@@ -1,6 +1,6 @@
 import React from 'react';
 import projectsData from './data/projectsData.json';
-import Svg from './Svg'; // Импортируем твой хаб без фигурных скобок
+import { Svg } from './Svg'; // Импортируем твой хаб без фигурных скобок
 
 function ContentPreview({ preview }) {
   // 1. Если мы на главной — показываем стартовую карту разума
