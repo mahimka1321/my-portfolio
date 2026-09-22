@@ -1,6 +1,6 @@
 import React from 'react';
 import projectsData from './data/projectsData.json';
-import { Svg } from './Svg'; // Твой созданный хаб векторного кода
+import Svg from './Svg';
 
 function ContentPreview({ preview }) {
   // Если мы на главной — показываем стартовую карту разума
