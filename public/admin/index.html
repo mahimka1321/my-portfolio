@@ -1,13 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
   <meta charset="utf-8" />
-  <title>Mahomka Admin</title>
-  
-  <!-- 🔥 ДОБАВЛЯЕМ ЭТУ СТРОЧКУ: Она принудительно указывает путь к конфигу с учетом имени репозитория -->
-  <link rel="cms-config-url" type="text/yaml" href="/my-portfolio/admin/config.yml" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mahomka Admin Hub</title>
 </head>
-<body>
+<body style="margin: 0; background-color: #1a1a1a;">
+
+  <!-- 🔥 ВШИВАЕМ КОНФИГУРАЦИЮ НАПРЯМУЮ, ЧТОБЫ БРАУЗЕР НЕ БЛОКИРОВАЛ ПУТИ --- -->
+  <script type="text/yaml" id="cms-config">
+    backend:
+      name: github
+      repo: mahimka1321/my-portfolio
+      branch: main
+
+    media_folder: "src/assets"
+    public_folder: "./assets"
+
+    collections:
+      - name: "projects"
+        label: "Мои Дизайны"
+        folder: "src/data"
+        format: "json"
+        create: true
+        slug: "{{id}}"
+        fields:
+          - { label: "ID проекта", name: "id", widget: "string" }
+          - { label: "Главный Заголовок", name: "title", widget: "string" }
+          - { label: "Подзаголовок", name: "subtitle", widget: "string" }
+          - { label: "Описание", name: "description", widget: "text" }
+          - { label: "Задача бизнеса", name: "task", widget: "text" }
+          - { label: "Результат (список)", name: "results", widget: "list" }
+          - { label: "Цвета (HEX)", name: "colors", widget: "list" }
+          - { label: "Шрифты", name: "fonts", widget: "list" }
+          - { label: "Имя файла SVG", name: "previewAsset", widget: "string" }
+  </script>
+
+  <!-- Запуск самого движка админки -->
   <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js" type="module"></script>
+
 </body>
 </html>
