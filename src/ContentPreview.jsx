@@ -1,10 +1,9 @@
-// src/components/ContentPreview.jsx
 import React from 'react';
-import { projectsData } from './data/projectsData';
+import projectsData from './data/projectsData.json';
 import { Svg } from './Svg'; // Твой созданный хаб векторного кода
 
 function ContentPreview({ preview }) {
-  // Если мы на главной — показываем стартовую статическую карту разума
+  // Если мы на главной — показываем стартовую карту разума
   if (preview === 'map') {
     return (
       <div className="preview-box map-style">
@@ -13,16 +12,18 @@ function ContentPreview({ preview }) {
     );
   }
 
-  // Если выбран конкретный проект, вытаскиваем его ID (например, из 'preview-tea' берем 'tea')
+  // Вытаскиваем ID проекта из превью (убираем приставку 'preview-')
   const projectId = preview.replace('preview-', '');
-  const project = projectsData[projectId];
+  const list = projectsData.items || [];
+  const project = list.find(item => item.id === projectId);
 
-  if (project && project.previewType === 'svg-scroll') {
+  // Если проект найден и у него загружен макет, рендерим его из хаба Svg
+  if (project && project.previewAsset) {
     return (
-      <div className="preview-box dynamic-scroll">
-        <div className="svg-layout-container">
-          {/* Рендерим один сплошной длинный SVG-макет верстки из хаба */}
-          <Svg id={project.previewAsset} />
+      <div className="preview-box dynamic" style={{ overflowY: 'auto' }}>
+        <div className="svg-layout-container" style={{ width: '100%' }}>
+          {/* Админка сохраняет полный путь, берем только имя файла для хаба */}
+          <Svg id={project.previewAsset.split('/').pop().replace('.svg', '')} />
         </div>
       </div>
     );

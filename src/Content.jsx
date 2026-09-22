@@ -1,12 +1,10 @@
 import React from 'react';
+import projectsData from './data/projectsData.json'; 
 
-// 1. Вспомогательный компонент: Список всех дизайнов
+// 1. КОМПОНЕНТ: Динамический список всех дизайнов
 function DesignsList({ onSelect }) {
-  const list = [
-    { id: 'tea', name: '🍵 Японский Чай (Дзен-минимализм)', color: '#4E6E58' },
-    { id: 'hankoya', name: '🔲 Редизайн Hankoya (Фибоначчи)', color: '#D97D3A' },
-    { id: 'terraria', name: '👾 Мод для Terraria (Пиксель-арт)', color: '#3A7BD5' }
-  ];
+  // Безопасно достаем массив проектов. Если там пусто, ставим пустой массив [].
+  const list = projectsData.items || [];
 
   return (
     <div className="designs-list-page">
@@ -19,7 +17,8 @@ function DesignsList({ onSelect }) {
             key={item.id}
             className="proto-block"
             style={{ 
-              backgroundColor: item.color, 
+              // Задаем цвет фона кнопки из первого HEX-кода, введенного в админке
+              backgroundColor: (item.colors && item.colors[0]) ? item.colors[0] : '#4E6E58', 
               padding: '25px', 
               borderRadius: '8px', 
               color: '#fff', 
@@ -28,7 +27,7 @@ function DesignsList({ onSelect }) {
             }}
             onClick={() => onSelect(item.id)} // Клик открывает кейс
           >
-            <span>{item.name}</span>
+            <span>{item.title}</span>
           </div>
         ))}
       </div>
@@ -36,31 +35,16 @@ function DesignsList({ onSelect }) {
   );
 }
 
-// 2. Вспомогательный компонент: Объяснение конкретного выбранного дизайна
+// 2. КОМПОНЕНТ: Объяснение конкретного выбранного дизайна
 function DesignDetail({ id, onBack }) {
-  const details = {
-    tea: { 
-      title: 'Японский Чай', 
-      task: 'Передать атмосферу умиротворения и дзен через цифровой интерфейс, избегая токийского визуального хаоса.', 
-      result: 'Использована палитра традиционных матовых цветов, много воздуха и вертикальное написание каллиграфических иероглифов.' 
-    },
-    hankoya: { 
-      title: 'Редизайн Hankoya', 
-      task: 'Укротить перегруженный e-commerce контент крупнейшего магазина печатей, сохранив 100% важной информации.', 
-      result: 'Проектирование информационной архитектуры по принципу мозаики и 2D-скролла вдоль золотой спирали Фибоначчи.' 
-    },
-    terraria: { 
-      title: 'Мод для Terraria', 
-      task: 'Создать технически стабильный игровой контент и интегрировать его в существующую экосистему игры.', 
-      result: 'Самостоятельно отрисован пиксель-арт (спрайты) и прописана логика поведения хитбоксов и анимаций.' 
-    }
-  };
+  const list = projectsData.items || [];
+  // Ищем в базе проект, чей ID совпадает с выбранным на кнопке
+  const current = list.find(item => item.id === id);
 
-  const current = details[id] || { title: 'Проект', task: '-', result: '-' };
+  if (!current) return <div>Проект не найден</div>;
 
   return (
     <div className="design-detail-page">
-      {/* Кнопка "Назад" сбросит стейт */}
       <button 
         className="back-btn" 
         onClick={onBack}
@@ -70,30 +54,36 @@ function DesignDetail({ id, onBack }) {
       </button>
       
       <div className="case-study-content">
-        <h2>Проект: {current.title}</h2>
-        <div className="info-block" style={{ marginBottom: '20px', marginTop: '20px' }}>
+        <h2>{current.title}</h2>
+        <p style={{ fontStyle: 'italic', color: '#666', marginBottom: '20px' }}>{current.subtitle}</p>
+        <p style={{ marginBottom: '20px', lineHeight: '1.6' }}>{current.description}</p>
+        
+        <div className="info-block" style={{ marginBottom: '20px' }}>
           <h3>ЗАДАЧА</h3>
-          <p>{current.task}</p>
+          <p style={{ lineHeight: '1.6' }}>{current.task}</p>
         </div>
+        
         <div className="info-block">
-          <h3>РЕЗУЛЬТАТ</h3>
-          <p>{current.result}</p>
+          <h3>РЕЗУЛЬТАТЫ</h3>
+          <div style={{ lineHeight: '1.6' }}>
+            {current.results && current.results.map((res, i) => (
+              <span key={i}>• {res}<br/></span>
+            ))}
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-// 3. Корневой менеджер левого контента (Твой основной компонент)
+// 3. КОРНЕВОЙ МЕНЕДЖЕР ЛЕВОЙ ПАНЕЛИ
 function Content({ page, selectedDesign, setSelectedDesign, setCurrentPreview }) {
   
-  // Функция выбора дизайна
   const handleSelectDesign = (id) => {
     setSelectedDesign(id);
     setCurrentPreview(`preview-${id}`); 
   };
 
-  // Функция возврата назад к списку
   const handleBackToList = () => {
     setSelectedDesign(null);
     setCurrentPreview('map'); 
@@ -109,7 +99,6 @@ function Content({ page, selectedDesign, setSelectedDesign, setCurrentPreview })
       );
       
     case 'designs':
-      // Теперь и DesignsList, и DesignDetail объявлены выше в этом же файле!
       return selectedDesign === null ? (
         <DesignsList onSelect={handleSelectDesign} />
       ) : (

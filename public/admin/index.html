@@ -8,7 +8,6 @@
 <body style="margin: 0; background-color: #1a1a1a;">
 
   <!-- ВШИВАЕМ КОНФИГУРАЦИЮ НАПРЯМУЮ, ЧТОБЫ БРАУЗЕР НЕ БЛОКИРОВАЛ ПУТИ -->
-  <!-- ВШИВАЕМ КОНФИГУРАЦИЮ НАПРЯМУЮ, ЧТОБЫ БРАУЗЕР НЕ БЛОКИРОВАЛ ПУТИ -->
   <script type="text/yaml" id="cms-config">
     backend:
       name: github
@@ -21,25 +20,26 @@
     collections:
       - name: "projects"
         label: "Мои Дизайны"
-        folder: "src/data"
+        file: "src/data/projectsData.json"
         format: "json"
-        create: true
-        slug: "{{id}}"
         fields:
-          - { label: 'ID проекта', name: 'id', widget: 'string' }
-          - { label: 'Главный Заголовок', name: 'title', widget: 'string' }
-          - { label: 'Подзаголовок', name: 'subtitle', widget: 'string' }
-          - { label: 'Описание', name: 'description', widget: 'text' }
-          - { label: 'Задача бизнеса', name: 'task', widget: 'text' }
-          - { label: 'Результат (список)', name: 'results', widget: 'list' }
-          - { label: 'Цвета (HEX)', name: 'colors', widget: 'list' }
-          - { label: 'Шрифты', name: 'fonts', widget: 'list' }
-          - { label: 'Загрузить SVG макет верстки', name: 'previewAsset', widget: 'file' }
+          - name: "items"
+            label: "Список проектов"
+            widget: "list"
+            fields:
+              - { label: 'ID проекта (например: tea)', name: 'id', widget: 'string' }
+              - { label: 'Главный Заголовок', name: 'title', widget: 'string' }
+              - { label: 'Подзаголовок', name: 'subtitle', widget: 'string' }
+              - { label: 'Описание', name: 'description', widget: 'text' }
+              - { label: 'Задача бизнеса', name: 'task', widget: 'text' }
+              - { label: 'Результат (список)', name: 'results', widget: 'list' }
+              - { label: 'Цвета (HEX)', name: 'colors', widget: 'list' }
+              - { label: 'Шрифты', name: 'fonts', widget: 'list' }
+              - { label: 'Загрузить SVG макет верстки', name: 'previewAsset', widget: 'file' }
   </script>
 
-  <!-- Запуск самого движка админки -->
+  <!-- Запуск самого движка админки из локального файла -->
   <script src="./sveltia-cms.js" type="module"></script>
-
 
 </body>
 </html>
