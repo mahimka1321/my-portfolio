@@ -1,25 +1,27 @@
 backend:
   name: github
-  repo: mahimka1321/my-portfolio # Твой реальный репозиторий
+  repo: mahimka1321/my-portfolio
   branch: main
 
 media_folder: "src/assets"
-public_folder: "/my-portfolio/assets" # 🔥 ИСПРАВИЛИ ТУТ (сделали полный абсолютный путь)
+public_folder: "/my-portfolio/assets"
 
 collections:
   - name: "projects"
     label: "Мои Дизайны"
-    folder: "src/data"
+    file: "src/data/projectsData.json"
     format: "json"
-    create: true
-    slug: "{{id}}"
     fields:
-      - { label: 'ID проекта', name: 'id', widget: 'string' }
-      - { label: 'Главный Заголовок', name: 'title', widget: 'string' }
-      - { label: 'Подзаголовок', name: 'subtitle', widget: 'string' }
-      - { label: 'Описание', name: 'description', widget: 'text' }
-      - { label: 'Задача бизнеса', name: 'task', widget: 'text' }
-      - { label: 'Результат (список)', name: 'results', widget: 'list' }
-      - { label: 'Цвета (HEX)', name: 'colors', widget: 'list' }
-      - { label: 'Шрифты', name: 'fonts', widget: 'list' }
-      - { label: 'Загрузить SVG макет верстки', name: 'previewAsset', widget: 'file' }
+      - name: "items"
+        label: "Список проектов"
+        widget: "list"
+        fields:
+          - { label: 'ID проекта (например: tea)', name: 'id', widget: 'string' }
+          - { label: 'Главный Заголовок', name: 'title', widget: 'string' }
+          - { label: 'Подзаголовок', name: 'subtitle', widget: 'string' }
+          - { label: 'Описание', name: 'description', widget: 'text' }
+          - { label: 'Задача бизнеса', name: 'task', widget: 'text' }
+          - { label: 'Результат (список)', name: 'results', widget: 'list' }
+          - { label: 'Цвета (HEX)', name: 'colors', widget: 'list' }
+          - { label: 'Шрифты', name: 'fonts', widget: 'list' }
+          - { label: 'Загрузить SVG макет верстки', name: 'previewAsset', widget: 'file' }
