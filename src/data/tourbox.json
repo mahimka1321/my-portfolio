@@ -1,0 +1,18 @@
+{
+  "id": "tourbox",
+  "title": "Туры с онлайн гидом",
+  "subtitle": "простые и дешовые туры",
+  "description": "-",
+  "task": "-",
+  "results": [
+    "-"
+  ],
+  "colors": [
+    "#333222",
+    "#FFFFFF"
+  ],
+  "fonts": [
+    "-"
+  ],
+  "previewAsset": "/my-portfolio/assets/tour-box.svg"
+}
