@@ -7,7 +7,7 @@
 </head>
 <body style="margin: 0; background-color: #1a1a1a;">
 
-  <!-- 🔥 ВШИВАЕМ КОНФИГУРАЦИЮ НАПРЯМУЮ, ЧТОБЫ БРАУЗЕР НЕ БЛОКИРОВАЛ ПУТИ --- -->
+  <!-- ВШИВАЕМ КОНФИГУРАЦИЮ НАПРЯМУЮ, ЧТОБЫ БРАУЗЕР НЕ БЛОКИРОВАЛ ПУТИ -->
   <script type="text/yaml" id="cms-config">
     backend:
       name: github
@@ -15,7 +15,7 @@
       branch: main
 
     media_folder: "src/assets"
-    public_folder: "/src/assets"
+    public_folder: "/assets"
 
     collections:
       - name: "projects"
@@ -37,7 +37,7 @@
   </script>
 
   <!-- Запуск самого движка админки -->
-  <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js" type="module"></script>
+  <script src="https://unpkg.com" type="module"></script>
 
 </body>
 </html>
