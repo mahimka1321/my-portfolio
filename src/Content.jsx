@@ -1,6 +1,7 @@
 import React from 'react';
 import projectsData from './data/projectsData.json'; 
 
+
 // 1. КОМПОНЕНТ: Динамический список всех дизайнов
 function DesignsList({ onSelect }) {
   // Безопасно достаем массив проектов. Если там пусто, ставим пустой массив [].
