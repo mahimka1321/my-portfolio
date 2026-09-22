@@ -3,9 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <title>Mahomka Admin</title>
+  
+  <!-- 🔥 ДОБАВЛЯЕМ ЭТУ СТРОЧКУ: Она принудительно указывает путь к конфигу с учетом имени репозитория -->
+  <link rel="cms-config-url" type="text/yaml" href="/my-portfolio/admin/config.yml" />
 </head>
 <body>
-  <!-- Скрипт Sveltia CMS, который превратит страницу в админку -->
-  <script src="https://unpkg.com" type="module"></script>
+  <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js" type="module"></script>
 </body>
 </html>
