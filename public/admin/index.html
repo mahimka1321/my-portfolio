@@ -8,6 +8,7 @@
 <body style="margin: 0; background-color: #1a1a1a;">
 
   <!-- ВШИВАЕМ КОНФИГУРАЦИЮ НАПРЯМУЮ, ЧТОБЫ БРАУЗЕР НЕ БЛОКИРОВАЛ ПУТИ -->
+  <!-- ВШИВАЕМ КОНФИГУРАЦИЮ НАПРЯМУЮ, ЧТОБЫ БРАУЗЕР НЕ БЛОКИРОВАЛ ПУТИ -->
   <script type="text/yaml" id="cms-config">
     backend:
       name: github
@@ -25,19 +26,20 @@
         create: true
         slug: "{{id}}"
         fields:
-          - { label: "ID проекта", name: "id", widget: "string" }
-          - { label: "Главный Заголовок", name: "title", widget: "string" }
-          - { label: "Подзаголовок", name: "subtitle", widget: "string" }
-          - { label: "Описание", name: "description", widget: "text" }
-          - { label: "Задача бизнеса", name: "task", widget: "text" }
-          - { label: "Результат (список)", name: "results", widget: "list" }
-          - { label: "Цвета (HEX)", name: "colors", widget: "list" }
-          - { label: "Шрифты", name: "fonts", widget: "list" }
-          - { label: "Имя файла SVG", name: "previewAsset", widget: "string" }
+          - { label: 'ID проекта', name: 'id', widget: 'string' }
+          - { label: 'Главный Заголовок', name: 'title', widget: 'string' }
+          - { label: 'Подзаголовок', name: 'subtitle', widget: 'string' }
+          - { label: 'Описание', name: 'description', widget: 'text' }
+          - { label: 'Задача бизнеса', name: 'task', widget: 'text' }
+          - { label: 'Результат (список)', name: 'results', widget: 'list' }
+          - { label: 'Цвета (HEX)', name: 'colors', widget: 'list' }
+          - { label: 'Шрифты', name: 'fonts', widget: 'list' }
+          - { label: 'Имя файла SVG', name: 'previewAsset', widget: 'string' }
   </script>
 
   <!-- Запуск самого движка админки -->
   <script src="https://unpkg.com" type="module"></script>
+
 
 </body>
 </html>
