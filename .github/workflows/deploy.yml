@@ -34,9 +34,13 @@ jobs:
       - name: Build Project
         run: CI=false npm run build
 
+      # 🔥 ДОБАВЛЯЕМ ЭТОТ НОВЫЙ ШАГ: Принудительное копирование админки в сборку!
+      - name: Copy Admin Folder to Build
+        run: cp -r ./public/admin ./build/admin
+
       # Шаг 5: Берем папку build и заливаем ее в ветку деплоя gh-pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build # Для Create React App папка сборки называется build
+          publish_dir: ./build # Теперь внутри build гарантированно лежит папка admin!
