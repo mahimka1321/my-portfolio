@@ -22,4 +22,4 @@ collections:
       - { label: 'Результат (список)', name: 'results', widget: 'list' }
       - { label: 'Цвета (HEX)', name: 'colors', widget: 'list' }
       - { label: 'Шрифты', name: 'fonts', widget: 'list' }
-      - { label: 'Имя файла SVG', name: 'previewAsset', widget: 'string' }
+      - { label: 'Загрузить SVG макет верстки', name: 'previewAsset', widget: 'file' }
