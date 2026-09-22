@@ -1,0 +1,42 @@
+name: Build and Deploy Portfolio
+
+# Скрипт будет запускаться автоматически при каждом пуше (коммите) в ветку main
+on:
+  push:
+    branches:
+      - main
+
+# Даем права на управление контентом страниц
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Шаг 1: Скачиваем твой приватный код на сервер сборки
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      # Шаг 2: Разворачиваем Node.js окружение
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      # Шаг 3: Устанавливаем зависимости твоего React-приложения
+      - name: Install Dependencies
+        run: npm ci
+
+      # Шаг 4: Собираем проект в чистый, оптимизированный HTML/JS
+      - name: Build Project
+        run: npm run build
+
+      # Шаг 5: Берем папку build и заливаем ее в ветку деплоя gh-pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build # Для Create React App папка сборки называется build
