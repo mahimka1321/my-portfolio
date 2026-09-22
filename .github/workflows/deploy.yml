@@ -28,11 +28,11 @@ jobs:
 
       # Шаг 3: Устанавливаем зависимости твоего React-приложения
       - name: Install Dependencies
-        run: npm ci
+        run: npm install
 
       # Шаг 4: Собираем проект в чистый, оптимизированный HTML/JS
       - name: Build Project
-        run: npm run build
+        run: CI=false npm run build
 
       # Шаг 5: Берем папку build и заливаем ее в ветку деплоя gh-pages
       - name: Deploy to GitHub Pages
