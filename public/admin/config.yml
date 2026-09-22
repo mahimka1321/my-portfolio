@@ -1,0 +1,25 @@
+backend:
+  name: github
+  repo: твой_логин_на_гитхабе/имя_твоего_репозитория
+  branch: main # Твоя рабочая ветка кода
+
+media_folder: "src/assets" # Куда админка будет сохранять новые SVG-макеты
+public_folder: "./assets"
+
+collections:
+  - name: "projects"
+    label: "Мои Дизайны"
+    folder: "src/data" # Папка, где лежит json
+    format: "json"
+    create: true # Разрешить добавлять новые проекты
+    slug: "{{title}}"
+    fields:
+      - { label: "ID проекта (например: tea)", name: "id", widget: "string" }
+      - { label: "Главный Заголовок", name: "title", widget: "string" }
+      - { label: "Подзаголовок", name: "subtitle", widget: "string" }
+      - { label: "Описание", name: "description", widget: "text" }
+      - { label: "Задача бизнеса", name: "task", widget: "text" }
+      - { label: "Результат (через запятую)", name: "results", widget: "list" }
+      - { label: "Цвета (HEX коды)", name: "colors", widget: "list" }
+      - { label: "Шрифты", name: "fonts", widget: "list" }
+      - { label: "SVG Макет Верстки", name: "previewAsset", widget: "file" }
