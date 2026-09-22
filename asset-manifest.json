@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/my-portfolio/static/css/main.696694d6.css",
+    "main.js": "/my-portfolio/static/js/main.73f69c5e.js",
+    "static/js/453.35732811.chunk.js": "/my-portfolio/static/js/453.35732811.chunk.js",
+    "static/media/hand-pointer.svg": "/my-portfolio/static/media/hand-pointer.325b60fe77c39e5ba63764b158323da4.svg",
+    "static/media/hankoya-layout.svg": "/my-portfolio/static/media/hankoya-layout.325b60fe77c39e5ba63764b158323da4.svg",
+    "static/media/main-architecture-map.svg": "/my-portfolio/static/media/main-architecture-map.325b60fe77c39e5ba63764b158323da4.svg",
+    "static/media/terraria-layout.svg": "/my-portfolio/static/media/terraria-layout.325b60fe77c39e5ba63764b158323da4.svg",
+    "static/media/yellow-wire.svg": "/my-portfolio/static/media/yellow-wire.325b60fe77c39e5ba63764b158323da4.svg",
+    "static/media/tea-layout.svg": "/my-portfolio/static/media/tea-layout.257608415e693ed8b3b5dcb583bfd151.svg",
+    "index.html": "/my-portfolio/index.html",
+    "main.696694d6.css.map": "/my-portfolio/static/css/main.696694d6.css.map",
+    "main.73f69c5e.js.map": "/my-portfolio/static/js/main.73f69c5e.js.map",
+    "453.35732811.chunk.js.map": "/my-portfolio/static/js/453.35732811.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.696694d6.css",
+    "static/js/main.73f69c5e.js"
+  ]
+}
