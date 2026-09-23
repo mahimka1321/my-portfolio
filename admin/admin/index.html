@@ -8,6 +8,7 @@
 <body style="margin: 0; background-color: #1a1a1a;">
 
   <!-- ВШИВАЕМ КОНФИГУРАЦИЮ НАПРЯМУЮ, ЧТОБЫ БРАУЗЕР НЕ БЛОКИРОВАЛ ПУТИ -->
+  <!-- ВШИВАЕМ КОНФИГУРАЦИЮ НАПРЯМУЮ, ЧТОБЫ БРАУЗЕР НЕ БЛОКИРОВАЛ ПУТИ -->
   <script type="text/yaml" id="cms-config">
     backend:
       name: github
@@ -20,7 +21,7 @@
     collections:
       - name: "projects_collection"
         label: "Мои Дизайны"
-        type: "file"
+        folder: "src/data"
         file: "src/data/projectsData.json"
         format: "json"
         fields:
