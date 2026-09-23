@@ -22,8 +22,7 @@ collections:
           - { label: 'Подзаголовок', name: 'subtitle', widget: 'string' }
           - { label: 'Описание проекта', name: 'description', widget: 'text' }
           - { label: 'Задача бизнеса', name: 'task', widget: 'text' }
-          - { label: 'Результаты (добавляй кнопкой по одному)', name: 'results', widget: 'list', field: {name: 'result', widget: 'string'} }
-          - { label: 'Цвета кнопки (HEX)', name: 'buttonColor', widget: 'colorstring' }
+          - { label: 'Результаты (добавляй по одному)', name: 'results', widget: 'list', field: {name: 'result', widget: 'string'} }
+          - { label: 'Цвет кнопки (HEX)', name: 'buttonColor', widget: 'color' }
           - { label: 'Шрифты проекта', name: 'fonts', widget: 'string' }
           - { label: 'Загрузить SVG макет', name: 'previewAsset', widget: 'file' }
-
