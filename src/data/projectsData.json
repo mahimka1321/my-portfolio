@@ -2,15 +2,15 @@
   "items": [
     {
       "id": "tea",
-      "title": "1333333",
-      "subtitle": "2",
-      "description": "3",
-      "task": "4",
+      "title": "Чайный магазин",
+      "subtitle": "онлайн магазин по даставке чая",
+      "description": "отсутствует",
+      "task": "увеличить охват",
       "results": [
-        "5"
+        "1"
       ],
       "buttonColor": "#eaaeae",
-      "fonts": "#444444　＃４４４４４",
+      "fonts": "#444444 #444444 #555555",
       "previewAsset": "/my-portfolio/assets/tea-layout.svg",
       "colors": [
         "-"
