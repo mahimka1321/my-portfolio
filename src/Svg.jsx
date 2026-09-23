@@ -9,6 +9,7 @@ import { ReactComponent as HankoyaLayout } from './assets/hankoya-layout.svg';
 import { ReactComponent as TerrariaLayout } from './assets/terraria-layout.svg';
 import { ReactComponent as HandPointer } from './assets/hand-pointer.svg';
 import { ReactComponent as YellowWire } from './assets/yellow-wire.svg';
+import { ReactComponent as TourBox } from './assets/tour-box.svg';
 
 
 export const Svg = ({ id, className }) => {
@@ -33,6 +34,9 @@ export const Svg = ({ id, className }) => {
       
     case 'yellow-wire':
       return <YellowWire className={className} />;
+
+    case 'tour-box':
+      return <TourBox className={className} />;
 
     default:
       // Если передали несуществующий ID, система не упадет, а просто промолчит

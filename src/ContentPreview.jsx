@@ -19,7 +19,7 @@ function ContentPreview({ preview }) {
 
   // Список всех SVG-айдишников, которые РЕАЛЬНО прописаны у тебя в файле Svg.jsx
   // Дописывай сюда имена (кейсы) из своего Svg.jsx, когда будешь добавлять новые SVG!
-  const validSvgIds = ['main-architecture-map', 'tea-layout', 'hankoya-layout', 'terraria-layout'];
+  const validSvgIds = ['main-architecture-map', 'tea-layout', 'hankoya-layout', 'terraria-layout', 'hand-pointer', 'yellow-wire', 'tour-box'];
 
   if (project && project.previewAsset) {
     // Вытаскиваем чистое имя файла из пути (например, из "src/assets/tourbox.svg" получим "tourbox")
