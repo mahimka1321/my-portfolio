@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-
 import Header from './Header';
 import Content from './Content';
-import ContentPreview from './ContentPreview'; 
-import './App.css';
+import ContentPreview from './ContentPreview';
 
 function App() {
   // 1. ИНИЦИАЛИЗАЦИЯ СТЕЙТОВ ИЗ ХЭША АДРЕСНОЙ СТРОКИ
