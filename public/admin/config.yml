@@ -16,24 +16,38 @@ collections:
       - name: "items"
         label: "Список проектов"
         widget: "list"
+        summary: "{{id}} — {{title}}"
+        collapsed: true
         fields:
           - { label: 'ID проекта (латиницей)', name: 'id', widget: 'string' }
           - { label: 'Главный Заголовок', name: 'title', widget: 'string' }
           - { label: 'Подзаголовок', name: 'subtitle', widget: 'string' }
           - { label: 'Описание проекта', name: 'description', widget: 'text' }
           - { label: 'Задача бизнеса', name: 'task', widget: 'text' }
-          - { label: 'Результаты (по одному)', name: 'results', widget: 'list', field: {name: 'result', widget: 'string'} }
           
-          # 🔥 ИЗМЕНИЛИ ТУТ:
+          - name: "results"
+            label: "Результаты"
+            widget: "list"
+            collapsed: true
+            summary: "{{result}}"
+            field: {name: 'result', widget: 'string', label: 'Текст результата'}
+          
           - name: "colors"
             label: "Палитра цветов проекта"
             widget: "list"
+            collapsed: true
+            summary: "{{colorCode}}"
             field: { label: 'Выбрать цвет', name: 'colorCode', widget: 'color' }
 
           - { label: 'Шрифты проекта', name: 'fonts', widget: 'string' }
           - { label: 'Загрузить SVG макет', name: 'previewAsset', widget: 'file' }
-          # Добавь эти поля к списку остальных полей:
-          - { label: 'Теги проекта (через запятую, например: UI/UX, WEB)', name: 'tags', widget: 'list', field: {name: 'tag', widget: 'string'} }
-          - { label: 'Цитата сверху (например: Чай - это тоже забота)', name: 'topQuote', widget: 'string' }
-          - { label: 'Цитата слева внизу (например: уют в деталях)', name: 'leftQuote', widget: 'string' }
-          - { label: 'Цитата справа внизу (например: спокойствие в клике)', name: 'rightQuote', widget: 'string' }
+          - { label: 'Цитата сверху', name: 'topQuote', widget: 'string' }
+          - { label: 'Цитата слева внизу', name: 'leftQuote', widget: 'string' }
+          - { label: 'Цитата справа внизу', name: 'rightQuote', widget: 'string' }
+          
+          - name: "tags"
+            label: "Теги проекта"
+            widget: "list"
+            collapsed: true
+            summary: "{{tag}}"
+            field: {name: 'tag', widget: 'string', label: 'Имя тега (например: UI/UX)'}
