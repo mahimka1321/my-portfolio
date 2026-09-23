@@ -260,3 +260,57 @@
     }
   }
 }
+
+
+
+/* --- Допиши/обнови эти стили в самом верху src/Content.scss --- */
+
+.designs-list-page {
+  padding: 30px;
+  
+  .section-title {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 0 10px 0;
+  }
+  
+  .section-subtitle {
+    color: #666;
+    margin: 0 0 25px 0;
+  }
+  
+  .blocks-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    
+    .proto-block {
+      padding: 25px; 
+      border-radius: 12px; 
+      color: #fff; 
+      font-weight: bold; 
+      cursor: pointer;
+      display: block;
+      transition: transform 0.2s ease, filter 0.2s ease;
+      
+      &:hover {
+        transform: translateY(-2px);
+        filter: brightness(1.1);
+      }
+    }
+  }
+}
+
+.design-detail-page {
+  /* 🔥 ИСПРАВЛЕНИЕ ШАПКИ: Даем четкий отступ сверху, чтобы контент не сжимал header */
+  margin-top: 20px; 
+  padding: 30px;
+  color: #2B2B2B;
+  background-color: #FAF9F5;
+  font-family: 'system-ui', -apple-system, sans-serif;
+  min-height: calc(100vh - 120px); // Ограничиваем высоту с учетом шапки
+  box-sizing: border-box;
+  clear: both; // Изолируем флоаты и гриды шапки
+  
+  /* Все остальные дочерние стили кейса (.back-btn, .case-header-block и т.д.) остаются прежними */
+}

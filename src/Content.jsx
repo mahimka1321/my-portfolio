@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import projectsData from './data/projectsData.json'; 
-import './Content.scss'; // 🔥 ИМПОРТИРУЕМ НАШИ СТИЛИ ИЗ SCSS ФАЙЛА
+import './Content.scss'; 
 
 // 1. КОМПОНЕНТ: Динамический список проектов (кнопки)
 function DesignsList({ onSelect }) {
   const list = projectsData.items || [];
 
   return (
-    <div className="designs-list-page" style={{ padding: '30px', color: '#2B2B2B' }}>
-      <h2 style={{ textTransform: 'uppercase', letterSpacing: '1px' }}>Мои проекты и дизайны</h2>
-      <p style={{ color: '#666', marginBottom: '25px' }}>Выберите кейс, чтобы изучить его архитектуру смыслов:</p>
+    <div className="designs-list-page">
+      <h2 className="section-title">Мои проекты и дизайны</h2>
+      <p className="section-subtitle">Выберите кейс, чтобы изучить его архитектуру смыслов:</p>
       
-      <div className="blocks-grid" style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+      <div className="blocks-grid">
         {list.map((item, index) => {
           const data = item.fields ? item.fields : item;
           
@@ -28,15 +28,7 @@ function DesignsList({ onSelect }) {
             <div 
               key={projectId}
               className="proto-block"
-              style={{ 
-                backgroundColor: firstColor, // Динамический цвет оставляем инлайновым
-                padding: '25px', 
-                borderRadius: '12px', 
-                color: '#fff', 
-                fontWeight: 'bold', 
-                cursor: 'pointer',
-                display: 'block'
-              }}
+              style={{ backgroundColor: firstColor }} // Динамический цвет оставляем инлайном
               onClick={() => onSelect(projectId)}
             >
               <span>{titleText}</span>
@@ -48,7 +40,7 @@ function DesignsList({ onSelect }) {
   );
 }
 
-// 2. КОМПОНЕНТ: ЖУРНАЛЬНЫЙ UI/UX КЕЙС (ПЕРЕВЕДЕН НА ЧИСТЫЕ CSS КЛАССЫ)
+// 2. КОМПОНЕНТ: ЖУРНАЛЬНЫЙ UI/UX КЕЙС
 function DesignDetail({ id, onBack }) {
   const list = projectsData.items || [];
   
@@ -57,7 +49,7 @@ function DesignDetail({ id, onBack }) {
     return data.id === id;
   });
 
-  if (!currentItem) return <div style={{ padding: '30px' }}>Проект не найден</div>;
+  if (!currentItem) return <div className="design-error">Проект не найден</div>;
   const current = currentItem.fields ? currentItem.fields : currentItem;
 
   return (
@@ -119,6 +111,7 @@ function DesignDetail({ id, onBack }) {
           </div>
         </div>
       </div>
+      {/* НИЖНИЙ ТРЕХКОЛОНОЧНЫЙ БЛОК: ЗАДАЧА | РЕЗУЛЬТАТ | ЦВЕТА И ШРИФТЫ */}
       <div className="case-bottom-grid">
         
         {/* Колонка 1: ЗАДАЧА */}
@@ -165,7 +158,7 @@ function DesignDetail({ id, onBack }) {
                     key={i} 
                     title={hex}
                     className="color-circle"
-                    style={{ backgroundColor: hex }} // Динамический цвет красим инлайном
+                    style={{ backgroundColor: hex }}
                   />
                 );
               })
@@ -176,10 +169,10 @@ function DesignDetail({ id, onBack }) {
 
           <h4>ШРИФТЫ</h4>
           <h3 className="font-primary">
-            {current.fonts ? current.fonts.split(',')[0] : 'Montserrat'}
+            {current.fonts ? current.fonts.split(',') : 'Montserrat'}
           </h3>
           <p className="font-secondary">
-            {current.fonts && current.fonts.split(',')[1] ? current.fonts.split(',')[1].trim() : 'Nunito'}
+            {current.fonts && current.fonts.split(',') ? current.fonts.split(',').trim() : 'Nunito'}
           </p>
 
           {current.rightQuote && (
@@ -194,8 +187,22 @@ function DesignDetail({ id, onBack }) {
   );
 }
 
-// 3. КОРНЕВОЙ МЕНЕДЖЕР ЛЕВОЙ ПАНЕЛИ
-function Content({ page, selectedDesign, setSelectedDesign, setCurrentPreview }) {
+// 3. КОРНЕВОЙ МЕНЕДЖЕР ЛЕВОЙ ПАНЕЛИ (СОХРАНЯЕТ СОСТОЯНИЕ ПРИ F5)
+function Content({ page, setPage, selectedDesign, setSelectedDesign, setCurrentPreview }) {
+  
+  // 🔥 ЭФФЕКТ: Синхронизируем состояние с localStorage при любых изменениях
+  useEffect(() => {
+    localStorage.setItem('portfolio_page', page);
+  }, [page]);
+
+  useEffect(() => {
+    if (selectedDesign) {
+      localStorage.setItem('portfolio_design', selectedDesign);
+    } else {
+      localStorage.removeItem('portfolio_design');
+    }
+  }, [selectedDesign]);
+
   const handleSelectDesign = (id) => {
     setSelectedDesign(id);
     setCurrentPreview(`preview-${id}`); 
