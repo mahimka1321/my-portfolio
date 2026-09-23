@@ -1,3 +1,21 @@
 {
-  "items": []
+  "items": [
+    {
+      "id": "tea",
+      "title": "-",
+      "subtitle": "-",
+      "description": "-",
+      "task": "-",
+      "results": [
+        "-"
+      ],
+      "colors": [
+        "-"
+      ],
+      "fonts": [
+        "#444444"
+      ],
+      "previewAsset": "/my-portfolio/assets/tea-layout.svg"
+    }
+  ]
 }
