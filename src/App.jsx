@@ -1,53 +1,75 @@
-import './styles.scss';
-// src/App.jsx
-import React, { useState } from 'react';
-
-import Header from './Header';
-import Content from './Content';
-import ContentPreview from './ContentPreview';
+import React, { useState, useEffect } from 'react';
+// Импортируй свои компоненты Header, Content, ContentPreview как обычно
 
 function App() {
-// --- 1. ИНИЦИАЛИЗАЦИЯ СТЕЙТОВ С УМНЫМ ЧТЕНИЕМ ПАМЯТИ БРАУЗЕРА ---
-const [page, setPage] = useState(() => localStorage.getItem('portfolio_page') || 'home');
-const [selectedDesign, setSelectedDesign] = useState(() => localStorage.getItem('portfolio_design') || null);
+  // 1. ИНИЦИАЛИЗАЦИЯ СТЕЙТОВ ИЗ ХЭША АДРЕСНОЙ СТРОКИ
+  const [page, setPage] = useState('home');
+  const [selectedDesign, setSelectedDesign] = useState(null);
+  const [currentPreview, setCurrentPreview] = useState('map');
 
-// Превью для правой панели (тоже сразу вспоминает, где мы были)
-const [currentPreview, setCurrentPreview] = useState(() => {
-  const savedDesign = localStorage.getItem('portfolio_design');
-  return savedDesign ? `preview-${savedDesign}` : 'map';
-});
+  // 2. ФУНКЦИЯ: Разбор ссылки при загрузке или её изменении
+  const parseLocationHash = () => {
+    const hash = window.location.hash; // Получаем всё, что идет после # (например, #/design/tour-box)
+    
+    if (!hash || hash === '#/' || hash === '#/home') {
+      setPage('home');
+      setSelectedDesign(null);
+      setCurrentPreview('map');
+    } else if (hash.startsWith('#/design/')) {
+      // Если ссылка на конкретный дизайн
+      const designId = hash.replace('#/design/', '');
+      setPage('designs');
+      setSelectedDesign(designId);
+      setCurrentPreview(`preview-${designId}`);
+    } else {
+      // Если ссылка на вкладку (например, #/designs или #/skills)
+      const cleanPage = hash.replace('#/', '');
+      setPage(cleanPage);
+      setSelectedDesign(null);
+      setCurrentPreview('map');
+    }
+  };
 
-// --- 2. ИСПРАВЛЕННЫЕ ФУНКЦИИ КЛИКОВ (РАБОТАЮТ С ЕДИНЫМ СТЕЙТОМ) ---
-const handleLogoClick = () => {
-  setPage('home'); // Используем setPage вместо setCurrentPage
-  setSelectedDesign(null);
-  setCurrentPreview('map');
-};
+  // 3. ЭФФЕКТ: Вешаем слушатель на изменение URL браузера
+  useEffect(() => {
+    // Разбираем хэш при самом первом открытии сайта
+    parseLocationHash();
 
-const handleTabChange = (newPage) => {
-  setPage(newPage); // Переключаем вкладку в едином стейте
-  setSelectedDesign(null);
-  setCurrentPreview('map'); // При смене таба всегда сбрасываем на общую карту разума
-};
+    // Слушаем, если пользователь нажал стрелочки "Назад/Вперед" в браузере
+    const handleHashChange = () => parseLocationHash();
+    window.addEventListener('hashchange', handleHashChange);
+    
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
+  // 4. ФУНКЦИИ КЛИКОВ: Теперь они просто меняют ХЭШ в строке браузера, а React сам подстроится!
+  const handleLogoClick = () => {
+    window.location.hash = '#/home';
+  };
+
+  const handleTabChange = (newPage) => {
+    window.location.hash = `#/${newPage}`;
+  };
 
   return (
     <div className="app-container">
-      <div className="left-side-container">
-        <Header 
-          currentPage={page} 
-          onLogoClick={handleLogoClick} 
-          onTabChange={handleTabChange} 
-        />
+      <Header 
+        page={page} 
+        handleTabChange={handleTabChange} 
+        handleLogoClick={handleLogoClick} 
+      />
+      <div className="main-layout" style={{ display: 'flex' }}>
         <Content 
           page={page} 
-          selectedDesign={selectedDesign}
-          setSelectedDesign={setSelectedDesign}
-          setCurrentPreview={setCurrentPreview}
+          setPage={setPage}
+          selectedDesign={selectedDesign} 
+          setSelectedDesign={setSelectedDesign} 
+          setCurrentPreview={setCurrentPreview} 
         />
+        <ContentPreview preview={currentPreview} />
       </div>
-      <ContentPreview preview={currentPreview} />
     </div>
   );
 }
+
 export default App;

@@ -198,30 +198,16 @@ function DesignDetail({ id, onBack }) {
 }
 
 
-// 3. КОРНЕВОЙ МЕНЕДЖЕР ЛЕВОЙ ПАНЕЛИ (СОХРАНЯЕТ СОСТОЯНИЕ ПРИ F5)
+// Найди компонент Content в самом низу файла src/Content.jsx и замени его функции:
 function Content({ page, setPage, selectedDesign, setSelectedDesign, setCurrentPreview }) {
-  
-  // 🔥 ЭФФЕКТ: Синхронизируем состояние с localStorage при любых изменениях
-  useEffect(() => {
-    localStorage.setItem('portfolio_page', page);
-  }, [page]);
 
-  useEffect(() => {
-    if (selectedDesign) {
-      localStorage.setItem('portfolio_design', selectedDesign);
-    } else {
-      localStorage.removeItem('portfolio_design');
-    }
-  }, [selectedDesign]);
-
+  // Больше никаких localStorage.setItem! Чистая работа с адресной строкой:
   const handleSelectDesign = (id) => {
-    setSelectedDesign(id);
-    setCurrentPreview(`preview-${id}`); 
+    window.location.hash = `#/design/${id}`; // Меняем адрес на /#/design/tour-box
   };
 
   const handleBackToList = () => {
-    setSelectedDesign(null);
-    setCurrentPreview('map'); 
+    window.location.hash = '#/designs'; // Возвращаем адрес на /#/designs
   };
 
   switch (page) {
@@ -243,5 +229,6 @@ function Content({ page, setPage, selectedDesign, setSelectedDesign, setCurrentP
       return <div style={{ padding: '30px' }}>Страница не найдена</div>;
   }
 }
+
 
 export default Content;
