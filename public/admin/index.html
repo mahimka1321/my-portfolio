@@ -7,7 +7,7 @@
 </head>
 <body style="margin: 0; background-color: #1a1a1a;">
 
-  <!-- ВШИВАЕМ КОНФИГУРАЦИЮ НАПРЯМУЮ, ЧТОБЫ БРАУЗЕР НЕ БЛОКИРОВАЛ ПУТИ -->
+  <!-- ВШИВАЕМ КОНФИГУРАЦИЮ НАПРЯМУЮ -->
   <script type="text/yaml" id="cms-config">
     backend:
       name: github
@@ -28,23 +28,18 @@
             label: "Список проектов"
             widget: "list"
             fields:
-              - { label: 'ID проекта (латиницей, например: tea)', name: 'id', widget: 'string' }
+              - { label: 'ID проекта (латиницей)', name: 'id', widget: 'string' }
               - { label: 'Главный Заголовок', name: 'title', widget: 'string' }
               - { label: 'Подзаголовок', name: 'subtitle', widget: 'string' }
               - { label: 'Описание проекта', name: 'description', widget: 'text' }
               - { label: 'Задача бизнеса', name: 'task', widget: 'text' }
-              - { label: 'Результаты (добавляй по одному)', name: 'results', widget: 'list', field: {name: 'result', widget: 'string'} }
+              - { label: 'Результаты (по одному)', name: 'results', widget: 'list', field: {name: 'result', widget: 'string'} }
               
-              # 🔥 ИЗМЕНИЛИ ТУТ: заменили пипетку на выпадающий список твоей палитры!
-              - label: 'Фирменный цвет кнопки'
-                name: 'buttonColor'
-                widget: 'select'
-                options:
-                  - { label: '🍵 Изумрудный чай (#4E6E58)', value: '#4E6E58' }
-                  - { label: '🔲 Глубокий графит (#2B2B2B)', value: '#2B2B2B' }
-                  - { label: '🍊 Бенто оранжевый (#D97D3A)', value: '#D97D3A' }
-                  - { label: '🌙 Полночный синий (#1A2E3B)', value: '#1A2E3B' }
-                  - { label: '🦩 Дерзкий коралловый (#E05A47)', value: '#E05A47' }
+              # 🔥 ИЗМЕНИЛИ ТУТ: Динамический список цветов с пипеткой для каждого!
+              - name: "colors"
+                label: "Палитра цветов проекта"
+                widget: "list"
+                field: { label: 'Выбрать цвет', name: 'colorCode', widget: 'color' }
 
               - { label: 'Шрифты проекта', name: 'fonts', widget: 'string' }
               - { label: 'Загрузить SVG макет', name: 'previewAsset', widget: 'file' }
@@ -52,7 +47,6 @@
 
   <!-- Запуск самого движка админки из локального файла -->
   <script src="./sveltia-cms.js" type="module"></script>
-
 
 </body>
 </html>

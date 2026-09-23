@@ -1,7 +1,7 @@
 import React from 'react';
 import projectsData from './data/projectsData.json'; 
 
-// 1. КОМПОНЕНТ: Динамический список всех дизайнов
+// 1. КОМПОНЕНТ: Список проектов
 function DesignsList({ onSelect }) {
   const list = projectsData.items || [];
 
@@ -14,7 +14,13 @@ function DesignsList({ onSelect }) {
         {list.map((item, index) => {
           const data = item.fields ? item.fields : item;
           
-          const bgColor = data.buttonColor && data.buttonColor !== '-' ? data.buttonColor : '#4E6E58';
+          // 🔥 Беру самый первый цвет из массива для покраски кнопки. Если пусто — ставим дефолт
+          let firstColor = '#4E6E58';
+          if (data.colors && Array.isArray(data.colors) && data.colors.length > 0) {
+            const firstObj = data.colors[0];
+            firstColor = firstObj.colorCode ? firstObj.colorCode : firstObj;
+          }
+
           const titleText = data.title && data.title !== '-' ? `Проект: ${data.title}` : `Проект #${index + 1}`;
           const projectId = data.id || `project-${index}`;
 
@@ -23,7 +29,7 @@ function DesignsList({ onSelect }) {
               key={projectId}
               className="proto-block"
               style={{ 
-                backgroundColor: bgColor, 
+                backgroundColor: firstColor, 
                 padding: '25px', 
                 borderRadius: '8px', 
                 color: '#fff', 
@@ -42,7 +48,7 @@ function DesignsList({ onSelect }) {
   );
 }
 
-// 2. КОМПОНЕНТ: Объяснение конкретного выбранного дизайна (БЕЗ БЕЛОГО ФОНА И С ФИКСОМ РЕЗУЛЬТАТОВ)
+// 2. КОМПОНЕНТ: Детали проекта (ГЕНЕРИРУЕМ МНОГО КРУЖОЧКОВ)
 function DesignDetail({ id, onBack }) {
   const list = projectsData.items || [];
   
@@ -72,19 +78,17 @@ function DesignDetail({ id, onBack }) {
         <p style={{ marginBottom: '30px', lineHeight: '1.6', fontSize: '16px' }}>{current.description || ''}</p>
         
         <div className="case-grid" style={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
-          {/* Блок: ЗАДАЧА */}
+          
           <div className="info-block">
             <h3 style={{ borderLeft: '4px solid #ffd200', paddingLeft: '10px', marginBottom: '10px' }}>ЗАДАЧА</h3>
             <p style={{ lineHeight: '1.6' }}>{current.task || 'Описание задачи отсутствует.'}</p>
           </div>
           
-          {/* Блок: РЕЗУЛЬТАТЫ (Распаковываем объекты Sveltia CMS правильно!) */}
           <div className="info-block">
             <h3 style={{ borderLeft: '4px solid #ffd200', paddingLeft: '10px', marginBottom: '10px' }}>РЕЗУЛЬТАТЫ</h3>
             <div style={{ lineHeight: '1.6' }}>
               {current.results && Array.isArray(current.results) ? (
                 current.results.map((resObj, i) => {
-                  // Вытаскиваем текст из ключа 'result', который генерирует админка
                   const txt = resObj.result ? resObj.result : resObj;
                   return <span key={i}>• {txt}<br/></span>;
                 })
@@ -94,20 +98,34 @@ function DesignDetail({ id, onBack }) {
             </div>
           </div>
 
-          {/* Блок: СПЕЦИФИКАЦИЯ СТИЛЯ (Чистый прозрачный фон, полный минимализм) */}
+          {/* Блок: СПЕЦИФИКАЦИЯ СТИЛЯ */}
           <div className="info-block" style={{ marginTop: '10px', padding: '0px' }}>
             <h3 style={{ borderLeft: '4px solid #ffd200', paddingLeft: '10px', marginBottom: '15px' }}>СПЕЦИФИКАЦИЯ СТИЛЯ</h3>
             
-            <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '10px' }}>
-              <strong>Фирменный цвет:</strong>
-              <div style={{ 
-                width: '24px', 
-                height: '24px', 
-                borderRadius: '50%', 
-                backgroundColor: current.buttonColor || '#4E6E58',
-                border: '1px solid #ccc'
-              }} />
-              <span>{current.buttonColor || '#4E6E58'}</span>
+            <div style={{ marginBottom: '20px' }}>
+              <strong>Фирменные цвета палитры:</strong>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '10px' }}>
+                {current.colors && Array.isArray(current.colors) ? (
+                  // 🔥 ВЫВОДИМ СКОЛЬКО УГОДНО КРУЖОЧКОВ ЧЕРЕЗ ЦИКЛ С ПОДПИСЬЮ HEX!
+                  current.colors.map((cObj, i) => {
+                    const hex = cObj.colorCode ? cObj.colorCode : cObj;
+                    return (
+                      <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                        <div style={{ 
+                          width: '24px', 
+                          height: '24px', 
+                          borderRadius: '50%', 
+                          backgroundColor: hex,
+                          border: '1px solid #ccc'
+                        }} />
+                        <span style={{ fontFamily: 'monospace', fontSize: '14px' }}>{hex}</span>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <span>Цвета не указаны</span>
+                )}
+              </div>
             </div>
 
             <div>
@@ -122,7 +140,6 @@ function DesignDetail({ id, onBack }) {
   );
 }
 
-// 3. КОРНЕВОЙ МЕНЕДЖЕР ЛЕВОЙ ПАНЕЛИ
 function Content({ page, selectedDesign, setSelectedDesign, setCurrentPreview }) {
   const handleSelectDesign = (id) => {
     setSelectedDesign(id);
