@@ -4,6 +4,12 @@
   box-sizing: border-box;
 }
 
+body {
+  font-family: 'Nunito', sans-serif;
+  overflow: hidden; // Запрещаем скролл всей страницы, так как у нас есть отдельные скроллы внутри
+}
+
+
 // 1. Корневой контейнер всего сайта (теперь это горизонтальный сплит 50/50)
 .app-container {
   width: 100vw;

@@ -58,7 +58,7 @@
 
     .case-subtitle {
       font-size: 22px;
-      font-family: 'Georgia', serif;
+      font-family: 'Nunito', sans-serif;
       font-style: italic;
       color: #D9A74A; // Золотисто-желтый курсив
       margin: 0;
@@ -81,7 +81,7 @@
     position: absolute;
     right: 40px;
     top: -10px;
-    font-family: 'Georgia', serif;
+    font-family: 'Nunito', sans-serif;
     font-style: italic;
     color: #D9A74A;
     text-align: center;
@@ -204,7 +204,7 @@
     }
 
     .quote-style {
-      font-family: 'Georgia', serif;
+      font-family: 'Nunito', sans-serif;
       font-style: italic;
       color: #D9A74A;
       margin-top: 25px;
@@ -250,7 +250,7 @@
       margin: 0;
       font-size: 20px;
       font-weight: bold;
-      font-family: sans-serif;
+      font-family: 'Nunito', sans-serif;
     }
     .font-secondary {
       margin: 3px 0 0 0;
@@ -299,5 +299,29 @@
         filter: brightness(1.1);
       }
     }
+  }
+}
+
+.design-detail-page {
+  margin-top: 20px; 
+  padding: 35px 30px 40px 30px; 
+  color: #2B2B2B;
+  background-color: #FAF9F5;
+  min-height: calc(100vh - 120px);
+  box-sizing: border-box;
+  clear: both;
+
+  /* 🔥 ЗАДАЕМ ТВОЙ ФИРМЕННЫЙ ШРИФТ NUNITO КАК ЗАПАСНОЙ ПО УМОЛЧАНИЮ */
+  font-family: var(--primary-font, 'Nunito'), sans-serif; 
+
+  /* Навязываем его всем обычным текстам и заголовкам */
+  h1, h2, h3, h4, p, span, div {
+    font-family: var(--primary-font, 'Nunito'), sans-serif !important;
+  }
+
+  /* А для рукописных курсивных цитат и подзаголовков включаем его курсивную итерацию (Nunito Italic) */
+  .case-subtitle, .top-handwritten-quote, .quote-style, .font-secondary {
+    font-family: var(--secondary-font, 'Nunito'), serif !important;
+    font-style: italic;
   }
 }

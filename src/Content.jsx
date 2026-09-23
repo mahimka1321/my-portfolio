@@ -49,11 +49,20 @@ function DesignDetail({ id, onBack }) {
     return data.id === id;
   });
 
-  if (!currentItem) return <div className="design-error">Проект не найден</div>;
+  if (!currentItem) return <div style={{ padding: '30px' }}>Проект не найден</div>;
   const current = currentItem.fields ? currentItem.fields : currentItem;
 
+  // 🔥 ОЧИЩАЕМ СТРОКУ ОТ ПРОБЕЛОВ: .trim() убирает случайные пробелы по бокам названия
+  const cleanFont = current.fonts && current.fonts !== '-' ? current.fonts.trim() : 'Nunito';
+
   return (
-    <div className="design-detail-page">
+    <div 
+      className="design-detail-page" 
+      style={{ 
+        // Передаем одну чистую переменную для всей страницы
+        '--chosen-font': cleanFont
+      }}
+    >
       
       <button className="back-btn" onClick={onBack}>
         ← К ВСЕМ ДИЗАЙНАМ
@@ -111,7 +120,8 @@ function DesignDetail({ id, onBack }) {
           </div>
         </div>
       </div>
-      {/* НИЖНИЙ ТРЕХКОЛОНОЧНЫЙ БЛОК: ЗАДАЧА | РЕЗУЛЬТАТ | ЦВЕТА И ШРИФТЫ */}
+
+      {/* НИЖНИЙ ТРЕХКОЛОНОЧНЫЙ БЛОК */}
       <div className="case-bottom-grid">
         
         {/* Колонка 1: ЗАДАЧА */}
@@ -169,10 +179,10 @@ function DesignDetail({ id, onBack }) {
 
           <h4>ШРИФТЫ</h4>
           <h3 className="font-primary">
-            {current.fonts ? current.fonts.split(',')[0] : 'Montserrat'}
+            {cleanFont}
           </h3>
           <p className="font-secondary">
-            {current.fonts && current.fonts.split(',')[1] ? current.fonts.split(',')[1] : 'Nunito'}
+            {cleanFont} (Italic)
           </p>
 
           {current.rightQuote && (
@@ -186,6 +196,7 @@ function DesignDetail({ id, onBack }) {
     </div>
   );
 }
+
 
 // 3. КОРНЕВОЙ МЕНЕДЖЕР ЛЕВОЙ ПАНЕЛИ (СОХРАНЯЕТ СОСТОЯНИЕ ПРИ F5)
 function Content({ page, setPage, selectedDesign, setSelectedDesign, setCurrentPreview }) {
