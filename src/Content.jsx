@@ -1,5 +1,6 @@
 import React from 'react';
 import projectsData from './data/projectsData.json'; 
+import './Content.scss'; // 🔥 ИМПОРТИРУЕМ НАШИ СТИЛИ ИЗ SCSS ФАЙЛА
 
 // 1. КОМПОНЕНТ: Динамический список проектов (кнопки)
 function DesignsList({ onSelect }) {
@@ -28,7 +29,7 @@ function DesignsList({ onSelect }) {
               key={projectId}
               className="proto-block"
               style={{ 
-                backgroundColor: firstColor, 
+                backgroundColor: firstColor, // Динамический цвет оставляем инлайновым
                 padding: '25px', 
                 borderRadius: '12px', 
                 color: '#fff', 
@@ -47,7 +48,7 @@ function DesignsList({ onSelect }) {
   );
 }
 
-// 2. КОМПОНЕНТ: ЖУРНАЛЬНЫЙ UI/UX КЕЙС (МАКЕТ ИЗ МАКЕТА ХАБА)
+// 2. КОМПОНЕНТ: ЖУРНАЛЬНЫЙ UI/UX КЕЙС (ПЕРЕВЕДЕН НА ЧИСТЫЕ CSS КЛАССЫ)
 function DesignDetail({ id, onBack }) {
   const list = projectsData.items || [];
   
@@ -60,194 +61,102 @@ function DesignDetail({ id, onBack }) {
   const current = currentItem.fields ? currentItem.fields : currentItem;
 
   return (
-    <div className="design-detail-page" style={{ 
-      padding: '40px 30px', 
-      color: '#2B2B2B', 
-      backgroundColor: '#FAF9F5', // Тот самый благородный молочный фон с макета
-      fontFamily: 'system-ui, sans-serif',
-      minHeight: '100%'
-    }}>
+    <div className="design-detail-page">
       
-      {/* Кнопка возврата в стиле макета */}
-      <button 
-        className="back-btn" 
-        onClick={onBack}
-        style={{ 
-          background: 'none', 
-          border: 'none', 
-          cursor: 'pointer', 
-          fontSize: '13px', 
-          textTransform: 'uppercase', 
-          letterSpacing: '1px', 
-          fontWeight: 'bold',
-          color: '#555',
-          marginBottom: '30px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '5px'
-        }}
-      >
+      <button className="back-btn" onClick={onBack}>
         ← К ВСЕМ ДИЗАЙНАМ
       </button>
       
-      {/* ГЛАВНЫЙ БЛОК ШАПКИ КЕЙСА */}
-      <div style={{ position: 'relative', marginBottom: '35px' }}>
-        <span style={{ color: '#888', fontSize: '11px', fontWeight: 'bold', letterSpacing: '1.5px', textTransform: 'uppercase' }}>
-          UI / UX ДИЗАЙН
-        </span>
+      {/* ВЕРХНЯЯ ШАПКА КЕЙСА */}
+      <div className="case-header-block">
+        <span className="ui-ux-tag">UI / UX ДИЗАЙН</span>
+        <h1>{current.title || 'Без названия'}</h1>
         
-        <h1 style={{ 
-          fontSize: '46px', 
-          fontWeight: '900', 
-          lineHeight: '1.1', 
-          margin: '5px 0 15px 0', 
-          textTransform: 'uppercase',
-          letterSpacing: '-0.5px'
-        }}>
-          {current.title || 'Без названия'}
-        </h1>
-        
-        {/* Желтый рукописный подзаголовок */}
-        <div style={{ position: 'relative', display: 'inline-block' }}>
-          <p style={{ 
-            fontSize: '22px', 
-            fontFamily: '"Georgia", serif', 
-            fontStyle: 'italic', 
-            color: '#D9A74A', 
-            margin: '0',
-            position: 'relative',
-            zIndex: '2'
-          }}>
-            {current.subtitle || ''}
-          </p>
-          <span style={{ position: 'absolute', left: '-25px', top: '5px', color: '#D9A74A', fontSize: '18px' }}>⚡</span>
-          <span style={{ position: 'absolute', right: '-25px', top: '5px', color: '#D9A74A', fontSize: '18px' }}>⚡</span>
+        <div className="subtitle-wrap">
+          <p className="case-subtitle">{current.subtitle || ''}</p>
+          <span className="decor-ray left">⚡</span>
+          <span className="decor-ray right">⚡</span>
         </div>
 
-        {/* Справа сверху: Рисованная цитата "Чай - это тоже забота" */}
         {current.topQuote && (
-          <div style={{ 
-            position: 'absolute', 
-            right: '40px', 
-            top: '-10px', 
-            fontFamily: '"Georgia", serif', 
-            fontStyle: 'italic', 
-            color: '#D9A74A', 
-            textAlign: 'center',
-            fontSize: '15px'
-          }}>
+          <div className="top-handwritten-quote">
             {current.topQuote} ⭐️
           </div>
         )}
       </div>
 
-      {/* СРЕДНИЙ БЛОК: ОПИСАНИЕ, ТЕГИ И ТАЙМЛАЙН ПРОЦЕССА */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '40px', marginBottom: '40px', alignItems: 'center' }}>
+      {/* СРЕДНИЙ БЛОК: ОПИСАНИЕ, ТЕГИ И ТАЙМЛАЙН */}
+      <div className="case-middle-section">
         <div>
-          <p style={{ fontSize: '16px', lineHeight: '1.6', color: '#333', margin: '0 0 20px 0', maxWidth: '480px' }}>
-            {current.description || ''}
-          </p>
+          <p className="desc-text">{current.description || ''}</p>
           
-          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+          <div className="tags-container">
             {current.tags && Array.isArray(current.tags) ? (
               current.tags.map((t, i) => {
                 const tagText = t.tag ? t.tag : t;
-                return (
-                  <span key={i} style={{ 
-                    backgroundColor: '#EAE7DE', 
-                    padding: '6px 14px', 
-                    borderRadius: '20px', 
-                    fontSize: '12px', 
-                    fontWeight: 'bold', 
-                    color: '#555',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.5px'
-                  }}>{tagText}</span>
-                );
+                return <span key={i} className="tag-item">{tagText}</span>;
               })
             ) : (
               <>
-                <span style={{ backgroundColor: '#EAE7DE', padding: '6px 14px', borderRadius: '20px', fontSize: '12px', fontWeight: 'bold' }}>UI/UX</span>
-                <span style={{ backgroundColor: '#EAE7DE', padding: '6px 14px', borderRadius: '20px', fontSize: '12px', fontWeight: 'bold' }}>WEB</span>
+                <span className="tag-item">UI/UX</span>
+                <span className="tag-item">WEB</span>
               </>
             )}
           </div>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '25px', alignItems: 'flex-end' }}>
-          <div style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            border: '1.5px solid #2B2B2B', 
-            borderRadius: '30px', 
-            padding: '10px 25px', 
-            backgroundColor: 'transparent',
-            cursor: 'pointer',
-            width: '240px',
-            justifyContent: 'space-between',
-            fontWeight: 'bold',
-            fontSize: '13px',
-            letterSpacing: '1px'
-          }}>
+        <div className="action-column">
+          <div className="btn-about">
             <span>☕️ О ПРОЕКТЕ</span>
             <span>➔</span>
           </div>
 
-          <div style={{ display: 'flex', gap: '20px', fontSize: '9px', fontWeight: 'bold', color: '#888', letterSpacing: '0.5px' }}>
-            <div style={{ textAlign: 'center' }}><div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#D9A74A', margin: '0 auto 4px auto' }}></div>КОНЦЕПТ</div>
-            <div style={{ textAlign: 'center' }}><div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#CCC', margin: '0 auto 4px auto' }}></div>UI КИТ</div>
-            <div style={{ textAlign: 'center' }}><div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#CCC', margin: '0 auto 4px auto' }}></div>ДИЗАЙН</div>
-            <div style={{ textAlign: 'center' }}><div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#CCC', margin: '0 auto 4px auto' }}></div>АДАПТИВ</div>
+          <div className="timeline-steps">
+            <div className="step"><div className="dot active"></div>КОНЦЕПТ</div>
+            <div className="step"><div className="dot"></div>UI КИТ</div>
+            <div className="step"><div className="dot"></div>ДИЗАЙН</div>
+            <div className="step"><div className="dot"></div>АДАПТИВ</div>
           </div>
         </div>
       </div>
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: '1fr 1.2fr 1fr', 
-        gap: '35px', 
-        borderTop: '1px solid #D1CFC8', 
-        paddingTop: '35px',
-        position: 'relative'
-      }}>
+      <div className="case-bottom-grid">
         
         {/* Колонка 1: ЗАДАЧА */}
-        <div style={{ borderRight: '1px solid #D1CFC8', paddingRight: '20px' }}>
-          <h4 style={{ margin: '0 0 15px 0', fontSize: '12px', letterSpacing: '1px', fontWeight: 'bold', color: '#555' }}>ЗАДАЧА</h4>
-          <p style={{ fontSize: '14px', lineHeight: '1.6', color: '#444' }}>
-            {current.task || 'Описание задачи отсутствует.'}
-          </p>
+        <div className="info-column">
+          <h4>ЗАДАЧА</h4>
+          <p>{current.task || 'Описание задачи отсутствует.'}</p>
           {current.leftQuote && (
-            <p style={{ fontFamily: '"Georgia", serif', fontStyle: 'italic', color: '#D9A74A', marginTop: '25px', fontSize: '14px' }}>
+            <p className="quote-style">
               ✨ {current.leftQuote} ♡
             </p>
           )}
         </div>
 
         {/* Колонка 2: РЕЗУЛЬТАТ */}
-        <div style={{ borderRight: '1px solid #D1CFC8', paddingRight: '20px' }}>
-          <h4 style={{ margin: '0 0 15px 0', fontSize: '12px', letterSpacing: '1px', fontWeight: 'bold', color: '#555' }}>РЕЗУЛЬТАТ</h4>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+        <div className="info-column">
+          <h4>РЕЗУЛЬТАТ</h4>
+          <div>
             {current.results && Array.isArray(current.results) ? (
               current.results.map((resObj, i) => {
                 const txt = resObj.result ? resObj.result : resObj;
                 const icon = i % 2 === 0 ? '💻' : '📱';
                 return (
-                  <div key={i} style={{ display: 'flex', gap: '12px', alignItems: 'flex-start', fontSize: '14px', lineHeight: '1.4' }}>
-                    <span style={{ fontSize: '18px' }}>{icon}</span>
-                    <span style={{ color: '#444' }}>{txt}</span>
+                  <div key={i} className="result-item">
+                    <span className="icon">{icon}</span>
+                    <span className="text">{txt}</span>
                   </div>
                 );
               })
             ) : (
-              <p style={{ fontSize: '14px' }}>Результаты обрабатываются.</p>
+              <p>Результаты обрабатываются.</p>
             )}
           </div>
         </div>
 
         {/* Колонка 3: ЦВЕТА И ШРИФТЫ */}
-        <div>
-          <h4 style={{ margin: '0 0 15px 0', fontSize: '12px', letterSpacing: '1px', fontWeight: 'bold', color: '#555' }}>ЦВЕТА</h4>
-          <div style={{ display: 'flex', gap: '8px', marginBottom: '30px', flexWrap: 'wrap' }}>
+        <div className="info-column">
+          <h4>ЦВЕТА</h4>
+          <div className="colors-row">
             {current.colors && Array.isArray(current.colors) ? (
               current.colors.map((cObj, i) => {
                 const hex = cObj.colorCode ? cObj.colorCode : cObj;
@@ -255,40 +164,26 @@ function DesignDetail({ id, onBack }) {
                   <div 
                     key={i} 
                     title={hex}
-                    style={{ 
-                      width: '26px', 
-                      height: '26px', 
-                      borderRadius: '50%', 
-                      backgroundColor: hex,
-                      border: '1px solid #D1CFC8',
-                      cursor: 'pointer'
-                    }} 
+                    className="color-circle"
+                    style={{ backgroundColor: hex }} // Динамический цвет красим инлайном
                   />
                 );
               })
             ) : (
-              <div style={{ width: '26px', height: '26px', borderRadius: '50%', backgroundColor: '#4E6E58' }} />
+              <div className="color-circle" style={{ backgroundColor: '#4E6E58' }} />
             )}
           </div>
 
-          <h4 style={{ margin: '0 0 10px 0', fontSize: '12px', letterSpacing: '1px', fontWeight: 'bold', color: '#555' }}>ШРИФТЫ</h4>
-          <h3 style={{ margin: '0', fontSize: '20px', fontWeight: 'bold', fontFamily: 'sans-serif' }}>
+          <h4>ШРИФТЫ</h4>
+          <h3 className="font-primary">
             {current.fonts ? current.fonts.split(',')[0] : 'Montserrat'}
           </h3>
-          <p style={{ margin: '3px 0 0 0', fontSize: '14px', color: '#777', fontFamily: 'serif', fontStyle: 'italic' }}>
+          <p className="font-secondary">
             {current.fonts && current.fonts.split(',')[1] ? current.fonts.split(',')[1].trim() : 'Nunito'}
           </p>
 
           {current.rightQuote && (
-            <p style={{ 
-              fontFamily: '"Georgia", serif', 
-              fontStyle: 'italic', 
-              color: '#D9A74A', 
-              marginTop: '25px', 
-              fontSize: '14px',
-              textAlign: 'right',
-              lineHeight: '1.3'
-            }}>
+            <p className="quote-style right-align">
               {current.rightQuote} ♡
             </p>
           )}
