@@ -9,12 +9,16 @@
       "results": [
         "1"
       ],
-      "buttonColor": "#eaaeae",
-      "fonts": "#444444 #444444 #555555",
-      "previewAsset": "/my-portfolio/assets/tea-layout.svg",
       "colors": [
-        "-"
-      ]
+        "#5d5950",
+        "#dfd5c7",
+        "#607647",
+        "#6d8650",
+        "#7f9960"
+      ],
+      "fonts": "Roboto",
+      "previewAsset": "/my-portfolio/assets/tea-layout.svg",
+      "buttonColor": "#eaaeae"
     }
   ]
 }
