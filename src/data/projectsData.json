@@ -18,7 +18,34 @@
       ],
       "fonts": "Roboto",
       "previewAsset": "/my-portfolio/assets/tea-layout.svg",
+      "topQuote": "ВОУ",
+      "leftQuote": "ДАДАДА",
+      "rightQuote": "КРУТО",
+      "tags": [
+        "UI/UX"
+      ],
       "buttonColor": "#eaaeae"
+    },
+    {
+      "id": "tourbox",
+      "title": "Онлайн гид",
+      "subtitle": "2",
+      "description": "1",
+      "task": "3",
+      "results": [
+        "1"
+      ],
+      "colors": [
+        "#4485ee"
+      ],
+      "fonts": "крутые",
+      "previewAsset": "/my-portfolio/assets/tour-box.svg",
+      "topQuote": "вооооооой",
+      "leftQuote": "оуууууу",
+      "rightQuote": "круууто",
+      "tags": [
+        "UI/UX"
+      ]
     }
   ]
 }
