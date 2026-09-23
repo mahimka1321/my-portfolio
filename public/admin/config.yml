@@ -9,8 +9,8 @@ public_folder: "/my-portfolio/assets"
 collections:
   - name: "projects_collection"
     label: "Мои Дизайны"
-    type: "file"
-    file: "src/data/projectsData.json"
+    folder: "src/data" # 🔥 ДОБАВИЛИ СЮДА
+    file: "src/data/projectsData.json" # 🔥 ДОБАВИЛИ СЮДА
     format: "json"
     fields:
       - name: "items"
