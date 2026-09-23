@@ -169,10 +169,10 @@ function DesignDetail({ id, onBack }) {
 
           <h4>ШРИФТЫ</h4>
           <h3 className="font-primary">
-            {current.fonts ? current.fonts.split(',') : 'Montserrat'}
+            {current.fonts ? current.fonts.split(',')[0] : 'Montserrat'}
           </h3>
           <p className="font-secondary">
-            {current.fonts && current.fonts.split(',') ? current.fonts.split(',').trim() : 'Nunito'}
+            {current.fonts && current.fonts.split(',')[1] ? current.fonts.split(',')[1] : 'Nunito'}
           </p>
 
           {current.rightQuote && (
