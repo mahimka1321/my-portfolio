@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/my-portfolio/static/css/main.2e1006de.css",
-    "main.js": "/my-portfolio/static/js/main.15c1ae1b.js",
+    "main.css": "/my-portfolio/static/css/main.d3edbaec.css",
+    "main.js": "/my-portfolio/static/js/main.4757d4ce.js",
     "static/js/453.35732811.chunk.js": "/my-portfolio/static/js/453.35732811.chunk.js",
     "static/media/hand-pointer.svg": "/my-portfolio/static/media/hand-pointer.325b60fe77c39e5ba63764b158323da4.svg",
     "static/media/hankoya-layout.svg": "/my-portfolio/static/media/hankoya-layout.325b60fe77c39e5ba63764b158323da4.svg",
@@ -10,12 +10,12 @@
     "static/media/yellow-wire.svg": "/my-portfolio/static/media/yellow-wire.325b60fe77c39e5ba63764b158323da4.svg",
     "static/media/tea-layout.svg": "/my-portfolio/static/media/tea-layout.257608415e693ed8b3b5dcb583bfd151.svg",
     "index.html": "/my-portfolio/index.html",
-    "main.2e1006de.css.map": "/my-portfolio/static/css/main.2e1006de.css.map",
-    "main.15c1ae1b.js.map": "/my-portfolio/static/js/main.15c1ae1b.js.map",
+    "main.d3edbaec.css.map": "/my-portfolio/static/css/main.d3edbaec.css.map",
+    "main.4757d4ce.js.map": "/my-portfolio/static/js/main.4757d4ce.js.map",
     "453.35732811.chunk.js.map": "/my-portfolio/static/js/453.35732811.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2e1006de.css",
-    "static/js/main.15c1ae1b.js"
+    "static/css/main.d3edbaec.css",
+    "static/js/main.4757d4ce.js"
   ]
 }
