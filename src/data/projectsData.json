@@ -2,20 +2,19 @@
   "items": [
     {
       "id": "tea",
-      "title": "-",
-      "subtitle": "-",
-      "description": "-",
-      "task": "-",
+      "title": "1333333",
+      "subtitle": "2",
+      "description": "3",
+      "task": "4",
       "results": [
-        "-"
+        "5"
       ],
+      "buttonColor": "#eaaeae",
+      "fonts": "#444444　＃４４４４４",
+      "previewAsset": "/my-portfolio/assets/tea-layout.svg",
       "colors": [
         "-"
-      ],
-      "fonts": [
-        "#444444"
-      ],
-      "previewAsset": "/my-portfolio/assets/tea-layout.svg"
+      ]
     }
   ]
 }
