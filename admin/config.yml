@@ -9,6 +9,7 @@ public_folder: "/my-portfolio/assets"
 collections:
   - name: "projects"
     label: "Мои Дизайны"
+    folder: "src/data"
     file: "src/data/projectsData.json"
     format: "json"
     fields:
