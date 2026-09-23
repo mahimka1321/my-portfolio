@@ -1,6 +1,7 @@
 import React from 'react';
 
-function Header({ currentPage, onLogoClick, onTabChange }) {
+function Header({ currentPage, onTabChange, onLogoClick }) {
+
   return (
     <header className="site-header">
       <div className="logo" onClick={onLogoClick}>

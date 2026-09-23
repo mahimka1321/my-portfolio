@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import Content from './Content';
 import ContentPreview from './ContentPreview';
+import './styles.scss';
 
 function App() {
   // 1. ИНИЦИАЛИЗАЦИЯ СТЕЙТОВ ИЗ ХЭША АДРЕСНОЙ СТРОКИ
@@ -55,21 +56,21 @@ function App() {
 
   return (
     <div className="app-container">
+      <div className="left-side-container">
       <Header 
-        page={page} 
-        handleTabChange={handleTabChange} 
-        handleLogoClick={handleLogoClick} 
+        currentPage={page} 
+        onTabChange={handleTabChange} 
+        onLogoClick={handleLogoClick} 
       />
-      <div className="main-layout" style={{ display: 'flex' }}>
-        <Content 
-          page={page} 
-          setPage={setPage}
-          selectedDesign={selectedDesign} 
-          setSelectedDesign={setSelectedDesign} 
-          setCurrentPreview={setCurrentPreview} 
-        />
-        <ContentPreview preview={currentPreview} />
+      <Content 
+        page={page} 
+        setPage={setPage}
+        selectedDesign={selectedDesign} 
+        setSelectedDesign={setSelectedDesign} 
+        setCurrentPreview={setCurrentPreview} 
+      />
       </div>
+      <ContentPreview preview={currentPreview} />
     </div>
   );
 }
