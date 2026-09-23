@@ -7,9 +7,9 @@ media_folder: "src/assets"
 public_folder: "/my-portfolio/assets"
 
 collections:
-  - name: "projects"
+  - name: "projects_collection"
     label: "Мои Дизайны"
-    folder: "src/data"
+    type: "file"
     file: "src/data/projectsData.json"
     format: "json"
     fields:
