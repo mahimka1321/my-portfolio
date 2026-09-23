@@ -18,9 +18,10 @@
     public_folder: "/my-portfolio/assets"
 
     collections:
-      - name: "projects"
+      - name: "projects_collection"
         label: "Мои Дизайны"
-        folder: "src/data"
+        # 🔥 КЛЮЧЕВОЙ МОМЕНТ: указываем, что вся коллекция — это ОДИН файл, а не папка!
+        type: "file" 
         file: "src/data/projectsData.json"
         format: "json"
         fields:
