@@ -4,7 +4,7 @@
   padding: 35px 30px 40px 30px; 
   
   color: #2B2B2B;
-  background-color: #FAF9F5;
+  background-color: #F9FBDF;
   font-family: 'system-ui', -apple-system, sans-serif;
   box-sizing: border-box;
 
@@ -267,6 +267,7 @@
 /* --- Допиши/обнови эти стили в самом верху src/Content.scss --- */
 
 .designs-list-page {
+  background-color: #F9FBDF;
   padding: 30px;
   
   .section-title {
@@ -306,7 +307,7 @@
   margin-top: 20px; 
   padding: 35px 30px 40px 30px; 
   color: #2B2B2B;
-  background-color: #FAF9F5;
+  background-color: #F9FBDF;
   min-height: calc(100vh - 120px);
   box-sizing: border-box;
   clear: both;
@@ -324,4 +325,9 @@
     font-family: var(--secondary-font, 'Nunito'), serif !important;
     font-style: italic;
   }
+}
+
+.left-side-container {
+  box-shadow: 7px 0px 15px 3px rgb(0 0 0 / 15%);
+  z-index: 1;
 }

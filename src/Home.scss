@@ -1,0 +1,317 @@
+.home-page-container {
+  padding: 60px 100px;
+  padding-top: 40px;
+  color: #2B2B2B;
+  background-color: #F9FBDF; // Твой оригинальный цвет фона
+  font-family: 'Nunito', sans-serif;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+
+  /* --- ВЕРХНИЙ БЛОК: МАНИФЕСТ --- */
+  .manifesto-section {
+    max-width: 580px;
+    
+    .manifesto-content {
+      display: flex;
+      position: relative; // Фиксируем контекст для внутренних абсолютных элементов
+
+      .manifesto-subtitle {
+        display: flex;
+        align-items: center;
+        margin-top: 100px;
+        margin-left: 20px;
+        position: relative;
+
+        span {
+          display: block;
+          width: 200px;
+          height: 40px;
+          background-image: url('./assets/LineText.png');
+          background-repeat: no-repeat;
+          background-position: center;
+        }
+
+        p {
+          font-size: 20px;
+          font-weight: bold;
+          color: #F8C028;
+          width: 100px;
+          margin-left: 40px;
+          position: relative; // Даем относительное позиционирование для работы ::after
+
+          &::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            top: 50%; // Центрируем звезду по вертикали относительно текста
+            left: 100%; // Выносим строго вправо за текст
+            transform: translateY(-50%); // Идеальное выравнивание по центру
+            margin-left: 40px;
+            background-image: url('./assets/Star.png');
+            background-repeat: no-repeat;
+            background-position: center;
+          }
+        }
+      }
+    }
+
+    .manifesto-tag {
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      color: #777778;
+      text-transform: uppercase;
+      margin-top: 50px;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    h3 {
+      margin-top: 60px;
+      margin-bottom: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #424242;
+    }
+
+    h1 {
+      font-size: 58px;
+      font-weight: 800;
+      line-height: 1.05;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+      margin: 0 0 20px 0;
+      color: #424242;
+
+      .invalig--rag-ps {
+        display: flex;
+        width: 640px;
+        color: #F9C428;
+        margin-left: -30px;
+        padding-top: 10px;
+        position: relative; // Защищаем абсолютную линию снизу от улетания
+
+        span {
+          display: flex;
+          width: 60px;
+          height: 80px;
+          background-repeat: no-repeat;
+          background-position: center;
+
+          &:nth-child(1) {
+            background-image: url('./assets/LeftDrop.png');
+          }
+          &:nth-child(2) {
+            background-image: url('./assets/RightDrop.png');
+            margin-left: -25px;
+          }
+        }
+
+        &::after {
+          content: '';
+          position: absolute;
+          width: 250px;
+          height: 25px;
+          bottom: -15px; // Привязываем линию строго к низу акцентного текста
+          left: 290px;
+          background-image: url('./assets/BigLine.png');
+          background-repeat: no-repeat;
+          background-position: center;
+          transform: rotate(2deg);
+        }
+      }
+    }
+
+    .manifesto-desc {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: #424242;
+      margin: 0;
+    }
+  }
+
+  /* --- СРЕДНИЙ БЛОК: ТАБЫ И СПЕЦИФИКАЦИИ --- */
+  .highlights-section {
+    display: flex;
+    margin-top: 40px;
+    position: relative; // 🔥 Важно: фиксируем точку отсчета для правого блока
+
+    .highlights-content {
+      width: 700px;
+      position: relative;
+
+      div {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+
+        p {
+          font-size: 18px;
+          font-weight: 600;
+          color: #646A73;
+          margin: 0;
+        }
+
+        p:nth-child(1) {
+          color: #222529;
+          position: relative;
+
+          &::after {
+            content: '';
+            position: absolute;
+            width: 120px;
+            height: 10px;
+            bottom: -12px;
+            left: 0;
+            background-image: url('./assets/minLain.png');
+            background-repeat: no-repeat;
+            background-position: center;
+          }
+        }
+      }
+
+      button {
+        margin-top: 80px;
+        width: 315px;
+        height: 55px;
+        border-radius: 24px;
+        background: #222529;
+        border: 3px solid #F9C428;
+        color: #F9C428;
+        font-size: 16px;
+        font-weight: 600;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: transparent;
+          border: 3px solid #222529;
+          color: #222529;
+        }
+
+        span {
+          font-size: 28px;
+          font-weight: 800;
+          padding-bottom: 7px;
+          padding-left: 5px;
+        }
+      }
+    }
+
+    /* 🔥 ИСПРАВЛЕННЫЙ БЛОК: Изолируем его высоту, чтобы подвал не уходил вниз */
+    .highlights-illustration {
+      position: absolute; // Выносим из общего потока высоты
+      right: 0; // Намертво прижимаем к правому краю секции
+      top: -250px; // Поднимаем на твою идеальную дизайнерскую высоту
+      height: 320px;
+      border-left: 3px solid #F9C428;
+      padding-left: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .highlight-block {
+        display: flex;
+        align-items: center;
+
+        svg {
+          width: 30px;
+          height: 40px;
+        }
+
+        div {
+          width: 150px;
+          margin-left: 20px;
+
+          h3 {
+            font-size: 16px;
+            font-weight: bold;
+            color: #424242;
+            margin: 0 0 4px 0;
+          }
+
+          p {
+            font-size: 12px;
+            font-weight: 400;
+            color: #646A73;
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+
+
+  /* --- НИЖНИЙ БЛОК: МЕТРИКИ ФУТТЕРА --- */
+  .footer-metrics {
+    border-top: 1px solid #D1CFC8;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+
+    .metric-item {
+      display: flex;
+      flex-direction: column;
+
+      .metric-label {
+        font-size: 10px;
+        font-weight: bold;
+        color: #888;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 4px;
+      }
+
+      .metric-value {
+        font-size: 14px;
+        font-weight: 700;
+        color: #2B2B2B;
+      }
+    }
+
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      background-color: #EAE7DE;
+      padding: 6px 14px;
+      border-radius: 20px;
+      color: #444;
+
+      .pulse-dot {
+        width: 6px;
+        height: 6px;
+        background-color: #4E6E58;
+        border-radius: 50%;
+        position: relative;
+
+        &::after {
+          content: '';
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background-color: #4E6E58;
+          border-radius: 50%;
+          animation: pulse-effect 2s infinite ease-in-out;
+        }
+      }
+    }
+  }
+}
+
+@keyframes pulse-effect {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
