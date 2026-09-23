@@ -3,7 +3,6 @@ import projectsData from './data/projectsData.json';
 
 // 1. КОМПОНЕНТ: Динамический список всех дизайнов
 function DesignsList({ onSelect }) {
-  // Безопасно достаем массив проектов
   const list = projectsData.items || [];
 
   return (
@@ -13,14 +12,11 @@ function DesignsList({ onSelect }) {
       
       <div className="blocks-grid" style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginTop: '20px' }}>
         {list.map((item, index) => {
-          // СТРАХОВКА: Если админка завернула данные глубоко, извлекаем их. Иначе берем сам item.
           const data = item.fields ? item.fields : item;
           
-          // Безопасно вытаскиваем цвет. Если цвета нет или это пустой массив, ставим дефолтный дзен-зеленый
-          const buttonColor = (data.colors && data.colors[0]) ? data.colors[0] : '#4E6E58';
-          // Вытаскиваем заголовок. Если пусто — выводим временную заглушку, чтобы кнопка не была пустой
-          const buttonTitle = data.title || `Проект #${index + 1}`;
-          // Вытаскиваем ID для клика
+          // 🔥 ЧИТАЕМ ЦВЕТ НАПРЯМУЮ ИЗ НАШЕГО НОВОГО ПОЛЯ БЕЗ СЛОЖНЫХ МАССИВОВ
+          const bgColor = data.buttonColor && data.buttonColor !== '-' ? data.buttonColor : '#4E6E58';
+          const titleText = data.title && data.title !== '-' ? data.title : `Проект #${index + 1}`;
           const projectId = data.id || `project-${index}`;
 
           return (
@@ -28,18 +24,17 @@ function DesignsList({ onSelect }) {
               key={projectId}
               className="proto-block"
               style={{ 
-                backgroundColor: buttonColor, // Принудительно красим кнопку
+                backgroundColor: bgColor, // Цвет применится железно!
                 padding: '25px', 
                 borderRadius: '8px', 
                 color: '#fff', 
                 fontWeight: 'bold', 
                 cursor: 'pointer',
-                display: 'block' // Задаем блочную видимость
+                display: 'block'
               }}
-              onClick={() => onSelect(projectId)} // Клик открывает кейс
+              onClick={() => onSelect(projectId)}
             >
-              {/* Выводим заголовок проекта на кнопку */}
-              <span>{buttonTitle}</span>
+              <span>{titleText}</span>
             </div>
           );
         })}

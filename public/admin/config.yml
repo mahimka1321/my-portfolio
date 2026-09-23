@@ -17,12 +17,13 @@ collections:
         label: "Список проектов"
         widget: "list"
         fields:
-          - { label: 'ID проекта (например: tea)', name: 'id', widget: 'string' }
+          - { label: 'ID проекта (латиницей, например: tea)', name: 'id', widget: 'string' }
           - { label: 'Главный Заголовок', name: 'title', widget: 'string' }
           - { label: 'Подзаголовок', name: 'subtitle', widget: 'string' }
-          - { label: 'Описание', name: 'description', widget: 'text' }
+          - { label: 'Описание проекта', name: 'description', widget: 'text' }
           - { label: 'Задача бизнеса', name: 'task', widget: 'text' }
-          - { label: 'Результат (список)', name: 'results', widget: 'list' }
-          - { label: 'Цвета (HEX)', name: 'colors', widget: 'list' }
-          - { label: 'Шрифты', name: 'fonts', widget: 'list' }
-          - { label: 'Загрузить SVG макет верстки', name: 'previewAsset', widget: 'file' }
+          - { label: 'Результаты (добавляй кнопкой по одному)', name: 'results', widget: 'list', field: {name: 'result', widget: 'string'} }
+          - { label: 'Цвета кнопки (HEX)', name: 'buttonColor', widget: 'colorstring' }
+          - { label: 'Шрифты проекта', name: 'fonts', widget: 'string' }
+          - { label: 'Загрузить SVG макет', name: 'previewAsset', widget: 'file' }
+
