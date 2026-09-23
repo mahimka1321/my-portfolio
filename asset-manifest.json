@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/my-portfolio/static/css/main.d3edbaec.css",
-    "main.js": "/my-portfolio/static/js/main.5fb4507b.js",
+    "main.css": "/my-portfolio/static/css/main.f813d084.css",
+    "main.js": "/my-portfolio/static/js/main.40fc083f.js",
     "static/js/453.35732811.chunk.js": "/my-portfolio/static/js/453.35732811.chunk.js",
     "static/media/tour-box.svg": "/my-portfolio/static/media/tour-box.135b19d253903f41faa18f8cca6e82e2.svg",
     "static/media/hand-pointer.svg": "/my-portfolio/static/media/hand-pointer.325b60fe77c39e5ba63764b158323da4.svg",
@@ -11,12 +11,12 @@
     "static/media/yellow-wire.svg": "/my-portfolio/static/media/yellow-wire.325b60fe77c39e5ba63764b158323da4.svg",
     "static/media/tea-layout.svg": "/my-portfolio/static/media/tea-layout.257608415e693ed8b3b5dcb583bfd151.svg",
     "index.html": "/my-portfolio/index.html",
-    "main.d3edbaec.css.map": "/my-portfolio/static/css/main.d3edbaec.css.map",
-    "main.5fb4507b.js.map": "/my-portfolio/static/js/main.5fb4507b.js.map",
+    "main.f813d084.css.map": "/my-portfolio/static/css/main.f813d084.css.map",
+    "main.40fc083f.js.map": "/my-portfolio/static/js/main.40fc083f.js.map",
     "453.35732811.chunk.js.map": "/my-portfolio/static/js/453.35732811.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d3edbaec.css",
-    "static/js/main.5fb4507b.js"
+    "static/css/main.f813d084.css",
+    "static/js/main.40fc083f.js"
   ]
 }
