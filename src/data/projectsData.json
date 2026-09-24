@@ -49,6 +49,31 @@
       "tags": [
         "UI/UX"
       ]
+    },
+    {
+      "id": "webComponent",
+      "title": "Web Component",
+      "subtitle": "Онлайн конструктор компонентов",
+      "description": "-",
+      "task": "-",
+      "results": [
+        "-"
+      ],
+      "colors": [
+        "#1a1a1a",
+        "#2b2b2b",
+        "#343434",
+        "#4aff93",
+        "#ffffff"
+      ],
+      "fonts": "-",
+      "previewAsset": "/my-portfolio/assets/web-component.svg",
+      "topQuote": "-",
+      "leftQuote": "-",
+      "rightQuote": "-",
+      "tags": [
+        "UI/UX"
+      ]
     }
   ]
 }
