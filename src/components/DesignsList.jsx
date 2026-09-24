@@ -3,6 +3,7 @@ import projectsData from '../data/projectsData.json';
 import './DesignsList.scss';
 
 function DesignsList({ onSelect }) {
+
   const list = projectsData.items || [];
 
   return (
@@ -42,6 +43,11 @@ function DesignsList({ onSelect }) {
           }
 
           const titleText = data.title && data.title !== '-' ? data.title : `Проект #${index + 1}`;
+          // 🔥 ЖЕЛЕЗОБЕТОННЫЙ ФИКС: Забираем строго первый хекс из массива строк JSON
+          const colorText = data.colors && Array.isArray(data.colors) && data.colors.length > 0 
+            ? data.colors[0] // Сюда прилетит чистая строка "#5d5950"
+            : '#222529';    // Дефолтный темный цвет, если в JSON пусто
+          
           const projectId = data.id || `project-${index}`;
           const formattedIndex = String(index + 1).padStart(2, '0');
 
@@ -57,7 +63,7 @@ function DesignsList({ onSelect }) {
               </div>
 
               <div className="card-body">
-                <h3 className="card-title">{titleText}</h3>
+                <h3 className="card-title" style={{ color: colorText }}>{titleText}</h3>
                 <p className="card-desc">
                   {data.description && data.description !== '-' 
                     ? data.description 

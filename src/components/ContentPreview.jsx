@@ -23,11 +23,8 @@ function ContentPreview({ preview }) {
   const validSvgIds = [
     "main-architecture-map",
     "tea-layout",
-    "hankoya-layout",
-    "terraria-layout",
-    "hand-pointer",
-    "yellow-wire",
     "tour-box",
+    "web-component",
   ];
 
   if (project && project.previewAsset) {
