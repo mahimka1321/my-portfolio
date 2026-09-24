@@ -10,7 +10,6 @@
   justify-content: space-between;
   box-sizing: border-box;
 
-  /* --- 1. МАКЕТ МАНИФЕСТА (ВЕРХНИЙ БЛОК) --- */
   .manifesto-section {
     max-width: 580px;
 
@@ -135,7 +134,6 @@
     }
   }
 
-  /* --- 2. МАКЕТ ИНТЕРАКТИВНЫХ ТАБОВ И ИЛЛЮСТРАЦИЙ (СРЕДНИЙ БЛОК) --- */
   .highlights-section {
     display: flex;
     margin-top: 40px;
@@ -153,18 +151,16 @@
         p {
           font-size: 18px;
           font-weight: 600;
-          color: #646A73; // Тусклый цвет по умолчанию для неактивных шагов [1]
+          color: #646A73;
           margin: 0;
           position: relative;
-          padding-bottom: 15px; // Защита от налезания линии на буквы [1]
+          padding-bottom: 15px;
           transition: color 0.3s ease;
 
-          /* Стили для активного шага, выбранного кликом */
           &.active {
-            color: #222529; // Насыщенный темный цвет [1]
+            color: #222529;
             font-weight: 700;
 
-            /* Рождение линии minLain.png строго под активным табом */
             &::after {
               content: '';
               position: absolute;
@@ -176,7 +172,7 @@
               background-image: url('../assets/minLain.png');
               background-repeat: no-repeat;
               background-position: center;
-              animation: line-fade-in 0.3s ease-out forwards; // Мягкое проявление [1]
+              animation: line-fade-in 0.3s ease-out forwards;
             }
           }
         }
@@ -213,11 +209,10 @@
       }
     }
 
-    /* Изолированная правая колонка компетенций с абсолютным позиционированием */
     .highlights-illustration {
       position: absolute;
       right: 0;
-      top: -250px; // Четкая фиксация высоты для защиты подвала от улетания [1]
+      top: -250px;
       height: 320px;
       border-left: 3px solid #f9c428;
       padding-left: 20px;
@@ -228,14 +223,14 @@
       .highlight-block {
         display: flex;
         align-items: center;
-        opacity: 0.35; // Приглушаем неактивные блоки компетенций [1]
+        opacity: 0.35;
         transform: translateX(0);
         transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
         svg {
           width: 30px;
           height: 40px;
-          filter: grayscale(100%); // Черно-белая иконка в покое [1]
+          filter: grayscale(100%);
           transition: filter 0.3s ease;
         }
 
@@ -258,13 +253,12 @@
           }
         }
 
-        /* Эффект яркой подсветки блока, связанного с активным шагом */
         &.is-highlighted {
-          opacity: 1; // Полная контрастность [1]
-          transform: translateX(8px); // Элегантный сдвиг вправо на 8px [1]
+          opacity: 1;
+          transform: translateX(8px);
 
           svg {
-            filter: grayscale(0%); // Возвращаем цвет иконке [1]
+            filter: grayscale(0%);
           }
 
           h3 {
@@ -275,7 +269,6 @@
     }
   }
 
-  /* --- 3. ДЗЕН-ПОДВАЛ САЙТА (НИЖНИЙ БЛОК) --- */
   .footer-metrics {
     border-top: 1px solid #d1cfc8;
     height: 70px;
@@ -336,7 +329,6 @@
   }
 }
 
-/* --- ГЛОБАЛЬНЫЕ АНИМАЦИИ --- */
 @keyframes pulse-effect {
   0% {
     transform: scale(1);
