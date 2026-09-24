@@ -1,4 +1,4 @@
-/* --- ГЛАВНЫЙ КОНТЕЙНЕР ЖУРНАЛЬНОГО КЕЙСА --- */
+
 .design-detail-page {
   margin-top: 0; 
   padding: 35px 30px 40px 30px; 
@@ -8,7 +8,6 @@
   font-family: 'system-ui', -apple-system, sans-serif;
   box-sizing: border-box;
 
-  /* Кнопка возврата */
   .back-btn {
     background: none;
     border: none;
@@ -30,7 +29,6 @@
   }
 }
 
-/* --- ВЕРХНЯЯ ШАПКА КЕЙСА --- */
 .case-header-block {
   position: relative;
   margin-bottom: 35px;
@@ -60,7 +58,7 @@
       font-size: 22px;
       font-family: 'Nunito', sans-serif;
       font-style: italic;
-      color: #D9A74A; // Золотисто-желтый курсив
+      color: #D9A74A;
       margin: 0;
       position: relative;
       z-index: 2;
@@ -89,7 +87,6 @@
   }
 }
 
-/* --- СРЕДНИЙ БЛОК: ОПИСАНИЕ И ТАЙМЛАЙН --- */
 .case-middle-section {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
@@ -143,7 +140,6 @@
       letter-spacing: 1px;
     }
 
-    /* Интерактивный таймлайн */
     .timeline-steps {
       display: flex;
       gap: 20px;
@@ -170,7 +166,6 @@
   }
 }
 
-/* --- НИЖНИЙ ТРЕХКОЛОНОЧНЫЙ ЖУРНАЛЬНЫЙ БЛОК --- */
 .case-bottom-grid {
   display: grid;
   grid-template-columns: 1fr 1.2fr 1fr;
@@ -216,7 +211,6 @@
       }
     }
 
-    /* Иконки результатов */
     .result-item {
       display: flex;
       gap: 12px;
@@ -229,7 +223,6 @@
       .text { color: #444; }
     }
 
-    /* Ряд кружочков палитры */
     .colors-row {
       display: flex;
       gap: 8px;
@@ -245,7 +238,6 @@
       }
     }
 
-    /* Блок шрифтов */
     .font-primary {
       margin: 0;
       font-size: 20px;
@@ -261,10 +253,6 @@
     }
   }
 }
-
-
-
-/* --- Допиши/обнови эти стили в самом верху src/Content.scss --- */
 
 .designs-list-page {
   background-color: #F9FBDF;
@@ -312,15 +300,12 @@
   box-sizing: border-box;
   clear: both;
 
-  /* 🔥 ЗАДАЕМ ТВОЙ ФИРМЕННЫЙ ШРИФТ NUNITO КАК ЗАПАСНОЙ ПО УМОЛЧАНИЮ */
   font-family: var(--primary-font, 'Nunito'), sans-serif; 
 
-  /* Навязываем его всем обычным текстам и заголовкам */
   h1, h2, h3, h4, p, span, div {
     font-family: var(--primary-font, 'Nunito'), sans-serif !important;
   }
 
-  /* А для рукописных курсивных цитат и подзаголовков включаем его курсивную итерацию (Nunito Italic) */
   .case-subtitle, .top-handwritten-quote, .quote-style, .font-secondary {
     font-family: var(--secondary-font, 'Nunito'), serif !important;
     font-style: italic;

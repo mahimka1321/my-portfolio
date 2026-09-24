@@ -2,7 +2,7 @@
   padding: 60px 100px;
   padding-top: 40px;
   color: #2B2B2B;
-  background-color: #F9FBDF; // Твой оригинальный цвет фона
+  background-color: #F9FBDF;
   font-family: 'Nunito', sans-serif;
   min-height: 100%;
   display: flex;
@@ -10,13 +10,12 @@
   justify-content: space-between;
   box-sizing: border-box;
 
-  /* --- ВЕРХНИЙ БЛОК: МАНИФЕСТ --- */
   .manifesto-section {
     max-width: 580px;
     
     .manifesto-content {
       display: flex;
-      position: relative; // Фиксируем контекст для внутренних абсолютных элементов
+      position: relative;
 
       .manifesto-subtitle {
         display: flex;
@@ -40,16 +39,16 @@
           color: #F8C028;
           width: 100px;
           margin-left: 40px;
-          position: relative; // Даем относительное позиционирование для работы ::after
+          position: relative;
 
           &::after {
             content: '';
             position: absolute;
             width: 50px;
             height: 50px;
-            top: 50%; // Центрируем звезду по вертикали относительно текста
-            left: 100%; // Выносим строго вправо за текст
-            transform: translateY(-50%); // Идеальное выравнивание по центру
+            top: 50%;
+            left: 100%;
+            transform: translateY(-50%);
             margin-left: 40px;
             background-image: url('./assets/Star.png');
             background-repeat: no-repeat;
@@ -93,7 +92,7 @@
         color: #F9C428;
         margin-left: -30px;
         padding-top: 10px;
-        position: relative; // Защищаем абсолютную линию снизу от улетания
+        position: relative;
 
         span {
           display: flex;
@@ -116,7 +115,7 @@
           position: absolute;
           width: 250px;
           height: 25px;
-          bottom: -15px; // Привязываем линию строго к низу акцентного текста
+          bottom: -15px;
           left: 290px;
           background-image: url('./assets/BigLine.png');
           background-repeat: no-repeat;
@@ -135,11 +134,11 @@
     }
   }
 
-  /* --- СРЕДНИЙ БЛОК: ТАБЫ И СПЕЦИФИКАЦИИ --- */
+
   .highlights-section {
     display: flex;
     margin-top: 40px;
-    position: relative; // 🔥 Важно: фиксируем точку отсчета для правого блока
+    position: relative;
 
     .highlights-content {
       width: 700px;
@@ -206,11 +205,11 @@
       }
     }
 
-    /* 🔥 ИСПРАВЛЕННЫЙ БЛОК: Изолируем его высоту, чтобы подвал не уходил вниз */
+
     .highlights-illustration {
-      position: absolute; // Выносим из общего потока высоты
-      right: 0; // Намертво прижимаем к правому краю секции
-      top: -250px; // Поднимаем на твою идеальную дизайнерскую высоту
+      position: absolute;
+      right: 0;
+      top: -250px;
       height: 320px;
       border-left: 3px solid #F9C428;
       padding-left: 20px;
@@ -250,7 +249,6 @@
   }
 
 
-  /* --- НИЖНИЙ БЛОК: МЕТРИКИ ФУТТЕРА --- */
   .footer-metrics {
     border-top: 1px solid #D1CFC8;
     height: 70px;

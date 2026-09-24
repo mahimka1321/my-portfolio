@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import Content from './Content';
 import ContentPreview from './ContentPreview';
-import './styles.scss';
+import './styles.scss'; // Больше никаких лишних импортов лоадера!
 
 function App() {
   // 1. ИНИЦИАЛИЗАЦИЯ СТЕЙТОВ ИЗ ХЭША АДРЕСНОЙ СТРОКИ
@@ -12,20 +12,18 @@ function App() {
 
   // 2. ФУНКЦИЯ: Разбор ссылки при загрузке или её изменении
   const parseLocationHash = () => {
-    const hash = window.location.hash; // Получаем всё, что идет после # (например, #/design/tour-box)
+    const hash = window.location.hash;
     
     if (!hash || hash === '#/' || hash === '#/home') {
       setPage('home');
       setSelectedDesign(null);
       setCurrentPreview('map');
     } else if (hash.startsWith('#/design/')) {
-      // Если ссылка на конкретный дизайн
       const designId = hash.replace('#/design/', '');
       setPage('designs');
       setSelectedDesign(designId);
       setCurrentPreview(`preview-${designId}`);
     } else {
-      // Если ссылка на вкладку (например, #/designs или #/skills)
       const cleanPage = hash.replace('#/', '');
       setPage(cleanPage);
       setSelectedDesign(null);
@@ -33,45 +31,59 @@ function App() {
     }
   };
 
-  // 3. ЭФФЕКТ: Вешаем слушатель на изменение URL браузера
+  // 3. ЭФФЕКТ: Вешаем слушатель на изменение URL браузера и гасим глобальный HTML-лоадер
   useEffect(() => {
-    // Разбираем хэш при самом первом открытии сайта
     parseLocationHash();
 
-    // Слушаем, если пользователь нажал стрелочки "Назад/Вперед" в браузере
     const handleHashChange = () => parseLocationHash();
     window.addEventListener('hashchange', handleHashChange);
+    
+    // МЯГКО ГАСИМ ГЛОБАЛЬНЫЙ ЛОАДЕР ИЗ ИНДЕКСА
+    const hideGlobalLoader = () => {
+      const loader = document.getElementById('global-preloader');
+      if (loader) {
+        loader.classList.add('preloader--hidden'); 
+        setTimeout(() => loader.remove(), 400); 
+      }
+    };
+
+    if (document.readyState === 'complete') {
+      setTimeout(hideGlobalLoader, 500); 
+    } else {
+      window.addEventListener('load', hideGlobalLoader);
+      return () => {
+        window.removeEventListener('hashchange', handleHashChange);
+        window.removeEventListener('load', hideGlobalLoader);
+      };
+    }
     
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
-  // 4. ФУНКЦИИ КЛИКОВ: Теперь они просто меняют ХЭШ в строке браузера, а React сам подстроится!
-  const handleLogoClick = () => {
-    window.location.hash = '#/home';
-  };
-
-  const handleTabChange = (newPage) => {
-    window.location.hash = `#/${newPage}`;
-  };
+  // 4. ФУНКЦИИ КЛИКОВ
+  const handleLogoClick = () => { window.location.hash = '#/home'; };
+  const handleTabChange = (newPage) => { window.location.hash = `#/${newPage}`; };
 
   return (
-    <div className="app-container">
-      <div className="left-side-container">
-      <Header 
-        currentPage={page} 
-        onTabChange={handleTabChange} 
-        onLogoClick={handleLogoClick} 
-      />
-      <Content 
-        page={page} 
-        setPage={setPage}
-        selectedDesign={selectedDesign} 
-        setSelectedDesign={setSelectedDesign} 
-        setCurrentPreview={setCurrentPreview} 
-      />
+    <>
+      <div className="app-container">
+        <div className="left-side-container">
+          <Header 
+            currentPage={page} 
+            onTabChange={handleTabChange} 
+            onLogoClick={handleLogoClick} 
+          />
+          <Content 
+            page={page} 
+            setPage={setPage}
+            selectedDesign={selectedDesign} 
+            setSelectedDesign={setSelectedDesign} 
+            setCurrentPreview={setCurrentPreview} 
+          />
+        </div>
+        <ContentPreview preview={currentPreview} />
       </div>
-      <ContentPreview preview={currentPreview} />
-    </div>
+    </>
   );
 }
 

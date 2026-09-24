@@ -31,7 +31,63 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+  <div id="root">
+    <!-- 🔥 ВСЁ, ЧТО НАПИСАНО ТУТ, БРАУЗЕР ПОКАЖЕТ МГНОВЕННО, ПОКА ЖДЕТ КАРТУ И СКРИПТЫ -->
+    <div id="global-preloader" style="
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #F9FBDF; /* Твой оригинальный цвет фона */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 999999;
+      font-family: 'Nunito', sans-serif;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    ">
+      <!-- Вращающийся брутальный спиннер -->
+      <div style="
+        width: 60px;
+        height: 60px;
+        border: 4px solid #222529;
+        border-top: 4px solid #F9C428;
+        border-radius: 50%;
+        animation: global-spin 1s linear infinite;
+      "></div>
+      
+      <!-- Пульсирующий текст -->
+      <span id="global-preloader-text" style="
+        margin-top: 25px;
+        font-size: 12px;
+        font-weight: 800;
+        color: #222529;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        animation: global-pulse 1.5s infinite ease-in-out;
+      ">SYSTEM INITIALIZATION</span>
+
+      <!-- Вшиваем микро-стили анимаций прямо сюда, чтобы они завелись без внешних файлов -->
+      <style>
+        @keyframes global-spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        @keyframes global-pulse {
+          0%, 100% { opacity: 0.4; transform: scale(0.98); }
+          50% { opacity: 1; transform: scale(1.02); }
+        }
+        /* Стили для мягкого скрытия */
+        .preloader--hidden {
+          opacity: 0 !important;
+          visibility: hidden !important;
+          pointer-events: none !important;
+        }
+      </style>
+    </div>
+  </div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
