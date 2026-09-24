@@ -1,0 +1,30 @@
+.skills-page {
+  padding: 30px;
+  color: #2b2b2b;
+  font-family: "Nunito", sans-serif;
+
+  .skills-container {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .skill-card {
+      border-left: 3px solid #d9a74a;
+      padding-left: 15px;
+
+      h3 {
+        font-size: 14px;
+        margin: 0 0 5px 0;
+        letter-spacing: 0.5px;
+      }
+
+      p {
+        margin: 0;
+        color: #555;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+    }
+  }
+}

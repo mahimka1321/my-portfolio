@@ -1,18 +1,19 @@
 .home-page-container {
   padding: 60px 100px;
   padding-top: 40px;
-  color: #2B2B2B;
-  background-color: #F9FBDF;
-  font-family: 'Nunito', sans-serif;
+  color: #2b2b2b;
+  background-color: #f9fbdf; // Твой оригинальный фоновый цвет
+  font-family: "Nunito", sans-serif;
   min-height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   box-sizing: border-box;
 
+  /* --- 1. МАКЕТ МАНИФЕСТА (ВЕРХНИЙ БЛОК) --- */
   .manifesto-section {
     max-width: 580px;
-    
+
     .manifesto-content {
       display: flex;
       position: relative;
@@ -28,7 +29,7 @@
           display: block;
           width: 200px;
           height: 40px;
-          background-image: url('./assets/LineText.png');
+          background-image: url("../assets/LineText.png");
           background-repeat: no-repeat;
           background-position: center;
         }
@@ -36,13 +37,13 @@
         p {
           font-size: 20px;
           font-weight: bold;
-          color: #F8C028;
+          color: #f8c028;
           width: 100px;
           margin-left: 40px;
           position: relative;
 
           &::after {
-            content: '';
+            content: "";
             position: absolute;
             width: 50px;
             height: 50px;
@@ -50,7 +51,7 @@
             left: 100%;
             transform: translateY(-50%);
             margin-left: 40px;
-            background-image: url('./assets/Star.png');
+            background-image: url("../assets/Star.png");
             background-repeat: no-repeat;
             background-position: center;
           }
@@ -89,7 +90,7 @@
       .invalig--rag-ps {
         display: flex;
         width: 640px;
-        color: #F9C428;
+        color: #f9c428;
         margin-left: -30px;
         padding-top: 10px;
         position: relative;
@@ -102,22 +103,22 @@
           background-position: center;
 
           &:nth-child(1) {
-            background-image: url('./assets/LeftDrop.png');
+            background-image: url("../assets/LeftDrop.png");
           }
           &:nth-child(2) {
-            background-image: url('./assets/RightDrop.png');
+            background-image: url("../assets/RightDrop.png");
             margin-left: -25px;
           }
         }
 
         &::after {
-          content: '';
+          content: "";
           position: absolute;
           width: 250px;
           height: 25px;
           bottom: -15px;
           left: 290px;
-          background-image: url('./assets/BigLine.png');
+          background-image: url("../assets/BigLine.png");
           background-repeat: no-repeat;
           background-position: center;
           transform: rotate(2deg);
@@ -134,7 +135,7 @@
     }
   }
 
-
+  /* --- 2. МАКЕТ ИНТЕРАКТИВНЫХ ТАБОВ И ИЛЛЮСТРАЦИЙ (СРЕДНИЙ БЛОК) --- */
   .highlights-section {
     display: flex;
     margin-top: 40px;
@@ -152,24 +153,31 @@
         p {
           font-size: 18px;
           font-weight: 600;
-          color: #646A73;
+          color: #646A73; // Тусклый цвет по умолчанию для неактивных шагов [1]
           margin: 0;
-        }
-
-        p:nth-child(1) {
-          color: #222529;
           position: relative;
+          padding-bottom: 15px; // Защита от налезания линии на буквы [1]
+          transition: color 0.3s ease; [1]
 
-          &::after {
-            content: '';
-            position: absolute;
-            width: 120px;
-            height: 10px;
-            bottom: -12px;
-            left: 0;
-            background-image: url('./assets/minLain.png');
-            background-repeat: no-repeat;
-            background-position: center;
+          /* Стили для активного шага, выбранного кликом [1] */
+          &.active {
+            color: #222529; // Насыщенный темный цвет [1]
+            font-weight: 700; [1]
+
+            /* Рождение линии minLain.png строго под активным табом [1] */
+            &::after {
+              content: '';
+              position: absolute;
+              width: 120px;
+              height: 10px;
+              bottom: 0;
+              left: 50%;
+              transform: translateX(-50%);
+              background-image: url('../assets/minLain.png');
+              background-repeat: no-repeat;
+              background-position: center;
+              animation: line-fade-in 0.3s ease-out forwards; // Мягкое проявление [1]
+            }
           }
         }
       }
@@ -180,8 +188,8 @@
         height: 55px;
         border-radius: 24px;
         background: #222529;
-        border: 3px solid #F9C428;
-        color: #F9C428;
+        border: 3px solid #f9c428;
+        color: #f9c428;
         font-size: 16px;
         font-weight: 600;
         display: flex;
@@ -205,13 +213,13 @@
       }
     }
 
-
+    /* Изолированная правая колонка компетенций с абсолютным позиционированием [1] */
     .highlights-illustration {
       position: absolute;
       right: 0;
-      top: -250px;
+      top: -200px; // Четкая фиксация высоты для защиты подвала от улетания [1]
       height: 320px;
-      border-left: 3px solid #F9C428;
+      border-left: 3px solid #f9c428;
       padding-left: 20px;
       display: flex;
       flex-direction: column;
@@ -220,10 +228,15 @@
       .highlight-block {
         display: flex;
         align-items: center;
+        opacity: 0.35; // Приглушаем неактивные блоки компетенций [1]
+        transform: translateX(0); [1]
+        transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94); [1]
 
         svg {
           width: 30px;
           height: 40px;
+          filter: grayscale(100%); // Черно-белая иконка в покое [1]
+          transition: filter 0.3s ease; [1]
         }
 
         div {
@@ -240,17 +253,31 @@
           p {
             font-size: 12px;
             font-weight: 400;
-            color: #646A73;
+            color: #646a73;
             margin: 0;
+          }
+        }
+
+        /* Эффект яркой подсветки блока, связанного с активным шагом [1] */
+        &.is-highlighted {
+          opacity: 1; // Полная контрастность [1]
+          transform: translateX(8px); // Элегантный сдвиг вправо на 8px [1]
+
+          svg {
+            filter: grayscale(0%); // Возвращаем цвет иконке [1]
+          }
+
+          h3 {
+            color: #1A1A1A;
           }
         }
       }
     }
   }
 
-
+  /* --- 3. ДЗЕН-ПОДВАЛ САЙТА (НИЖНИЙ БЛОК) --- */
   .footer-metrics {
-    border-top: 1px solid #D1CFC8;
+    border-top: 1px solid #d1cfc8;
     height: 70px;
     display: flex;
     justify-content: space-between;
@@ -273,7 +300,7 @@
       .metric-value {
         font-size: 14px;
         font-weight: 700;
-        color: #2B2B2B;
+        color: #2b2b2b;
       }
     }
 
@@ -283,7 +310,7 @@
       gap: 8px;
       font-size: 12px;
       font-weight: 700;
-      background-color: #EAE7DE;
+      background-color: #eae7de;
       padding: 6px 14px;
       border-radius: 20px;
       color: #444;
@@ -291,16 +318,16 @@
       .pulse-dot {
         width: 6px;
         height: 6px;
-        background-color: #4E6E58;
+        background-color: #4e6e58;
         border-radius: 50%;
         position: relative;
 
         &::after {
-          content: '';
+          content: "";
           position: absolute;
           width: 100%;
           height: 100%;
-          background-color: #4E6E58;
+          background-color: #4e6e58;
           border-radius: 50%;
           animation: pulse-effect 2s infinite ease-in-out;
         }
@@ -309,7 +336,25 @@
   }
 }
 
+/* --- ГЛОБАЛЬНЫЕ АНИМАЦИИ --- */
 @keyframes pulse-effect {
-  0% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(2.5); opacity: 0; }
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+@keyframes line-fade-in {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scaleX(0.7); [1]
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) scaleX(1); [1]
+  }
 }

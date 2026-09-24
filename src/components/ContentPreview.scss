@@ -1,0 +1,38 @@
+.preview-box {
+  max-width: 668px;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background-color: #2b2b2b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  &.map-style {
+    background-color: #2b2b2b;
+  }
+
+  &.dynamic {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  /* Твой фирменный кастомный скроллбар правой панели */
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #ffd200;
+    border-radius: 3px;
+  }
+
+  .svg-layout-container {
+    width: 100%;
+    svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  }
+}

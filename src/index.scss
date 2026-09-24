@@ -1,0 +1,181 @@
+/* --- ГЛОБАЛЬНЫЕ БАЗОВЫЕ СТИЛИ И СБРОС --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+  background-color: #1a1a1a;
+}
+
+code {
+  font-family:
+    source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+/* Настройки главного сплит-контейнера приложения */
+.app-container {
+  width: 100vw;
+  height: 100dvh;
+  display: flex;
+  overflow: hidden;
+  background-color: #1a1a1a;
+}
+
+.left-side-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #f7f4eb;
+}
+
+/* Контейнеры скролла внутренних страниц левой панели */
+.home-page,
+.designs-list-page,
+.design-detail-page,
+.skills-page {
+  background-color: #f9fbdf;
+  width: 100%;
+  height: calc(100% - 60px);
+  padding: 40px;
+  color: #000;
+  overflow-y: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+  overflow: hidden;
+}
+
+.app-container {
+  width: 100vw;
+  height: 100dvh;
+  display: flex;
+  overflow: hidden;
+  background-color: #1a1a1a;
+}
+
+.left-side-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #f7f4eb;
+}
+
+.site-header {
+  height: 60px;
+  min-height: 60px;
+  max-height: 60px;
+  width: 100%;
+  background-color: #f9c428;
+  color: #222529;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+
+  .logo {
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .navigation {
+      button {
+      margin-left: 15px;
+      padding: 8px 16px;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      font-weight: bold;
+      border-bottom: 2px solid transparent;
+      &:hover {
+        border-color: #222529;
+        background-color: #f9fbdf;
+        border-radius: 4px;
+        transition: 0.3s;
+      }
+      &.active {
+        background-color: #222529;
+        color: #ffd200;
+        border-radius: 4px;
+      }
+    }
+  }
+}
+
+.home-page,
+.designs-list-page,
+.design-detail-page,
+.skills-page {
+  background-color: #f9fbdf;
+  width: 100%;
+  height: calc(100% - 60px);
+  padding: 40px;
+  color: #000;
+  overflow-y: auto;
+}
+
+.preview-box {
+  max-width: 668px;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background-color: #2b2b2b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  &.map-style {
+    background-color: #2b2b2b;
+  }
+
+  &.dynamic {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #ffd200;
+    border-radius: 3px;
+  }
+
+  .svg-layout-container {
+    width: 100%;
+    svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  }
+}

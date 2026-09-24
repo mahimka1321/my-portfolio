@@ -4,14 +4,16 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #F9FBDF;
+  background-color: #f9fbdf;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   z-index: 99999;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
-  font-family: 'Nunito', sans-serif;
+  transition:
+    opacity 0.5s ease,
+    visibility 0.5s ease;
+  font-family: "Nunito", sans-serif;
 
   &.loading-screen--hidden {
     opacity: 0;
@@ -32,7 +34,7 @@
     width: 60px;
     height: 60px;
     border: 4px solid #222529;
-    border-top: 4px solid #F9C428;
+    border-top: 4px solid #f9c428;
     border-radius: 50%;
     animation: spin-loader 1s linear infinite;
   }
@@ -49,11 +51,22 @@
 }
 
 @keyframes spin-loader {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes pulse-text {
-  0%, 100% { opacity: 0.4; transform: scale(0.98); }
-  50% { opacity: 1; transform: scale(1.02); }
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
 }

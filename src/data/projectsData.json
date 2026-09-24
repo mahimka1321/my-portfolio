@@ -6,24 +6,14 @@
       "subtitle": "онлайн магазин по даставке чая",
       "description": "отсутствует",
       "task": "увеличить охват",
-      "results": [
-        "1"
-      ],
-      "colors": [
-        "#5d5950",
-        "#dfd5c7",
-        "#607647",
-        "#6d8650",
-        "#7f9960"
-      ],
+      "results": ["1"],
+      "colors": ["#5d5950", "#dfd5c7", "#607647", "#6d8650", "#7f9960"],
       "fonts": "Roboto",
       "previewAsset": "/my-portfolio/assets/tea-layout.svg",
       "topQuote": "ВОУ",
       "leftQuote": "ДАДАДА",
       "rightQuote": "КРУТО",
-      "tags": [
-        "UI/UX"
-      ],
+      "tags": ["UI/UX"],
       "buttonColor": "#eaaeae"
     },
     {
@@ -32,20 +22,14 @@
       "subtitle": "2",
       "description": "1",
       "task": "3",
-      "results": [
-        "1"
-      ],
-      "colors": [
-        "#4485ee"
-      ],
+      "results": ["1"],
+      "colors": ["#4485ee"],
       "fonts": "крутые",
       "previewAsset": "/my-portfolio/assets/tour-box.svg",
       "topQuote": "вооооооой",
       "leftQuote": "оуууууу",
       "rightQuote": "круууто",
-      "tags": [
-        "UI/UX"
-      ]
+      "tags": ["UI/UX"]
     }
   ]
 }

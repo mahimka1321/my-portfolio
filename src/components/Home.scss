@@ -1,0 +1,360 @@
+.home-page-container {
+  padding: 60px 100px;
+  padding-top: 40px;
+  color: #2b2b2b;
+  background-color: #f9fbdf;
+  font-family: "Nunito", sans-serif;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+
+  /* --- 1. МАКЕТ МАНИФЕСТА (ВЕРХНИЙ БЛОК) --- */
+  .manifesto-section {
+    max-width: 580px;
+
+    .manifesto-content {
+      display: flex;
+      position: relative;
+
+      .manifesto-subtitle {
+        display: flex;
+        align-items: center;
+        margin-top: 100px;
+        margin-left: 20px;
+        position: relative;
+
+        span {
+          display: block;
+          width: 200px;
+          height: 40px;
+          background-image: url("../assets/LineText.png");
+          background-repeat: no-repeat;
+          background-position: center;
+        }
+
+        p {
+          font-size: 20px;
+          font-weight: bold;
+          color: #f8c028;
+          width: 100px;
+          margin-left: 40px;
+          position: relative;
+
+          &::after {
+            content: "";
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            top: 50%;
+            left: 100%;
+            transform: translateY(-50%);
+            margin-left: 40px;
+            background-image: url("../assets/Star.png");
+            background-repeat: no-repeat;
+            background-position: center;
+          }
+        }
+      }
+    }
+
+    .manifesto-tag {
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      color: #777778;
+      text-transform: uppercase;
+      margin-top: 50px;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    h3 {
+      margin-top: 60px;
+      margin-bottom: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #424242;
+    }
+
+    h1 {
+      font-size: 58px;
+      font-weight: 800;
+      line-height: 1.05;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+      margin: 0 0 20px 0;
+      color: #424242;
+
+      .invalig--rag-ps {
+        display: flex;
+        width: 640px;
+        color: #f9c428;
+        margin-left: -30px;
+        padding-top: 10px;
+        position: relative;
+
+        span {
+          display: flex;
+          width: 60px;
+          height: 80px;
+          background-repeat: no-repeat;
+          background-position: center;
+
+          &:nth-child(1) {
+            background-image: url("../assets/LeftDrop.png");
+          }
+          &:nth-child(2) {
+            background-image: url("../assets/RightDrop.png");
+            margin-left: -25px;
+          }
+        }
+
+        &::after {
+          content: "";
+          position: absolute;
+          width: 250px;
+          height: 25px;
+          bottom: -15px;
+          left: 290px;
+          background-image: url("../assets/BigLine.png");
+          background-repeat: no-repeat;
+          background-position: center;
+          transform: rotate(2deg);
+        }
+      }
+    }
+
+    .manifesto-desc {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: #424242;
+      margin: 0;
+    }
+  }
+
+  /* --- 2. МАКЕТ ИНТЕРАКТИВНЫХ ТАБОВ И ИЛЛЮСТРАЦИЙ (СРЕДНИЙ БЛОК) --- */
+  .highlights-section {
+    display: flex;
+    margin-top: 40px;
+    position: relative;
+
+    .highlights-content {
+      width: 700px;
+      position: relative;
+
+      div {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+
+        p {
+          font-size: 18px;
+          font-weight: 600;
+          color: #646A73; // Тусклый цвет по умолчанию для неактивных шагов [1]
+          margin: 0;
+          position: relative;
+          padding-bottom: 15px; // Защита от налезания линии на буквы [1]
+          transition: color 0.3s ease;
+
+          /* Стили для активного шага, выбранного кликом */
+          &.active {
+            color: #222529; // Насыщенный темный цвет [1]
+            font-weight: 700;
+
+            /* Рождение линии minLain.png строго под активным табом */
+            &::after {
+              content: '';
+              position: absolute;
+              width: 120px;
+              height: 10px;
+              bottom: 0;
+              left: 50%;
+              transform: translateX(-50%);
+              background-image: url('../assets/minLain.png');
+              background-repeat: no-repeat;
+              background-position: center;
+              animation: line-fade-in 0.3s ease-out forwards; // Мягкое проявление [1]
+            }
+          }
+        }
+      }
+
+      button {
+        margin-top: 80px;
+        width: 315px;
+        height: 55px;
+        border-radius: 24px;
+        background: #222529;
+        border: 3px solid #f9c428;
+        color: #f9c428;
+        font-size: 16px;
+        font-weight: 600;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: transparent;
+          border: 3px solid #222529;
+          color: #222529;
+        }
+
+        span {
+          font-size: 28px;
+          font-weight: 800;
+          padding-bottom: 7px;
+          padding-left: 5px;
+        }
+      }
+    }
+
+    /* Изолированная правая колонка компетенций с абсолютным позиционированием */
+    .highlights-illustration {
+      position: absolute;
+      right: 0;
+      top: -250px; // Четкая фиксация высоты для защиты подвала от улетания [1]
+      height: 320px;
+      border-left: 3px solid #f9c428;
+      padding-left: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .highlight-block {
+        display: flex;
+        align-items: center;
+        opacity: 0.35; // Приглушаем неактивные блоки компетенций [1]
+        transform: translateX(0);
+        transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+        svg {
+          width: 30px;
+          height: 40px;
+          filter: grayscale(100%); // Черно-белая иконка в покое [1]
+          transition: filter 0.3s ease;
+        }
+
+        div {
+          width: 150px;
+          margin-left: 20px;
+
+          h3 {
+            font-size: 16px;
+            font-weight: bold;
+            color: #424242;
+            margin: 0 0 4px 0;
+          }
+
+          p {
+            font-size: 12px;
+            font-weight: 400;
+            color: #646a73;
+            margin: 0;
+          }
+        }
+
+        /* Эффект яркой подсветки блока, связанного с активным шагом */
+        &.is-highlighted {
+          opacity: 1; // Полная контрастность [1]
+          transform: translateX(8px); // Элегантный сдвиг вправо на 8px [1]
+
+          svg {
+            filter: grayscale(0%); // Возвращаем цвет иконке [1]
+          }
+
+          h3 {
+            color: #1A1A1A;
+          }
+        }
+      }
+    }
+  }
+
+  /* --- 3. ДЗЕН-ПОДВАЛ САЙТА (НИЖНИЙ БЛОК) --- */
+  .footer-metrics {
+    border-top: 1px solid #d1cfc8;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+
+    .metric-item {
+      display: flex;
+      flex-direction: column;
+
+      .metric-label {
+        font-size: 10px;
+        font-weight: bold;
+        color: #888;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 4px;
+      }
+
+      .metric-value {
+        font-size: 14px;
+        font-weight: 700;
+        color: #2b2b2b;
+      }
+    }
+
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      background-color: #eae7de;
+      padding: 6px 14px;
+      border-radius: 20px;
+      color: #444;
+
+      .pulse-dot {
+        width: 6px;
+        height: 6px;
+        background-color: #4e6e58;
+        border-radius: 50%;
+        position: relative;
+
+        &::after {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background-color: #4e6e58;
+          border-radius: 50%;
+          animation: pulse-effect 2s infinite ease-in-out;
+        }
+      }
+    }
+  }
+}
+
+/* --- ГЛОБАЛЬНЫЕ АНИМАЦИИ --- */
+@keyframes pulse-effect {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+@keyframes line-fade-in {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scaleX(0.7);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) scaleX(1);
+  }
+}
