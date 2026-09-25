@@ -3,7 +3,7 @@
   height: 100dvh;
   overflow-y: scroll;
   overflow-x: hidden;
-  background-color: #2b2b2b;
+  background-color: #f9fbdf;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,7 +19,7 @@
   }
 
   &.map-style {
-    background-color: #2b2b2b;
+    background-color: #f9fbdf;
   }
 
   &::-webkit-scrollbar {
