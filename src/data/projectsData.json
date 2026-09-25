@@ -54,10 +54,10 @@
       "id": "webComponent",
       "title": "Web Component",
       "subtitle": "Онлайн конструктор компонентов",
-      "description": "-",
+      "description": "09",
       "task": "-",
       "results": [
-        "-"
+        "2"
       ],
       "colors": [
         "#1a1a1a",
@@ -66,11 +66,11 @@
         "#4aff93",
         "#ffffff"
       ],
-      "fonts": "-",
+      "fonts": "1",
       "previewAsset": "/my-portfolio/assets/web-component.svg",
-      "topQuote": "-",
-      "leftQuote": "-",
-      "rightQuote": "-",
+      "topQuote": "2",
+      "leftQuote": "3",
+      "rightQuote": "4",
       "tags": [
         "UI/UX"
       ]

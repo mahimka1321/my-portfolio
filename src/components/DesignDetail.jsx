@@ -1,152 +1,142 @@
-import React from "react";
-import projectsData from "../data/projectsData.json";
+import React from 'react';
+import projectsData from '../data/projectsData.json';
 import './DesignDetail.scss';
 
 function DesignDetail({ id, onBack }) {
   const list = projectsData.items || [];
-
-  const currentItem = list.find((item) => {
+  
+  const currentItem = list.find(item => {
     const data = item.fields ? item.fields : item;
     return data.id === id;
   });
 
-  if (!currentItem)
-    return <div style={{ padding: "30px" }}>Проект не найден</div>;
+  if (!currentItem) {
+    return <div className="design-detail-page"><h2>Проект не найден в базе данных</h2></div>;
+  }
+  
   const current = currentItem.fields ? currentItem.fields : currentItem;
-
-  // Очищаем строку от пробелов
-  const cleanFont =
-    current.fonts && current.fonts !== "-" ? current.fonts.trim() : "Nunito";
+  const primaryFont = current.fonts && current.fonts !== '-' ? current.fonts.trim() : 'Montserrat';
 
   return (
-    <div className="design-detail-page" style={{ "--chosen-font": cleanFont }}>
-      <button className="back-btn" onClick={onBack}>
-        ← К ВСЕМ ДИЗАЙНАМ
-      </button>
+    <div className="design-detail-page" style={{ '--chosen-font': primaryFont }}>
+      
+      {/* ПЕРВАЯ СЕКЦИЯ: ШАПКА, ИНФОРМАЦИЯ, КНОПКА И ПРОГРЕСС-БАР */}
+      <section className="case-top-section">
+        {/* стрелочка назад */}
+        <button className="back-btn" onClick={onBack}>
+          ← К ВСЕМ ДИЗАЙНАМ
+        </button>
 
-      {/* ВЕРХНЯЯ ШАПКА КЕЙСА */}
-      <div className="case-header-block">
-        <span className="ui-ux-tag">UI / UX ДИЗАЙН</span>
-        <h1>{current.title || "Без названия"}</h1>
-
-        <div className="subtitle-wrap">
-          <p className="case-subtitle">{current.subtitle || ""}</p>
-          <span className="decor-ray left">⚡</span>
-          <span className="decor-ray right">⚡</span>
+        {/* текст информации + заголовок */}
+        <div className="case-header-block">
+          <span className="case-tag">UI / UX ДИЗАЙН</span>
+          <h1 className="case-main-title">{current.title || 'БЕЗ НАЗВАНИЯ'}</h1>
+          
+          {/* Твоя фирменная оранжевая подпись с лучиками по бокам */}
+          <div className="case-signature-wrap">
+            <span className="signature-ray left"></span>
+            <p className="signature-text">{current.subtitle || 'Традиции в цифровом формате'}</p>
+            <span className="signature-ray right"></span>
+          </div>
         </div>
 
-        {current.topQuote && (
-          <div className="top-handwritten-quote">{current.topQuote} ⭐️</div>
-        )}
-      </div>
+        {/* доп текст из json + кнопка + прогресс бар */}
+        <div className="case-middle-block">
+          <div className="desc-and-pills">
+            <p className="case-description">
+              {current.description || 'Дизайн сайта для небольшого чайного магазина, где традиции, уют и простота встречаются в современном цифровом формате.'}
+            </p>
+            <div className="pills-row">
+              {current.tags && Array.isArray(current.tags) ? (
+                current.tags.map((t, i) => <span key={i} className="pill-item">{t.tag ? t.tag : t}</span>)
+              ) : (
+                <>
+                  <span className="pill-item">UI/UX</span>
+                  <span className="pill-item">E-COMMERCE</span>
+                  <span className="pill-item">WEB</span>
+                </>
+              )}
+            </div>
+          </div>
 
-      {/* СРЕДНИЙ БЛОК: ОПИСАНИЕ, ТЕГИ И ТАЙМЛАЙН */}
-      <div className="case-middle-section">
-        <div>
-          <p className="desc-text">{current.description || ""}</p>
+          <div className="interactive-column">
+            {/* Рукописный текст "Чай - это тоже забота" строго над кнопкой */}
+            {current.topQuote && (
+              <div className="handwritten-top-quote">{current.topQuote} ⭐️</div>
+            )}
+            
+            <div className="btn-about">
+              <span>☕️ О ПРОЕКТЕ</span>
+              <span>➔</span>
+            </div>
 
-          <div className="tags-container">
-            {current.tags && Array.isArray(current.tags) ? (
-              current.tags.map((t, i) => {
-                const tagText = t.tag ? t.tag : t;
-                return (
-                  <span key={i} className="tag-item">
-                    {tagText}
-                  </span>
-                );
-              })
+            {/* Прогресс-бар / таймлайн этапов */}
+            <div className="timeline-progress">
+              <div className="step"><div className="dot active"></div><span>концепт</span></div>
+              <div className="step"><div className="dot"></div><span>ui кит</span></div>
+              <div className="step"><div className="dot"></div><span>дизайн</span></div>
+              <div className="step"><div className="dot"></div><span>адаптив</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ВТОРЯЯ СЕКЦИЯ: ТРЕХКОЛОНОЧНЫЙ БЛОК ХАРАКТЕРИСТИК */}
+      <section className="case-bottom-section">
+        {/* колонка 1 задаца + текст из json */}
+        <div className="info-column">
+          <h4>ЗАДАЧА</h4>
+          <p>{current.task || 'Создать удобный и эстетичный интерфейс для онлайн-магазина чая...'}</p>
+          {current.leftQuote && <p className="quote-style italic-left">✨ {current.leftQuote} ♡</p>}
+        </div>
+
+        {/* колонка 2 результат */}
+        <div className="info-column">
+          <h4>РЕЗУЛЬТАТ</h4>
+          <div className="results-list">
+            {current.results && Array.isArray(current.results) ? (
+              current.results.map((resObj, i) => (
+                <div key={i} className="result-item">
+                  <span className="icon">💻</span>
+                  <span className="text">{resObj.result ? resObj.result : resObj}</span>
+                </div>
+              ))
             ) : (
               <>
-                <span className="tag-item">UI/UX</span>
-                <span className="tag-item">WEB</span>
+                <div className="result-item"><span className="icon">💻</span><span className="text">Современный, чистый интерфейс с акцентом на атмосферу</span></div>
+                <div className="result-item"><span className="icon">📱</span><span className="text">Адаптивная версия для всех устройств</span></div>
+                <div className="result-item"><span className="icon">🛒</span><span className="text">Удобная навигация и быстрый чек-аут</span></div>
               </>
             )}
           </div>
         </div>
 
-        <div className="action-column">
-          <div className="btn-about">
-            <span>☕️ О ПРОЕКТЕ</span>
-            <span>➔</span>
-          </div>
-
-          <div className="timeline-steps">
-            <div className="step">
-              <div className="dot active"></div>КОНЦЕПТ
-            </div>
-            <div className="step">
-              <div className="dot"></div>UI КИТ
-            </div>
-            <div className="step">
-              <div className="dot"></div>ДИЗАЙН
-            </div>
-            <div className="step">
-              <div className="dot"></div>АДАПТИВ
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* НИЖНИЙ ТРЕХКОЛОНОЧНЫЙ БЛОК */}
-      <div className="case-bottom-grid">
-        <div className="info-column">
-          <h4>ЗАДАЧА</h4>
-          <p>{current.task || "Описание задачи отсутствует."}</p>
-          {current.leftQuote && (
-            <p className="quote-style">✨ {current.leftQuote} ♡</p>
-          )}
-        </div>
-
-        <div className="info-column">
-          <h4>РЕЗУЛЬТАТ</h4>
-          <div>
-            {current.results && Array.isArray(current.results) ? (
-              current.results.map((resObj, i) => {
-                const txt = resObj.result ? resObj.result : resObj;
-                const icon = i % 2 === 0 ? "💻" : "📱";
-                return (
-                  <div key={i} className="result-item">
-                    <span className="icon">{icon}</span>
-                    <span className="text">{txt}</span>
-                  </div>
-                );
-              })
-            ) : (
-              <p>Результаты обрабатываются.</p>
-            )}
-          </div>
-        </div>
+        {/* колонка 3 цвета + шрифт + текст из json */}
         <div className="info-column">
           <h4>ЦВЕТА</h4>
           <div className="colors-row">
             {current.colors && Array.isArray(current.colors) ? (
               current.colors.map((cObj, i) => {
-                const hex = cObj.colorCode ? cObj.colorCode : cObj;
-                return (
-                  <div
-                    key={i}
-                    title={hex}
-                    className="color-circle"
-                    style={{ backgroundColor: hex }}
-                  />
-                );
+                const hex = cObj.colorCode || cObj.color || cObj.value || (typeof cObj === 'string' ? cObj : '#222529');
+                return <div key={i} className="color-circle" style={{ backgroundColor: hex }} />;
               })
             ) : (
-              <div
-                className="color-circle"
-                style={{ backgroundColor: "#4E6E58" }}
-              />
+              <>
+                <div className="color-circle" style={{ backgroundColor: '#5D5950' }} />
+                <div className="color-circle" style={{ backgroundColor: '#DFD5C7' }} />
+                <div className="color-circle" style={{ backgroundColor: '#607647' }} />
+              </>
             )}
           </div>
-          <h4>ШРИФТЫ</h4>
-          <h3 className="font-primary">{cleanFont}</h3>
-          <p className="font-secondary">{cleanFont} (Italic)</p>
 
-          {current.rightQuote && (
-            <p className="quote-style right-align">{current.rightQuote} ♡</p>
-          )}
+          <h4>ШРИФТЫ</h4>
+          <h3 className="font-primary">{primaryFont}</h3>
+          <p className="font-secondary">{primaryFont} (Italic)</p>
+          
+          {current.rightQuote && <p className="quote-style italic-right">{current.rightQuote} ♡</p>}
         </div>
-      </div>
+      </section>
+
     </div>
   );
 }
