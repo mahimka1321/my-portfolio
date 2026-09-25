@@ -8,7 +8,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  // transition: max-width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: none; 
 
   &[data-device="mobile"] {
     max-width: 668px; 
@@ -16,10 +16,12 @@
 
   &[data-device="desktop"] {
     max-width: 50vw;
+    transition: max-width 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   &.map-style {
     background-color: #f9fbdf;
+    transition: none !important;
   }
 
   &::-webkit-scrollbar {
