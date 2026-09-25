@@ -65,6 +65,8 @@
                 collapsed: true
                 summary: "{{tag}}"
                 field: {name: 'tag', widget: 'string', label: 'Имя тега (например: UI/UX)'}
+                
+              - { label: 'Тип макета (для превью)', name: 'deviceType', widget: 'select', options: ['desktop', 'mobile'], default: 'desktop', required: true }
   </script>
 
   <script src="./sveltia-cms.js" type="module"></script>
