@@ -24,6 +24,7 @@
       "tags": [
         "UI/UX"
       ],
+      "deviceType": "mobile",
       "buttonColor": "#eaaeae"
     },
     {
@@ -48,7 +49,8 @@
       "rightQuote": "круууто",
       "tags": [
         "UI/UX"
-      ]
+      ],
+      "deviceType": "mobile"
     },
     {
       "id": "webComponent",
@@ -73,7 +75,8 @@
       "rightQuote": "4",
       "tags": [
         "UI/UX"
-      ]
+      ],
+      "deviceType": "desktop"
     }
   ]
 }
