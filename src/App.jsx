@@ -1,93 +1,86 @@
-import React, { useState, useEffect } from "react";
-import Header from "./components/Header";
+import React, { useCallback, useEffect, useState } from "react";
+import Header from "./components/ui/Header/Header";
 import Content from "./components/Content";
 import ContentPreview from "./components/ContentPreview";
-import './index.scss';
+import "./index.scss";
+
+const getRoute = () => {
+  const hash = window.location.hash || "#/home";
+  const normalized = hash.startsWith("#/") ? hash.slice(2) : hash.replace(/^#/, "");
+
+  if (!normalized || normalized === "home") {
+    return { page: "home", selectedDesign: null, preview: "map" };
+  }
+
+  if (normalized.startsWith("design/")) {
+    const designId = decodeURIComponent(normalized.slice("design/".length)).trim();
+    return {
+      page: "designs",
+      selectedDesign: designId || null,
+      preview: designId ? `preview-${designId}` : "map",
+    };
+  }
+
+  const page = normalized.split("/")[0];
+  if (page === "designs" || page === "skills") {
+    return { page, selectedDesign: null, preview: "map" };
+  }
+
+  return { page: "home", selectedDesign: null, preview: "map" };
+};
 
 function App() {
-  // 1. ИНИЦИАЛИЗАЦИЯ СТЕЙТОВ ИЗ ХЭША АДРЕСНОЙ СТРОКИ
-  const [page, setPage] = useState("home");
-  const [selectedDesign, setSelectedDesign] = useState(null);
-  const [currentPreview, setCurrentPreview] = useState("map");
+  const [route, setRoute] = useState(getRoute);
 
-  // 2. ФУНКЦИЯ: Разбор ссылки при загрузке или её изменении
-  const parseLocationHash = () => {
-    const hash = window.location.hash;
+  const syncRoute = useCallback(() => {
+    setRoute(getRoute());
+  }, []);
 
-    if (!hash || hash === "#/" || hash === "#/home") {
-      setPage("home");
-      setSelectedDesign(null);
-      setCurrentPreview("map");
-    } else if (hash.startsWith("#/design/")) {
-      const designId = hash.replace("#/design/", "");
-      setPage("designs");
-      setSelectedDesign(designId);
-      setCurrentPreview(`preview-${designId}`);
-    } else {
-      const cleanPage = hash.replace("#/", "");
-      setPage(cleanPage);
-      setSelectedDesign(null);
-      setCurrentPreview("map");
-    }
-  };
-
-  // 3. ЭФФЕКТ: Вешаем слушатель на изменение URL браузера и гасим глобальный HTML-лоадер
   useEffect(() => {
-    parseLocationHash();
+    window.addEventListener("hashchange", syncRoute);
 
-    const handleHashChange = () => parseLocationHash();
-    window.addEventListener("hashchange", handleHashChange);
-
-    // МЯГКО ГАСИМ ГЛОБАЛЬНЫЙ ЛОАДЕР ИЗ ИНДЕКСА
+    let loaderTimeout;
     const hideGlobalLoader = () => {
       const loader = document.getElementById("global-preloader");
-      if (loader) {
-        loader.classList.add("preloader--hidden");
-        setTimeout(() => loader.remove(), 400);
-      }
+      if (!loader) return;
+
+      loader.classList.add("preloader--hidden");
+      loaderTimeout = window.setTimeout(() => loader.remove(), 400);
     };
 
     if (document.readyState === "complete") {
-      setTimeout(hideGlobalLoader, 500);
+      loaderTimeout = window.setTimeout(hideGlobalLoader, 500);
     } else {
-      window.addEventListener("load", hideGlobalLoader);
-      return () => {
-        window.removeEventListener("hashchange", handleHashChange);
-        window.removeEventListener("load", hideGlobalLoader);
-      };
+      window.addEventListener("load", hideGlobalLoader, { once: true });
     }
 
-    return () => window.removeEventListener("hashchange", handleHashChange);
-  }, []);
+    return () => {
+      window.removeEventListener("hashchange", syncRoute);
+      window.removeEventListener("load", hideGlobalLoader);
+      if (loaderTimeout) window.clearTimeout(loaderTimeout);
+    };
+  }, [syncRoute]);
 
-  // 4. ФУНКЦИИ КЛИКОВ
   const handleLogoClick = () => {
     window.location.hash = "#/home";
   };
+
   const handleTabChange = (newPage) => {
     window.location.hash = `#/${newPage}`;
   };
 
   return (
-    <>
-      <div className="app-container">
-        <div className="left-side-container">
-          <Header
-            currentPage={page}
-            onTabChange={handleTabChange}
-            onLogoClick={handleLogoClick}
-          />
-          <Content
-            page={page}
-            setPage={setPage}
-            selectedDesign={selectedDesign}
-            setSelectedDesign={setSelectedDesign}
-            setCurrentPreview={setCurrentPreview}
-          />
-        </div>
-        <ContentPreview preview={currentPreview} />
+    <div className="app-container">
+      <div className="left-side-container">
+        <Header
+          currentPage={route.page}
+          onTabChange={handleTabChange}
+          onLogoClick={handleLogoClick}
+        />
+        <Content page={route.page} selectedDesign={route.selectedDesign} />
       </div>
-    </>
+      <ContentPreview preview={route.preview} />
+    </div>
   );
 }
 

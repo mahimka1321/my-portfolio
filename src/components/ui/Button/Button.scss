@@ -1,0 +1,37 @@
+.brutal-btn {
+  width: 315px;
+  height: 55px;
+  border-radius: 18px;
+  background: #222529;
+  border: 2px solid #222529;
+  color: #f9c428;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  &:focus-visible {
+    outline: 3px solid #f9c428;
+    outline-offset: 3px;
+  }
+
+  &:hover {
+    background: transparent;
+    border: 2px solid #222529;
+    color: #222529;
+  }
+  span {
+    font-size: 16px;
+    font-weight: 800;
+    padding-bottom: 2px;
+    padding-left: 5px;
+  }
+}
+
+
+@media (max-width: 520px) {
+  .brutal-btn {
+    width: min(315px, 100%);
+  }
+}

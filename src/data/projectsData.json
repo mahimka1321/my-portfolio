@@ -17,7 +17,7 @@
         "#7f9960"
       ],
       "fonts": "Roboto",
-      "previewAsset": "/my-portfolio/assets/tea-layout.svg",
+      "previewAsset": "tea-layout.webp",
       "topQuote": "ВОУ",
       "leftQuote": "ДАДАДА",
       "rightQuote": "КРУТО",
@@ -43,7 +43,7 @@
         "#ff5d5d"
       ],
       "fonts": "крутые",
-      "previewAsset": "/my-portfolio/assets/tour-box.svg",
+      "previewAsset": "tour-box.webp",
       "topQuote": "вооооооой",
       "leftQuote": "оуууууу",
       "rightQuote": "круууто",
@@ -53,23 +53,23 @@
       "deviceType": "mobile"
     },
     {
-      "id": "webComponent",
+      "id": "webComponent-01",
       "title": "Web Component",
       "subtitle": "Онлайн конструктор компонентов",
-      "description": "09",
+      "description": "Лендинг Positivus справа встал хорошо, но так как левая панель сейчас слишком яркая (из-за обилия жёлтого цвета), фокус внимания размывается.",
       "task": "-",
       "results": [
         "2"
       ],
       "colors": [
+        "#4aff93",
         "#1a1a1a",
         "#2b2b2b",
         "#343434",
-        "#4aff93",
         "#ffffff"
       ],
       "fonts": "1",
-      "previewAsset": "/my-portfolio/assets/web-component.svg",
+      "previewAsset": "web-component.webp",
       "topQuote": "2",
       "leftQuote": "3",
       "rightQuote": "4",

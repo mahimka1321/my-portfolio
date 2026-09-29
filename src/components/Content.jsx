@@ -1,35 +1,21 @@
 import React from "react";
-import Home from "./Home"; // Наш новый журнальный главный экран
-import DesignsList from "./DesignsList"; // Компонент сетки кнопок-проектов
-import DesignDetail from "./DesignDetail"; // Компонент журнального кейса
-import Skills from "./Skills"; // Компонент навыков и технологий
+import Home from "./Home";
+import DesignsList from "./DesignsList";
+import DesignDetail from "./DesignDetail";
+import Skills from "./Skills";
 
-function Content({
-  page,
-  setPage,
-  selectedDesign,
-  setSelectedDesign,
-  setCurrentPreview,
-}) {
-  // Функция срабатывает, когда пользователь кликает по кнопке любого проекта
-  const handleSelectDesign = (id) => {
-    window.location.hash = `#/design/${id}`; // Безопасно меняем адресную строку браузера
-  };
-
-  // Функция срабатывает, когда пользователь нажимает кнопку "← Назад к проектам"
+function Content({ page, selectedDesign }) {
   const handleBackToList = () => {
-    window.location.hash = "#/designs"; // Возвращаем адрес в список
+    window.location.hash = "#/designs";
   };
 
-  // Главный диспетчер роутинга левой панели
   switch (page) {
     case "home":
       return <Home />;
 
     case "designs":
-      // Если проект не выбран — показываем сетку кнопок, иначе — детальный кейс
       return selectedDesign === null ? (
-        <DesignsList onSelect={handleSelectDesign} />
+        <DesignsList />
       ) : (
         <DesignDetail id={selectedDesign} onBack={handleBackToList} />
       );
@@ -39,7 +25,7 @@ function Content({
 
     default:
       return (
-        <div style={{ padding: "30px", fontFamily: "Nunito, sans-serif" }}>
+        <div className="page-not-found">
           <h2>Страница не найдена</h2>
         </div>
       );

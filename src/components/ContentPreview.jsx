@@ -1,73 +1,82 @@
 import React from "react";
 import projectsData from "../data/projectsData.json";
-import { Svg } from "./Svg"; // Твой оригинальный импорт хаба
+import { Svg, hasSvg } from "./ui/Svg/Svg";
+import teaLayouttPreview from "../assets/tea-layout.webp";
+import tourBoxPreview from "../assets/tour-box.webp";
+import webComponentPreview from "../assets/web-component.webp";
 import "./ContentPreview.scss";
 
-function ContentPreview({ preview }) {
-  const list = projectsData.items || [];
+const rasterPreviews = {
+  "tea-layout.webp": teaLayouttPreview,
+  "tour-box.webp": tourBoxPreview,
+  "web-component.webp": webComponentPreview,
+};
 
-  // 1. Если мы на главной — показываем стартовую карту разума
+const findProject = (id) => {
+  return (projectsData.items || []).find((item) => {
+    const data = item.fields || item;
+    return String(data.id).trim().toLowerCase() === String(id).trim().toLowerCase();
+  });
+};
+
+function ContentPreview({ preview }) {
   if (preview === "map" || !preview) {
     return (
-      /* 🔥 ДЛЯ КАРТЫ НА СТАРТЕ ОСТАВЛЯЕМ ДЕФОЛТНЫЙ МОБИЛЬНЫЙ РЕЖИМ (max-width: 668px) */
       <div className="preview-box map-style" data-device="mobile">
         <Svg id="main-architecture-map" />
       </div>
     );
   }
 
-  // 2. Вытаскиваем ID проекта из превью (убираем приставку 'preview-')
-  const projectId = preview.replace("preview-", "");
-  
-  // Ищем наш проект в JSON-базе данных
-  const projectItem = list.find((item) => {
-    const data = item.fields ? item.fields : item;
-    return data.id === projectId;
-  });
+  const projectId = preview.replace(/^preview-/, "").trim();
+  const projectItem = findProject(projectId);
+  const project = projectItem ? projectItem.fields || projectItem : null;
+  const deviceType = project?.deviceType || "mobile";
+  const fileName = project?.previewAsset?.trim().split("/").pop();
 
-  const project = projectItem ? (projectItem.fields ? projectItem.fields : projectItem) : null;
+  if (project && fileName) {
+    const fileExtension = fileName.split(".").pop()?.toLowerCase();
 
-  // 🔥 ВЫТАСКИВАЕМ ТИП УСТРОЙСТВА ИЗ JSON (если в админке пусто — страхуем и ставим 'mobile')
-  const deviceType = project && project.deviceType ? project.deviceType : "mobile";
+    if (["webp", "png", "jpg", "jpeg"].includes(fileExtension)) {
+      const imageSrc = rasterPreviews[fileName];
 
-  // Список всех SVG-айдишников, которые РЕАЛЬНО прописаны у тебя в файле Svg.jsx
-  const validSvgIds = [
-    "main-architecture-map",
-    "tea-layout",
-    "tour-box",
-    "web-component",
-  ];
-
-  if (project && project.previewAsset) {
-    // Вытаскиваем чистое имя файла из пути (например, из "src/assets/tourbox.svg" получим "tourbox")
-    const svgId = project.previewAsset.split("/").pop().replace(".svg", "");
-
-    // ПРЕДОХРАНИТЕЛЬ: Проверяем, есть ли этот ID в нашем файле Svg.jsx
-    if (validSvgIds.includes(svgId)) {
-      return (
-        /* 🔥 МАГИЯ ТУТ: Твоя рабочая карточка, но теперь с дата-атрибутом ширины! */
-        <div className="preview-box dynamic" data-device={deviceType} style={{ overflowY: "auto" }}>
-          <div className="svg-layout-container" style={{ width: "100%" }}>
-            <Svg id={svgId} />
+      if (imageSrc) {
+        return (
+          <div className="preview-box dynamic" data-device={deviceType}>
+            <div className="media-layout-container">
+              <img
+                src={imageSrc}
+                alt={project.title || "Design Preview"}
+                className="preview-img-asset"
+                style={{ objectFit: "cover", width: "100%" }}
+              />
+            </div>
           </div>
-        </div>
-      );
+        );
+      }
+    }
+
+    if (fileExtension === "svg") {
+      const svgId = fileName.replace(/\.svg$/i, "");
+      const hasSvgPreview = hasSvg(svgId);
+
+      if (hasSvgPreview) {
+        return (
+          <div className="preview-box dynamic" data-device={deviceType}>
+            <div className="svg-layout-container">
+              <Svg id={svgId} />
+            </div>
+          </div>
+        );
+      }
     }
   }
 
-  // 3. Заглушка: Если файла нет или он не прописан в Svg.jsx — сайт НЕ упадет!
   return (
     <div className="preview-box map-style" data-device={deviceType}>
-      <div
-        className="static-map-placeholder"
-        style={{ textAlign: "center", color: "#888" }}
-      >
+      <div className="static-map-placeholder">
         🪐 [МАКЕТ ВЕРСТКИ ГОТОВИТСЯ]
-        <p style={{ marginTop: "10px", fontSize: "14px" }}>
-          Вы выбрали кейс "{project?.title || "Проект"}".
-          <br />
-          Векторный SVG-спринт находится на стадии загрузки на server.
-        </p>
+        <p>Вы выбрали кейс "{project?.title || "Проект"}".</p>
       </div>
     </div>
   );

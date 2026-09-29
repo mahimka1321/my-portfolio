@@ -2,7 +2,7 @@ import React from 'react';
 import projectsData from '../data/projectsData.json';
 import './DesignsList.scss';
 
-function DesignsList({ onSelect }) {
+function DesignsList() {
 
   const list = projectsData.items || [];
 
@@ -10,53 +10,60 @@ function DesignsList({ onSelect }) {
     <div className="designs-list-page">
       
       {/* ВЕРХНЯЯ ШАПКА: СТАБИЛЬНЫЙ ОРИГИНАЛЬНЫЙ КОНТУР */}
-      <div className="list-header-block">
-        <span className="list-header-tag">PORTFOLIO // DIRECTORY</span>
-        
-        <div className="title-with-drops">
-          <span className="drop-icon left-drop"></span>
-          <h1 className="list-main-title">選ばれたプロジェクト</h1>
-          <span className="drop-icon right-drop"></span>
-        </div>
+      <section className="list-header-block">
+        <div className='list-header-container'>
+          <div className='list-header-content'>
+            <span className="list-header-tag">PORTFOLIO // DIRECTORY</span>
+            
+            <div className="title-with-drops">
+              <span className="drop-icon left-drop"></span>
+              <h1 className="list-main-title">選ばれたプロジェクト</h1>
+              <span className="drop-icon right-drop"></span>
+            </div>
 
-        {/* 🔥 ИЗОЛИРОВАННЫЙ БЛОК ТЕКСТА И СТРЕЛКИ (ПЕРЕНЕСЕН ПО ТВОЕМУ МАРКЕРУ) */}
-        <div className="list-handwritten-wrap">
-          <p className="subtitle-text">Projects <br/> I've worked on</p>
-          <div className="handwritten-arrow-vector"></div> 
-        </div>
+            <div className='content-bottom'>
+              <h3 className="list-lead-text">デジタルプロダクト、ゲームシステム、UI/UXの制作実績です。</h3>
+              <p className="list-header-desc">
+                アイデアから実装まで、様々なプロジェクトに取り組んできました。
+              </p>
+            </div>
 
-        <h3 className="list-lead-text">デジタルプロダクト、ゲームシステム、UI/UXの制作実績です。</h3>
-        <p className="list-header-desc">
-          アイデアから実装まで、様々なプロジェクトに取り組んできました。
-        </p>
-      </div>
+          </div>
+
+          {/* 🔥 ИЗОЛИРОВАННЫЙ БЛОК ТЕКСТА И СТРЕЛКИ (ПЕРЕНЕСЕН ПО ТВОЕМУ МАРКЕРУ) */}
+          <div className="list-handwritten-wrap">
+            <p className="subtitle-text">Projects <br/> I've worked on</p>
+            <div className="handwritten-arrow-vector"><span></span></div> 
+          </div>
+
+        </div>
+      </section>
       
       {/* ТРЁХКОЛОНОЧНАЯ СЕТКА КАРТОЧЕК */}
-      <div className="blocks-grid">
+      <section className="blocks-grid">
         {list.map((item, index) => {
           const data = item.fields ? item.fields : item;
           
-          let projectColor = '#222529';
-          if (data.colors && Array.isArray(data.colors) && data.colors.length > 0) {
-            const firstObj = data.colors;
-            projectColor = firstObj.colorCode ? firstObj.colorCode : (typeof firstObj === 'string' ? firstObj : '#222529');
-          }
+          const projectColor =
+            Array.isArray(data.colors) && data.colors.length > 0
+              ? (typeof data.colors[0] === 'string'
+                  ? data.colors[0]
+                  : data.colors[0]?.colorCode || '#222529')
+              : '#222529';
 
           const titleText = data.title && data.title !== '-' ? data.title : `Проект #${index + 1}`;
           // 🔥 ЖЕЛЕЗОБЕТОННЫЙ ФИКС: Забираем строго первый хекс из массива строк JSON
-          const colorText = data.colors && Array.isArray(data.colors) && data.colors.length > 0 
-            ? data.colors[0] // Сюда прилетит чистая строка "#5d5950"
-            : '#222529';    // Дефолтный темный цвет, если в JSON пусто
+          const colorText = projectColor;
           
           const projectId = data.id || `project-${index}`;
           const formattedIndex = String(index + 1).padStart(2, '0');
 
           return (
-            <div 
+            <a
               key={projectId}
+              href={`#/design/${encodeURIComponent(projectId)}`}
               className="proto-block"
               style={{ '--project-accent': projectColor }}
-              onClick={() => onSelect(projectId)}
             >
               <div className="card-top-row">
                 <span className="card-number">{formattedIndex} —</span>
@@ -87,10 +94,10 @@ function DesignsList({ onSelect }) {
                 <div className="card-arrow-btn">➔</div>
               </div>
 
-            </div>
+            </a>
           );
         })}
-      </div>
+      </section>
 
     </div>
   );

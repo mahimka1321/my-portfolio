@@ -28,16 +28,19 @@ function DesignDetail({ id, onBack }) {
         </button>
 
         {/* текст информации + заголовок */}
-        <div className="case-header-block">
-          <span className="case-tag">UI / UX ДИЗАЙН</span>
-          <h1 className="case-main-title">{current.title || 'БЕЗ НАЗВАНИЯ'}</h1>
-          
-          {/* Твоя фирменная оранжевая подпись с лучиками по бокам */}
-          <div className="case-signature-wrap">
-            <span className="signature-ray left"></span>
-            <p className="signature-text">{current.subtitle || 'Традиции в цифровом формате'}</p>
-            <span className="signature-ray right"></span>
-          </div>
+        <div className='case-header-block'>
+          <span className="manifesto-tag">
+            UI/UX ДИЗАЙН
+          </span>
+          <h1>
+            {current.title || 'БЕЗ НАЗВАНИЯ'}
+            <br />
+            <span className="invalig--rag-ps">
+              <span />
+              {current.subtitle || 'Традиции в цифровом формате'}
+              <span />
+            </span>
+          </h1>
         </div>
 
         {/* доп текст из json + кнопка + прогресс бар */}
@@ -61,18 +64,18 @@ function DesignDetail({ id, onBack }) {
 
           <div className="interactive-column">
             {/* Рукописный текст "Чай - это тоже забота" строго над кнопкой */}
-            {current.topQuote && (
-              <div className="handwritten-top-quote">{current.topQuote} ⭐️</div>
-            )}
+           {/* {current.topQuote && (
+              <div className="handwritten-top-quote">{current.topQuote}</div>
+            )} */}
             
             <div className="btn-about">
-              <span>☕️ О ПРОЕКТЕ</span>
+              <span>О ПРОЕКТЕ</span>
               <span>➔</span>
             </div>
 
             {/* Прогресс-бар / таймлайн этапов */}
             <div className="timeline-progress">
-              <div className="step"><div className="dot active"></div><span>концепт</span></div>
+              <div className="step"><div className="dot active"></div><span className='text-active'>концепт</span></div>
               <div className="step"><div className="dot"></div><span>ui кит</span></div>
               <div className="step"><div className="dot"></div><span>дизайн</span></div>
               <div className="step"><div className="dot"></div><span>адаптив</span></div>
@@ -87,7 +90,7 @@ function DesignDetail({ id, onBack }) {
         <div className="info-column">
           <h4>ЗАДАЧА</h4>
           <p>{current.task || 'Создать удобный и эстетичный интерфейс для онлайн-магазина чая...'}</p>
-          {current.leftQuote && <p className="quote-style italic-left">✨ {current.leftQuote} ♡</p>}
+        {/*  {current.leftQuote && <p className="quote-style italic-left"> {current.leftQuote}</p>} */}
         </div>
 
         {/* колонка 2 результат */}
@@ -97,7 +100,6 @@ function DesignDetail({ id, onBack }) {
             {current.results && Array.isArray(current.results) ? (
               current.results.map((resObj, i) => (
                 <div key={i} className="result-item">
-                  <span className="icon">💻</span>
                   <span className="text">{resObj.result ? resObj.result : resObj}</span>
                 </div>
               ))
@@ -133,7 +135,7 @@ function DesignDetail({ id, onBack }) {
           <h3 className="font-primary">{primaryFont}</h3>
           <p className="font-secondary">{primaryFont} (Italic)</p>
           
-          {current.rightQuote && <p className="quote-style italic-right">{current.rightQuote} ♡</p>}
+         {/* {current.rightQuote && <p className="quote-style italic-right">{current.rightQuote}</p>} */}
         </div>
       </section>
 

@@ -13,7 +13,7 @@
   transition:
     opacity 0.5s ease,
     visibility 0.5s ease;
-  font-family: "Nunito", sans-serif;
+  font-family: "Nunito", "M PLUS Rounded 1c", sans-serif;
 
   &.loading-screen--hidden {
     opacity: 0;
@@ -21,7 +21,7 @@
     pointer-events: none;
   }
 
-  __spinner-wrap {
+  &__spinner-wrap {
     position: relative;
     width: 80px;
     height: 80px;
@@ -30,7 +30,7 @@
     align-items: center;
   }
 
-  __spinner {
+  &__spinner {
     width: 60px;
     height: 60px;
     border: 4px solid #222529;
@@ -39,7 +39,7 @@
     animation: spin-loader 1s linear infinite;
   }
 
-  __text {
+  &__text {
     margin-top: 25px;
     font-size: 12px;
     font-weight: 800;
