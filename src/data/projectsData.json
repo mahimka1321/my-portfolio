@@ -16,7 +16,7 @@
         "#ff5d5d"
       ],
       "fonts": "Akshar",
-      "previewAsset": "tour-box.webp",
+      "previewAsset": "/my-portfolio/assets/home-tour-box.png",
       "topQuote": "вооооооой",
       "leftQuote": "оуууууу",
       "rightQuote": "круууто",
@@ -40,22 +40,22 @@
         {
           "id": "design",
           "label": "дизайн",
-          "img": "/my-portfolio/assets/tours-tour-box.webp",
+          "img": "/my-portfolio/assets/home-tour-box.png",
           "subSteps": [
             {
               "id": "home",
               "label": "Home",
-              "img": "/my-portfolio/assets/tours-tour-box.webp"
+              "img": "/my-portfolio/assets/home-tour-box.png"
             },
             {
               "id": "tour",
               "label": "Tour",
-              "img": "/my-portfolio/assets/image16.png"
+              "img": "/my-portfolio/assets/tours-tour-box.webp"
             },
             {
               "id": "profil",
               "label": "Profil",
-              "img": "/my-portfolio/assets/web-component.webp"
+              "img": "/my-portfolio/assets/ptofil-tour-box.png"
             }
           ]
         },
