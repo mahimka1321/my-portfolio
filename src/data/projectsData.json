@@ -1,63 +1,68 @@
 {
   "items": [
     {
+      "id": "tourbox",
+      "title": "Онлайн гид",
+      "subtitle": "Онлайн гид по городу",
+      "description": "это приложение для туристов, которое помогает им ориентироваться в городе и находить интересные места.",
+      "task": "создать удобный интерфейс для пользователей, чтобы они могли легко находить информацию о достопримечательностях, ресторанах и других интересных местах.",
+      "results": [
+        "за 2 месяца было разработано приложение, которое получило положительные отзывы от пользователей. Они отметили удобный интерфейс и полезность приложения для туристов."
+      ],
       "colors": [
         "#2479db",
         "#c8def6",
         "#ffffff",
         "#ff5d5d"
       ],
-      "description": "это приложение для туристов, которое помогает им ориентироваться в городе и находить интересные места.",
-      "deviceType": "mobile",
       "fonts": "Akshar",
-      "id": "tourbox",
+      "previewAsset": "/my-portfolio/uploads/home-tour-box.png",
+      "topQuote": "вооооооой",
       "leftQuote": "оуууууу",
-      "previewAsset": "tour-box.webp",
-      "results": [
-        "за 2 месяца было разработано приложение, которое получило положительные отзывы от пользователей. Они отметили удобный интерфейс и полезность приложения для туристов."
-      ],
       "rightQuote": "круууто",
-      "subtitle": "Онлайн гид по городу",
       "tags": [
         "UI/UX"
       ],
-      "task": "создать удобный интерфейс для пользователей, чтобы они могли легко находить информацию о достопримечательностях, ресторанах и других интересных местах.",
-      "title": "Онлайн гид",
-      "topQuote": "вооооооой",
+      "deviceType": "mobile",
       "timelineSteps": [
         {
           "id": "concept",
           "label": "концепт",
-          "img": "/assets/tour-box.webp",
+          "img": "",
           "subSteps": []
         },
         {
           "id": "uikit",
           "label": "киты",
-          "img": "/assets/image16.png",
+          "img": "",
           "subSteps": []
         },
         {
           "id": "design",
           "label": "дизайн",
-          "img": "/assets/tour-box.webp",
+          "img": "/my-portfolio/uploads/home-tour-box.png",
           "subSteps": [
             {
               "id": "home",
-              "label": "home",
-              "img": "/assets/tour-box.webp"
+              "label": "Главная",
+              "img": "/my-portfolio/uploads/home-tour-box.png"
             },
             {
               "id": "tour",
-              "label": "tour",
-              "img": "/assets/tea-layout.webp"
+              "label": "Туры",
+              "img": "/my-portfolio/uploads/tours-tour-box.webp"
+            },
+            {
+              "id": "profil",
+              "label": "Профиль",
+              "img": "/my-portfolio/uploads/ptofil-tour-box.png"
             }
           ]
         },
         {
           "id": "adaptive",
           "label": "адаптив",
-          "img": "/assets/web-component.webp",
+          "img": "",
           "subSteps": []
         }
       ]
