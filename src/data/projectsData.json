@@ -91,7 +91,14 @@
         "MOBILE"
       ],
       "deviceType": "desktop",
-      "timelineSteps": []
+      "timelineSteps": [
+        {
+          "id": "dising",
+          "label": "Дизайн",
+          "img": "/my-portfolio/uploads/design-mahimka.png",
+          "subSteps": []
+        }
+      ]
     }
   ]
 }
