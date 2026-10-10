@@ -9,7 +9,14 @@
   justify-content: space-between;
   box-sizing: border-box;
 
-  h1, h2, h3, h4, p, span, div, button {
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  span,
+  div,
+  button {
     font-family: "Nunito", "M PLUS Rounded 1c", sans-serif;
   }
 
@@ -140,7 +147,7 @@
           transition: all 0.3s ease;
           margin-bottom: 80px;
           justify-content: space-around;
-          
+
           &:hover {
             background: #222529;
             border: 2px solid #222529;
@@ -204,7 +211,7 @@
               border: 2px solid #ced19e;
               box-sizing: border-box;
               z-index: 6;
-              
+
               &.active {
                 background-color: #f9c428;
                 border: none;
@@ -217,7 +224,7 @@
               color: #222529;
               text-transform: uppercase;
               white-space: nowrap; // Запрещаем тексту ломать строки
-              
+
               &.text-active {
                 font-weight: 800;
                 color: #222529;
@@ -231,7 +238,7 @@
               top: 11px; // Начинается точно от центра родительского .dot
               left: 50%;
               transform: translateX(-50%);
-              width: 280px; // Фиксированная ширина разлета веток
+              width: 225px; // Фиксированная ширина разлета веток
               height: 110px;
               z-index: 4;
               pointer-events: auto;
@@ -252,7 +259,7 @@
                   z-index: 6;
                   background-color: #f9fbdf;
                   border: 2px solid #ced19e;
-                  
+
                   &.active {
                     background-color: #f9c428;
                     border: none;
@@ -265,7 +272,7 @@
                   color: #777778;
                   margin-top: 5px;
                   text-transform: uppercase;
-                  
+
                   &.text-active {
                     font-weight: 800;
                     color: #222529;
@@ -277,10 +284,10 @@
                   content: "";
                   position: absolute;
                   width: 2px;
-                  height: 70px;
+                  height: 90px;
                   background-color: #ced19e;
                   top: 0;
-                  left: 50%; // Начинается из центра родительской точки
+                  left: 135%;
                   z-index: 1;
                   transform: rotate(45deg);
                   transform-origin: top center;
@@ -304,10 +311,10 @@
                   content: "";
                   position: absolute;
                   width: 2px;
-                  height: 70px;
+                  height: 90px;
                   background-color: #ced19e;
                   top: 0;
-                  left: 50%;
+                  left: -38%;
                   z-index: 1;
                   transform: rotate(-45deg);
                   transform-origin: top center;
@@ -316,7 +323,6 @@
             }
           }
         }
-
       }
     }
   }
@@ -327,13 +333,14 @@
     gap: 40px;
     border-top: 1px solid #d1cfc8;
     padding-top: 35px;
-    margin-top: 40px;
+    margin-top: 100px;
     width: 100%;
     align-items: start; // Выравнивает заголовки колонок по верхней линии
 
     .info-column {
       border-right: 1px solid #d1cfc8;
       padding-right: 20px;
+      height: 100%;
       &:last-child {
         border-right: none;
       }
@@ -387,6 +394,9 @@
         color: #646a73;
         margin: 0;
       }
+      .info-fonts {
+        margin: 0;
+      }
     }
   }
 }
@@ -401,4 +411,13 @@
     height: 110px;
     opacity: 1;
   }
+}
+
+.step-main-click {
+  position: relative;
+}
+
+.step-label-with-substeps {
+  position: relative;
+  top: -60px;
 }
