@@ -1,34 +1,6 @@
 {
   "items": [
     {
-      "buttonColor": "#eaaeae",
-      "colors": [
-        "#5d5950",
-        "#dfd5c7",
-        "#607647",
-        "#6d8650",
-        "#7f9960"
-      ],
-      "description": "отсутствует",
-      "deviceType": "mobile",
-      "fonts": "Roboto",
-      "id": "tea",
-      "leftQuote": "ДАДАДА",
-      "previewAsset": "tea-layout.png",
-      "results": [
-        "1"
-      ],
-      "rightQuote": "КРУТО",
-      "subtitle": "онлайн магазин по даставке чая",
-      "tags": [
-        "UI/UX"
-      ],
-      "task": "увеличить охват",
-      "title": "Чайный магазин",
-      "topQuote": "ВОУ",
-      "timelineSteps": []
-    },
-    {
       "colors": [
         "#2479db",
         "#c8def6",
@@ -47,8 +19,7 @@
       "rightQuote": "круууто",
       "subtitle": "Онлайн гид по городу",
       "tags": [
-        "UI/UX",
-        "MOBILE"
+        "UI/UX"
       ],
       "task": "создать удобный интерфейс для пользователей, чтобы они могли легко находить информацию о достопримечательностях, ресторанах и других интересных местах.",
       "title": "Онлайн гид",
@@ -69,7 +40,6 @@
         {
           "id": "design",
           "label": "дизайн",
-<<<<<<< HEAD
           "img": "/assets/tour-box.webp",
           "subSteps": [
             {
@@ -81,65 +51,16 @@
               "id": "tour",
               "label": "tour",
               "img": "/assets/tea-layout.webp"
-=======
-          "img": "/my-portfolio/uploads/home-tour-box.png",
-          "subSteps": [
-            {
-              "id": "home",
-              "label": "Home",
-              "img": "/my-portfolio/uploads/home-tour-box.png"
-            },
-            {
-              "id": "tour",
-              "label": "Tour",
-              "img": "/my-portfolio/uploads/tours-tour-box.webp"
-            },
-            {
-              "id": "profil",
-              "label": "Profil",
-              "img": "/my-portfolio/uploads/ptofil-tour-box.png"
->>>>>>> 4570e1d1a6ec8d0f107e3a89e2fc355c43e85fa3
             }
           ]
         },
         {
           "id": "adaptive",
           "label": "адаптив",
-<<<<<<< HEAD
           "img": "/assets/web-component.webp",
-=======
-          "img": "",
->>>>>>> 4570e1d1a6ec8d0f107e3a89e2fc355c43e85fa3
           "subSteps": []
         }
       ]
-    },
-    {
-      "colors": [
-        "#4aff93",
-        "#1a1a1a",
-        "#2b2b2b",
-        "#343434",
-        "#ffffff"
-      ],
-      "description": "Лендинг Positivus справа встал хорошо, но так как левая панель сейчас слишком яркая (из-за обилия жёлтого цвета), фокус внимания размывается.",
-      "deviceType": "desktop",
-      "fonts": "1",
-      "id": "webComponent-01",
-      "leftQuote": "3",
-      "previewAsset": "web-component.webp",
-      "results": [
-        "2"
-      ],
-      "rightQuote": "4",
-      "subtitle": "Онлайн конструктор компонентов",
-      "tags": [
-        "UI/UX"
-      ],
-      "task": "-",
-      "title": "Web Component",
-      "topQuote": "2",
-      "timelineSteps": []
     }
   ]
 }
