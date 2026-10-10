@@ -1,65 +1,57 @@
-    backend:
-      name: github
-      repo: mahimka1321/my-portfolio
-      branch: main
+backend:
+  name: github
+  repo: mahimka1321/my-portfolio
+  branch: main
 
-    media_folder: "public/assets"
-    public_folder: "/my-portfolio/assets"
+media_folder: "public/uploads"
+public_folder: "/my-portfolio/uploads"
 
-    collections:
-      - name: "projects_collection"
-        label: "Мои Дизайны"
-        folder: "src/data"
+collections:
+  - name: "projects_collection"
+    label: "Мои дизайны"
+    files:
+      - name: "projects"
+        label: "Список проектов"
         file: "src/data/projectsData.json"
         format: "json"
         fields:
           - name: "items"
-            label: "Список проектов"
+            label: "Проекты"
             widget: "list"
-            # 🔥 МАГИЯ ТУТ: Сворачивает проекты в компактные аккордеоны с заголовком ID
             summary: "{{id}} — {{title}}"
-            collapsed: true 
+            collapsed: true
             fields:
-              - { label: 'ID проекта (латиницей)', name: 'id', widget: 'string' }
-              - { label: 'Главный Заголовок', name: 'title', widget: 'string' }
-              - { label: 'Подзаголовок', name: 'subtitle', widget: 'string' }
-              - { label: 'Описание проекта', name: 'description', widget: 'text' }
-              - { label: 'Задача бизнеса', name: 'task', widget: 'text' }
-              
-              # Компактный список результатов
+              - { label: "ID проекта (латиницей, уникальный)", name: "id", widget: "string" }
+              - { label: "Главный заголовок", name: "title", widget: "string" }
+              - { label: "Подзаголовок", name: "subtitle", widget: "string", required: false }
+              - { label: "Описание проекта", name: "description", widget: "text", required: false }
+              - { label: "Задача бизнеса", name: "task", widget: "text", required: false }
               - name: "results"
                 label: "Результаты"
                 widget: "list"
+                required: false
                 collapsed: true
-                summary: "{{result}}"
-                field: {name: 'result', widget: 'string', label: 'Текст результата'}
-              
-              # Компактный список цветов с пипеткой
+                field: { name: "result", widget: "string", label: "Текст результата" }
               - name: "colors"
                 label: "Палитра цветов проекта"
                 widget: "list"
+                required: false
                 collapsed: true
-                summary: "{{colorCode}}"
-                field: { label: 'Выбрать цвет', name: 'colorCode', widget: 'color' }
-
-              - { label: 'Шрифты проекта', name: 'fonts', widget: 'string' }
-              - { label: 'Загрузить SVG макет', name: 'previewAsset', widget: 'file' }
-              - { label: 'Цитата сверху', name: 'topQuote', widget: 'string' }
-              - { label: 'Цитата слева внизу', name: 'leftQuote', widget: 'string' }
-              - { label: 'Цитата справа внизу', name: 'rightQuote', widget: 'string' }
-              
-              # Компактный список тегов
+                field: { label: "Выбрать цвет", name: "colorCode", widget: "color" }
+              - { label: "Шрифты проекта", name: "fonts", widget: "string", required: false }
+              - { label: "Главное изображение проекта", name: "previewAsset", widget: "file", required: false }
+              - { label: "Цитата сверху", name: "topQuote", widget: "string", required: false }
+              - { label: "Цитата слева внизу", name: "leftQuote", widget: "string", required: false }
+              - { label: "Цитата справа внизу", name: "rightQuote", widget: "string", required: false }
               - name: "tags"
                 label: "Теги проекта"
                 widget: "list"
+                required: false
                 collapsed: true
-                summary: "{{tag}}"
-                field: {name: 'tag', widget: 'string', label: 'Имя тега (например: UI/UX)'}
-                
-              - { label: 'Тип макета (для превью)', name: 'deviceType', widget: 'select', options: ['desktop', 'mobile'], default: 'desktop', required: true }
-              # Этапы прогресс-бара: у каждого этапа своё изображение и необязательные подэтапы
+                field: { name: "tag", widget: "string", label: "Имя тега (например: UI/UX)" }
+              - { label: "Тип макета (для превью)", name: "deviceType", widget: "select", options: ["desktop", "mobile"], default: "desktop", required: true }
               - name: "timelineSteps"
-                label: "Этапы прогресс-бара"
+                label: "Этапы прогресс-бара и изображения"
                 widget: "list"
                 required: false
                 collapsed: true
@@ -67,7 +59,7 @@
                 fields:
                   - { label: "ID этапа (латиницей)", name: "id", widget: "string" }
                   - { label: "Название этапа", name: "label", widget: "string" }
-                  - { label: "Изображение этапа", name: "img", widget: "image", required: false }
+                  - { label: "Изображение этапа", name: "img", widget: "file", required: false }
                   - name: "subSteps"
                     label: "Подэтапы (необязательно)"
                     widget: "list"
@@ -77,4 +69,4 @@
                     fields:
                       - { label: "ID подэтапа", name: "id", widget: "string" }
                       - { label: "Название подэтапа", name: "label", widget: "string" }
-                      - { label: "Изображение подэтапа", name: "img", widget: "image", required: false }
+                      - { label: "Изображение подэтапа", name: "img", widget: "file", required: false }
