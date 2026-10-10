@@ -43,9 +43,6 @@ collections:
                 field: { label: "Цвет", name: "colorCode", widget: "color" }
               - { label: "Шрифты проекта", name: "fonts", widget: "string", required: false }
               - { label: "Главное превью", name: "previewAsset", widget: "image", required: false }
-              - { label: "Цитата сверху", name: "topQuote", widget: "string", required: false }
-              - { label: "Цитата слева внизу", name: "leftQuote", widget: "string", required: false }
-              - { label: "Цитата справа внизу", name: "rightQuote", widget: "string", required: false }
               - name: "tags"
                 label: "Теги проекта"
                 widget: "list"
