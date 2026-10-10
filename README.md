@@ -1,9 +1,3 @@
 <p align="center">
-      <img src="https://i.ibb.co/mrmPkC0J/promo.png" width="726">
-</p>
-
-<p align="center">
-   <img src="" alt="Unity Version">
-   <img src="" alt="Game Version">
-   <img src="" alt="License">
+      <img src="https://i.ibb.co/mrmPkC0J/promo.png" width="1920">
 </p>
