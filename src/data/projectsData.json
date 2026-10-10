@@ -17,9 +17,6 @@
       ],
       "fonts": "Akshar",
       "previewAsset": "/my-portfolio/uploads/home-tour-box.png",
-      "topQuote": "вооооооой",
-      "leftQuote": "оуууууу",
-      "rightQuote": "круууто",
       "tags": [
         "UI/UX",
         "MOBILE"
@@ -66,7 +63,35 @@
           "img": "/my-portfolio/uploads/adaptive-tour-box.png",
           "subSteps": []
         }
-      ]
+      ],
+      "leftQuote": "оуууууу",
+      "rightQuote": "круууто",
+      "topQuote": "вооооооой"
+    },
+    {
+      "id": "mahimaka",
+      "title": "Mahimka",
+      "subtitle": "Сайт портфолио",
+      "description": "Это сайт портфолио как то так, ты давай быстрее смотри все проекты, ага да.",
+      "task": "Сильные",
+      "results": [
+        "Безупречен"
+      ],
+      "colors": [
+        "#f9c428",
+        "#f9fbdf",
+        "#222529",
+        "#424242"
+      ],
+      "fonts": "Nunito, M PLUS Rounded 1c",
+      "previewAsset": "",
+      "tags": [
+        "UI/UX",
+        "DESKTOP",
+        "MOBILE"
+      ],
+      "deviceType": "desktop",
+      "timelineSteps": []
     }
   ]
 }
