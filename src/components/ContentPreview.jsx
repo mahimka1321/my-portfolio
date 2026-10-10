@@ -1,13 +1,13 @@
 import React from "react";
 import projectsData from "../data/projectsData.json";
 import { Svg, hasSvg } from "./ui/Svg/Svg";
-import teaLayouttPreview from "../assets/tea-layout.webp";
+import teaLayouttPreview from "../assets/tea-layout.png";
 import tourBoxPreview from "../assets/tour-box.webp";
 import webComponentPreview from "../assets/web-component.webp";
 import "./ContentPreview.scss";
 
 const rasterPreviews = {
-  "tea-layout.webp": teaLayouttPreview,
+  "tea-layout.png": teaLayouttPreview,
   "tour-box.webp": tourBoxPreview,
   "web-component.webp": webComponentPreview,
 };
@@ -15,7 +15,9 @@ const rasterPreviews = {
 const findProject = (id) => {
   return (projectsData.items || []).find((item) => {
     const data = item.fields || item;
-    return String(data.id).trim().toLowerCase() === String(id).trim().toLowerCase();
+    return (
+      String(data.id).trim().toLowerCase() === String(id).trim().toLowerCase()
+    );
   });
 };
 

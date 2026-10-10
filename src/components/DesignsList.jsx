@@ -38,7 +38,34 @@ function DesignsList() {
 
         </div>
       </section>
-      
+      <section className="list-separator">
+        <div>
+          <button>
+            すべて
+          </button>
+          <button>
+            ウェブデザイン
+          </button>
+          <button>
+            アプリデザイン
+          </button>
+          <button>
+            ゲームデザイン
+          </button>
+          <button>
+            ゲームUI/UX
+          </button>
+          <button>
+            Web UI/UX
+          </button>
+          <button>
+            ロゴデザイン
+          </button>
+          <button>
+            イラスト
+          </button>
+        </div>
+      </section>
       {/* ТРЁХКОЛОНОЧНАЯ СЕТКА КАРТОЧЕК */}
       <section className="blocks-grid">
         {list.map((item, index) => {

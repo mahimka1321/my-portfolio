@@ -180,6 +180,7 @@
           line-height: 1.5;
           color: #646a73;
           margin: 0 0 16px 0;
+      
         }
       }
 
@@ -200,10 +201,10 @@
             font-size: 10px;
             font-weight: 800;
             text-transform: uppercase;
-            color: #444;
-            background-color: #eae7de;
             padding: 4px 12px;
-            border-radius: 8px;
+            border-radius: 12px;
+            background-color: #CED19E;
+            color: #424242;
           }
         }
 
@@ -335,6 +336,49 @@
 
       .proto-block {
         min-height: 250px;
+      }
+    }
+  }
+}
+
+
+
+.list-separator
+{
+  width: 100%;
+  height: 40px;
+  margin-bottom: 35px;
+  div {
+    button {
+      font-family: "Nunito", "M PLUS Rounded 1c", sans-serif;
+      width: auto;
+      height: 100%;
+      font-size: 14px;
+      font-weight: 800;
+      color: #424242;
+      background: none;
+      border-radius: 16px;
+      border:2px solid #CED19E;
+      padding: 4px 24px;
+      margin-left: 10px;
+      opacity: 0.75;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      &:first-child {
+        margin-left: 0px;
+        color: #424242;
+        background-color: #CED19E;
+        opacity: 1;
+      }
+      &:hover {
+        background-color: #CED19E;
+        color: #424242;
+        opacity: 1;
+      }
+      &.active {
+        background-color: #CED19E;
+        color: #424242;
+        opacity: 1;
       }
     }
   }

@@ -1,0 +1,58 @@
+.site-header {
+  height: 60px;
+  min-height: 60px;
+  max-height: 60px;
+  width: 100%;
+  background-color: #f9c428;
+  color: #424242;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    width: 400px;
+    height: auto;
+    font-weight: 800;
+    font-size: 20px;
+    color: #424242;
+    text-decoration: none;
+    cursor: pointer;
+    span {
+      width: 60px;
+      height: 37px;
+      //background-image: url('../../../assets/logo.png');
+      //background-repeat: no-repeat;
+      //background-size: cover;
+      margin-right: 15px;
+    }
+  }
+
+  .navigation {
+    button {
+      margin-left: 15px;
+      padding: 8px 16px;
+      cursor: pointer;
+      border: none;
+      color: #424242;
+      background: transparent;
+      font-weight: bold;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s ease;
+
+      &:hover {
+        border-color: #424242;
+        background-color: #f9fbdf;
+        border-radius: 4px;
+      }
+
+      &.active {
+        background-color: #222529;
+        color: #ffd200;
+        border-radius: 4px;
+      }
+    }
+  }
+}

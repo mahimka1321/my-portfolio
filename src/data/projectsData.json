@@ -6,50 +6,33 @@
       "subtitle": "онлайн магазин по даставке чая",
       "description": "отсутствует",
       "task": "увеличить охват",
-      "results": [
-        "1"
-      ],
-      "colors": [
-        "#5d5950",
-        "#dfd5c7",
-        "#607647",
-        "#6d8650",
-        "#7f9960"
-      ],
+      "results": ["1"],
+      "colors": ["#5d5950", "#dfd5c7", "#607647", "#6d8650", "#7f9960"],
       "fonts": "Roboto",
-      "previewAsset": "tea-layout.webp",
+      "previewAsset": "tea-layout.png",
       "topQuote": "ВОУ",
       "leftQuote": "ДАДАДА",
       "rightQuote": "КРУТО",
-      "tags": [
-        "UI/UX"
-      ],
+      "tags": ["UI/UX"],
       "deviceType": "mobile",
       "buttonColor": "#eaaeae"
     },
     {
       "id": "tourbox",
       "title": "Онлайн гид",
-      "subtitle": "2",
-      "description": "1",
-      "task": "3",
+      "subtitle": "Онлайн гид по городу",
+      "description": "это приложение для туристов, которое помогает им ориентироваться в городе и находить интересные места.",
+      "task": "создать удобный интерфейс для пользователей, чтобы они могли легко находить информацию о достопримечательностях, ресторанах и других интересных местах.",
       "results": [
-        "1"
+        "за 2 месяца было разработано приложение, которое получило положительные отзывы от пользователей. Они отметили удобный интерфейс и полезность приложения для туристов."
       ],
-      "colors": [
-        "#2479db",
-        "#c8def6",
-        "#ffffff",
-        "#ff5d5d"
-      ],
-      "fonts": "крутые",
+      "colors": ["#2479db", "#c8def6", "#ffffff", "#ff5d5d"],
+      "fonts": "Akshar",
       "previewAsset": "tour-box.webp",
       "topQuote": "вооооооой",
       "leftQuote": "оуууууу",
       "rightQuote": "круууто",
-      "tags": [
-        "UI/UX"
-      ],
+      "tags": ["UI/UX"],
       "deviceType": "mobile"
     },
     {
@@ -58,24 +41,14 @@
       "subtitle": "Онлайн конструктор компонентов",
       "description": "Лендинг Positivus справа встал хорошо, но так как левая панель сейчас слишком яркая (из-за обилия жёлтого цвета), фокус внимания размывается.",
       "task": "-",
-      "results": [
-        "2"
-      ],
-      "colors": [
-        "#4aff93",
-        "#1a1a1a",
-        "#2b2b2b",
-        "#343434",
-        "#ffffff"
-      ],
+      "results": ["2"],
+      "colors": ["#4aff93", "#1a1a1a", "#2b2b2b", "#343434", "#ffffff"],
       "fonts": "1",
       "previewAsset": "web-component.webp",
       "topQuote": "2",
       "leftQuote": "3",
       "rightQuote": "4",
-      "tags": [
-        "UI/UX"
-      ],
+      "tags": ["UI/UX"],
       "deviceType": "desktop"
     }
   ]
