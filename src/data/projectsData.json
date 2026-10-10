@@ -1,131 +1,121 @@
 {
   "items": [
     {
-      "id": "tourbox",
-      "title": "Онлайн гид",
-      "subtitle": "Онлайн гид по городу",
-      "description": "это приложение для туристов, которое помогает им ориентироваться в городе и находить интересные места.",
-      "task": "создать удобный интерфейс для пользователей, чтобы они могли легко находить информацию о достопримечательностях, ресторанах и других интересных местах.",
-      "results": [
-        "за 2 месяца было разработано приложение, которое получило положительные отзывы от пользователей. Они отметили удобный интерфейс и полезность приложения для туристов."
+      "buttonColor": "#eaaeae",
+      "colors": [
+        "#5d5950",
+        "#dfd5c7",
+        "#607647",
+        "#6d8650",
+        "#7f9960"
       ],
+      "description": "отсутствует",
+      "deviceType": "mobile",
+      "fonts": "Roboto",
+      "id": "tea",
+      "leftQuote": "ДАДАДА",
+      "previewAsset": "tea-layout.png",
+      "results": [
+        "1"
+      ],
+      "rightQuote": "КРУТО",
+      "subtitle": "онлайн магазин по даставке чая",
+      "tags": [
+        "UI/UX"
+      ],
+      "task": "увеличить охват",
+      "title": "Чайный магазин",
+      "topQuote": "ВОУ",
+      "timelineSteps": []
+    },
+    {
       "colors": [
         "#2479db",
         "#c8def6",
         "#ffffff",
         "#ff5d5d"
       ],
+      "description": "это приложение для туристов, которое помогает им ориентироваться в городе и находить интересные места.",
+      "deviceType": "mobile",
       "fonts": "Akshar",
-      "previewAsset": "/my-portfolio/assets/home-tour-box.png",
-      "topQuote": "вооооооой",
+      "id": "tourbox",
       "leftQuote": "оуууууу",
+      "previewAsset": "tour-box.webp",
+      "results": [
+        "за 2 месяца было разработано приложение, которое получило положительные отзывы от пользователей. Они отметили удобный интерфейс и полезность приложения для туристов."
+      ],
       "rightQuote": "круууто",
+      "subtitle": "Онлайн гид по городу",
       "tags": [
         "UI/UX"
       ],
-      "deviceType": "mobile",
+      "task": "создать удобный интерфейс для пользователей, чтобы они могли легко находить информацию о достопримечательностях, ресторанах и других интересных местах.",
+      "title": "Онлайн гид",
+      "topQuote": "вооооооой",
       "timelineSteps": [
         {
           "id": "concept",
           "label": "концепт",
-          "img": "/my-portfolio/assets/tea-layout.webp",
+          "img": "/assets/tour-box.webp",
           "subSteps": []
         },
         {
           "id": "uikit",
-          "label": "ui кит",
-          "img": "/my-portfolio/assets/image16.png",
+          "label": "киты",
+          "img": "/assets/image16.png",
           "subSteps": []
         },
         {
           "id": "design",
           "label": "дизайн",
-          "img": "/my-portfolio/assets/home-tour-box.png",
+          "img": "/assets/tour-box.webp",
           "subSteps": [
             {
               "id": "home",
-              "label": "Home",
-              "img": "/my-portfolio/assets/home-tour-box.png"
+              "label": "home",
+              "img": "/assets/tour-box.webp"
             },
             {
               "id": "tour",
-              "label": "Tour",
-              "img": "/my-portfolio/assets/tours-tour-box.webp"
-            },
-            {
-              "id": "profil",
-              "label": "Profil",
-              "img": "/my-portfolio/assets/ptofil-tour-box.png"
+              "label": "tour",
+              "img": "/assets/tea-layout.webp"
             }
           ]
         },
         {
           "id": "adaptive",
           "label": "адаптив",
-          "img": "/my-portfolio/assets/web-component.webp",
+          "img": "/assets/web-component.webp",
           "subSteps": []
         }
       ]
+    },
+    {
+      "colors": [
+        "#4aff93",
+        "#1a1a1a",
+        "#2b2b2b",
+        "#343434",
+        "#ffffff"
+      ],
+      "description": "Лендинг Positivus справа встал хорошо, но так как левая панель сейчас слишком яркая (из-за обилия жёлтого цвета), фокус внимания размывается.",
+      "deviceType": "desktop",
+      "fonts": "1",
+      "id": "webComponent-01",
+      "leftQuote": "3",
+      "previewAsset": "web-component.webp",
+      "results": [
+        "2"
+      ],
+      "rightQuote": "4",
+      "subtitle": "Онлайн конструктор компонентов",
+      "tags": [
+        "UI/UX"
+      ],
+      "task": "-",
+      "title": "Web Component",
+      "topQuote": "2",
+      "timelineSteps": []
     }
-  ],
-  "buttonColor": "#2479DB",
-  "colors": [
-    "#2479DB",
-    "#C8DEF6",
-    "#FFFFFF",
-    "#FF5D5D"
-  ],
-  "description": "Это приложение онлайн туров, с ним твои путешествия будут легче и ты точно не чего не пропустишь.",
-  "deviceType": "mobile",
-  "fonts": "Akshar",
-  "id": "tour-boks",
-  "previewAsset": "/assets/tour-box.webp",
-  "results": [
-    "Цель выполнена"
-  ],
-  "subtitle": "Онлайн гид в твоем кармане",
-  "tags": [
-    "UI/UX",
-    "WEB",
-    "MOBILE"
-  ],
-  "task": "Привлечь больше туристов.",
-  "timelineSteps": [
-    {
-      "id": "concept",
-      "img": "/assets/tour-box.webp",
-      "label": "концепт",
-      "subSteps": []
-    },
-    {
-      "id": "uikit",
-      "img": "/assets/image16.png",
-      "label": "киты",
-      "subSteps": []
-    },
-    {
-      "id": "design",
-      "img": "/assets/tour-box.webp",
-      "label": "дизайн",
-      "subSteps": [
-        {
-          "id": "home",
-          "img": "/assets/tour-box.webp",
-          "label": "home"
-        },
-        {
-          "id": "tour",
-          "img": "/assets/tea-layout.webp",
-          "label": "tour"
-        }
-      ]
-    },
-    {
-      "id": "adaptive",
-      "img": "/assets/web-component.webp",
-      "label": "адаптив",
-      "subSteps": []
-    }
-  ],
-  "title": "TourBox"
+  ]
 }

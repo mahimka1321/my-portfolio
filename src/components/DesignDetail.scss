@@ -186,11 +186,14 @@
 
             .step-main-click {
               display: flex;
+              background: none;
+              border: none;
               flex-direction: column;
               align-items: center;
               gap: 10px;
               position: relative;
               z-index: 5;
+              cursor: pointer;
             }
 
             .dot {
@@ -201,17 +204,7 @@
               border: 2px solid #ced19e;
               box-sizing: border-box;
               z-index: 6;
-              padding: 0;
-              display: block;
-              appearance: none;
-              cursor: pointer;
-              flex: 0 0 22px;
               
-              &:focus-visible {
-                outline: 2px solid #2479db;
-                outline-offset: 3px;
-              }
-
               &.active {
                 background-color: #f9c428;
                 border: none;
@@ -248,6 +241,8 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+                border: none;
+                background: none;
                 position: relative;
                 width: 33.33%; // Равномерно делим ширину на 3 части
                 cursor: pointer;
@@ -257,16 +252,7 @@
                   z-index: 6;
                   background-color: #f9fbdf;
                   border: 2px solid #ced19e;
-                  padding: 0;
-                  appearance: none;
-                  cursor: pointer;
-                  flex: 0 0 22px;
                   
-                  &:focus-visible {
-                    outline: 2px solid #2479db;
-                    outline-offset: 3px;
-                  }
-
                   &.active {
                     background-color: #f9c428;
                     border: none;

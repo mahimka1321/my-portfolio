@@ -1,175 +1,139 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import projectsData from '../data/projectsData.json';
 import './DesignDetail.scss';
 
-const DEFAULT_TIMELINE_STEPS = [
-  { id: 'concept', label: 'концепт', img: '' },
-  { id: 'uikit', label: 'ui кит', img: '' },
-  { id: 'design', label: 'дизайн', img: '', subSteps: [
-    { id: 'home', label: 'Home', img: '' },
-    { id: 'tour', label: 'Tour', img: '' },
-    { id: 'profil', label: 'Profil', img: '' }
-  ] },
-  { id: 'adaptive', label: 'адаптив', img: '' }
-];
+const normalizeId = (value) => String(value ?? '').trim().toLowerCase();
+const getProjectData = (item) => item?.fields || item || {};
 
-const normalizeAssetPath = (asset) => {
+const getImagePath = (step) => step?.image || step?.img || step?.imageUrl || '';
+
+const normalizeImagePath = (asset) => {
   if (!asset || typeof asset !== 'string') return '';
   const value = asset.trim();
   if (!value) return '';
-  if (/^(https?:)?\/\//i.test(value) || /^(data:|blob:)/i.test(value)) return value;
-  const publicUrl = (process.env.PUBLIC_URL || '').replace(/\/$/, '');
-  if (publicUrl && (value === publicUrl || value.startsWith(`${publicUrl}/`))) return value;
-  if (value.startsWith('/')) return `${publicUrl}${value}`;
-  return `${publicUrl}/${value.replace(/^\.\//, '')}`;
-};
+  if (/^(https?:)?\/\//i.test(value) || value.startsWith('data:')) return value;
 
-const getStepImage = (step) => step?.img || step?.image || step?.imageUrl || '';
+  const publicBase = process.env.PUBLIC_URL || '';
+  let path = value.replace(/^\.\//, '').replace(/^public\//, '');
+  path = path.replace(/^\/?my-portfolio\//, '').replace(/^\//, '');
+  if (!path.startsWith('uploads/') && !path.startsWith('assets/')) path = `uploads/${path}`;
+  return `${publicBase}/${path}`.replace(/([^:]\/)\/+/, '$1');
+};
 
 const publishPreview = (projectId, step) => {
   if (typeof window === 'undefined') return;
   window.dispatchEvent(new CustomEvent('project-timeline-preview', {
     detail: {
-      projectId: String(projectId || ''),
-      image: normalizeAssetPath(getStepImage(step)),
-      label: step?.label || ''
-    }
+      projectId,
+      image: normalizeImagePath(getImagePath(step)),
+      label: step?.label || '',
+    },
   }));
 };
 
 function DesignDetail({ id, onBack }) {
-  const [activeStep, setActiveStep] = useState('concept');
-  const [activeSubStep, setActiveSubStep] = useState('');
+  const [activeStepId, setActiveStepId] = useState('');
+  const [activeSubStepId, setActiveSubStepId] = useState('');
 
-  const list = Array.isArray(projectsData.items) ? projectsData.items : [];
-  const currentItem = list.find((item) => {
-    const data = item?.fields || item;
-    return String(data?.id || '').trim().toLowerCase() === String(id || '').trim().toLowerCase();
-  });
-  const current = currentItem ? (currentItem.fields || currentItem) : null;
-  const timelineSteps = Array.isArray(current?.timelineSteps) && current.timelineSteps.length
-    ? current.timelineSteps
-    : DEFAULT_TIMELINE_STEPS;
-  const activeStepData = timelineSteps.find((step) => step.id === activeStep) || timelineSteps[0];
-  const activeSubStepData = activeStepData?.subSteps?.find((step) => step.id === activeSubStep);
-  const primaryFont = current?.fonts && current.fonts !== '-' ? String(current.fonts).trim() : 'Montserrat';
+  const items = Array.isArray(projectsData.items) ? projectsData.items : [];
+  const currentItem = items.find((item) => normalizeId(getProjectData(item).id) === normalizeId(id));
+  const current = currentItem ? getProjectData(currentItem) : null;
+
+  const timelineSteps = useMemo(() => {
+    if (!Array.isArray(current?.timelineSteps)) return [];
+    return current.timelineSteps;
+  }, [current]);
 
   useEffect(() => {
     if (!current) return;
-    const validStep = timelineSteps.find((step) => step.id === activeStep) || timelineSteps[0];
-    if (!validStep) return;
-    const validSubStep = validStep.subSteps?.find((step) => step.id === activeSubStep);
-    publishPreview(current.id, validSubStep || validStep);
-  }, [current, activeStep, activeSubStep, timelineSteps]);
+    const firstStep = timelineSteps[0];
+    setActiveStepId((previous) => timelineSteps.some((step) => step.id === previous) ? previous : (firstStep?.id || ''));
+    const firstSubStep = firstStep?.subSteps?.[0];
+    setActiveSubStepId((previous) => firstSubStep?.id || previous || '');
+  }, [current?.id, timelineSteps]);
+
+  const activeStep = timelineSteps.find((step) => step.id === activeStepId) || timelineSteps[0];
+  const activeSubStep = activeStep?.subSteps?.find((step) => step.id === activeSubStepId);
+  const selectedPreviewStep = activeSubStep || activeStep;
+
+  useEffect(() => {
+    if (!current || !selectedPreviewStep) return;
+    publishPreview(current.id, selectedPreviewStep);
+  }, [current?.id, selectedPreviewStep]);
 
   if (!current) {
     return (
       <div className="design-detail-page">
-        <h2>Проект не найден в CMS. Проверь ID проекта и опубликованные данные.</h2>
+        <h2>Проект не найден в базе данных</h2>
+        <button className="back-btn" onClick={onBack}>⟵ КО ВСЕМ ДИЗАЙНАМ</button>
       </div>
     );
   }
 
+  const primaryFont = current.fonts && current.fonts !== '-' ? String(current.fonts).trim() : 'Montserrat';
+
   return (
     <div className="design-detail-page" style={{ '--chosen-font': primaryFont }}>
-      
-      {/* ПЕРВАЯ СЕКЦИЯ: ШАПКА, ИНФОРМАЦИЯ, КНОПКА И ПРОГРЕСС-БАР */}
       <section className="case-top-section">
-        {/* Стрелочка назад */}
-        <button className="back-btn" onClick={onBack}>
-          ⟵ КО ВСЕМ ДИЗАЙНАМ
-        </button>
+        <button className="back-btn" onClick={onBack}>⟵ КО ВСЕМ ДИЗАЙНАМ</button>
 
-        {/* Текст информации + заголовок */}
-        <div className='case-header-block'>
-          <span className="manifesto-tag">
-            UI/UX ДИЗАЙН
-          </span>
+        <div className="case-header-block">
+          <span className="manifesto-tag">UI/UX ДИЗАЙН</span>
           <h1>
             {current.title || 'БЕЗ НАЗВАНИЯ'}
             <br />
-            <span className="invalig--rag-ps">
-              <span />
-              {current.subtitle || 'Традиции в цифровом формате'}
-              <span />
-            </span>
+            <span className="invalig--rag-ps"><span />{current.subtitle || ''}<span /></span>
           </h1>
         </div>
 
-        {/* Доп текст из json + кнопка + прогресс бар */}
         <div className="case-middle-block">
           <div className="desc-and-pills">
-            <p className="case-description">
-              {current.description || 'Дизайн сайта для небольшого чайного магазина, где традиции, уют и простота встречаются в современном цифровом формате.'}
-            </p>
+            <p className="case-description">{current.description || ''}</p>
             <div className="pills-row">
-              {current.tags && Array.isArray(current.tags) ? (
-                current.tags.map((t, i) => <span key={i} className="pill-item">{t.tag ? t.tag : t}</span>)
-              ) : (
-                <>
-                  <span className="pill-item">UI/UX</span>
-                  <span className="pill-item">E-COMMERCE</span>
-                  <span className="pill-item">WEB</span>
-                </>
-              )}
+              {(Array.isArray(current.tags) ? current.tags : []).map((tag, index) => (
+                <span key={`${typeof tag === 'string' ? tag : tag.tag}-${index}`} className="pill-item">
+                  {typeof tag === 'string' ? tag : tag.tag}
+                </span>
+              ))}
             </div>
           </div>
 
           <div className="interactive-column">
-            <div className="btn-about">
-              <span>О ПРОЕКТЕ</span>
-              <span>➔</span>
-            </div>
-
-            {/* ДИНАМИЧЕСКИЙ ТАЙМЛАЙН */}
+            <div className="btn-about"><span>О ПРОЕКТЕ</span><span>➔</span></div>
             <div className="timeline-progress">
               {timelineSteps.map((step) => {
-                const isStepActive = activeStep === step.id;
-
+                const isStepActive = activeStep?.id === step.id;
                 return (
-                  <div 
-                    key={step.id} 
-                    className={`step ${isStepActive ? 'active' : ''}`}
-                  >
-                    {/* Главная кликабельная область шага */}
-                    <div className="step-main-click">
-                      <button
-                        type="button"
-                        className={`dot timeline-dot ${isStepActive ? 'active' : ''}`}
-                        aria-label={`Показать этап: ${step.label}`}
-                        aria-pressed={isStepActive}
-                        onClick={() => {
-                          setActiveStep(step.id);
-                          setActiveSubStep(step.subSteps?.[0]?.id || '');
-                        }}
-                      />
-                      <span className={isStepActive ? 'text-active' : ''}>{step.label}</span>
-                    </div>
-
-                    {/* ВЫПАДАЮЩЕЕ ДЕРЕВО ПОД-ШАГОВ */}
-                    {step.subSteps && isStepActive && (
+                  <div key={step.id} className={`step ${isStepActive ? 'active' : ''}`}>
+                    <button
+                      type="button"
+                      className="step-main-click"
+                      onClick={() => {
+                        setActiveStepId(step.id);
+                        setActiveSubStepId(step.subSteps?.[0]?.id || '');
+                        publishPreview(current.id, step.subSteps?.[0] || step);
+                      }}
+                    >
+                      <span className={`dot ${isStepActive ? 'active' : ''}`} />
+                      <span>{step.label}</span>
+                    </button>
+                    {Array.isArray(step.subSteps) && step.subSteps.length > 0 && isStepActive && (
                       <div className="container-for-hidden-text">
                         {step.subSteps.map((subStep) => {
-                          const isSubActive = activeSubStep === subStep.id;
-
+                          const isSubActive = activeSubStep?.id === subStep.id;
                           return (
-                            <div 
-                              key={subStep.id} 
-                              className="step sub-step-item"
+                            <button
+                              type="button"
+                              key={subStep.id}
+                              className={`step sub-step-item ${isSubActive ? 'active' : ''}`}
+                              onClick={() => {
+                                setActiveSubStepId(subStep.id);
+                                publishPreview(current.id, subStep);
+                              }}
                             >
-                              <button
-                                type="button"
-                                className={`dot timeline-dot ${isSubActive ? 'active' : ''}`}
-                                aria-label={`Показать этап: ${subStep.label}`}
-                                aria-pressed={isSubActive}
-                                onClick={() => {
-                                  setActiveSubStep(subStep.id);
-                                }}
-                              />
-                              <span className={isSubActive ? 'text-active' : ''}>
-                                {subStep.label}
-                              </span>
-                            </div>
+                              <span className={`dot ${isSubActive ? 'active' : ''}`} />
+                              <span className={isSubActive ? 'text-active' : ''}>{subStep.label}</span>
+                            </button>
                           );
                         })}
                       </div>
@@ -178,60 +142,36 @@ function DesignDetail({ id, onBack }) {
                 );
               })}
             </div>
-
           </div>
         </div>
       </section>
 
-      {/* ВТОРAЯ СЕКЦИЯ: ТРЕХКОЛОНОЧНЫЙ БЛОК ХАРАКТЕРИСТИК */}
       <section className="case-bottom-section">
         <div className="info-column">
           <h4>ЗАДАЧА</h4>
-          <p>{current.task || 'Создать удобный и эстетичный интерфейс для онлайн-магазина чая...'}</p>
+          <p>{current.task || '—'}</p>
         </div>
-
         <div className="info-column">
           <h4>РЕЗУЛЬТАТ</h4>
           <div className="results-list">
-            {current.results && Array.isArray(current.results) ? (
-              current.results.map((resObj, i) => (
-                <div key={i} className="result-item">
-                  <span className="text">{resObj.result ? resObj.result : resObj}</span>
-                </div>
-              ))
-            ) : (
-              <>
-                <div className="result-item"><span className="icon">💻</span><span className="text">Современный, чистый интерфейс с акцентом на атмосферу</span></div>
-                <div className="result-item"><span className="icon">📱</span><span className="text">Адаптивная версия для всех устройств</span></div>
-                <div className="result-item"><span className="icon">🛒</span><span className="text">Удобная навигация и быстрый чек-аут</span></div>
-              </>
-            )}
+            {(Array.isArray(current.results) ? current.results : []).map((result, index) => (
+              <div key={index} className="result-item"><span className="text">{typeof result === 'string' ? result : result.result}</span></div>
+            ))}
           </div>
         </div>
-
         <div className="info-column">
           <h4>ЦВЕТА</h4>
           <div className="colors-row">
-            {current.colors && Array.isArray(current.colors) ? (
-              current.colors.map((cObj, i) => {
-                const hex = cObj.colorCode || cObj.color || cObj.value || (typeof cObj === 'string' ? cObj : '#222529');
-                return <div key={i} className="color-circle" style={{ backgroundColor: hex }} />;
-              })
-            ) : (
-              <>
-                <div className="color-circle" style={{ backgroundColor: '#5D5950' }} />
-                <div className="color-circle" style={{ backgroundColor: '#DFD5C7' }} />
-                <div className="color-circle" style={{ backgroundColor: '#607647' }} />
-              </>
-            )}
+            {(Array.isArray(current.colors) ? current.colors : []).map((color, index) => {
+              const value = typeof color === 'string' ? color : color.colorCode || color.color || color.value || '#222529';
+              return <div key={`${value}-${index}`} className="color-circle" style={{ backgroundColor: value }} />;
+            })}
           </div>
-
           <h4>ШРИФТЫ</h4>
           <h3 className="font-primary">{primaryFont}</h3>
           <p className="font-secondary">{primaryFont} (Italic)</p>
         </div>
       </section>
-
     </div>
   );
 }

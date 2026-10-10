@@ -1,5 +1,5 @@
 import React from "react";
-import { ReactComponent as MainMap } from "../../../assets/main-architecture-map.svg";
+import { ReactComponent as MainMap } from "../../../assets/svg/main-architecture-map.svg";
 
 const SVG_REGISTRY = {
   "main-architecture-map": MainMap,

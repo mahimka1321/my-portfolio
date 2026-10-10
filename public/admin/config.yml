@@ -3,6 +3,8 @@ backend:
   repo: mahimka1321/my-portfolio
   branch: main
 
+# CMS uploads are web-served static files. Do not upload dynamic CMS media to
+# src/assets: Create React App does not expose arbitrary files from that folder.
 media_folder: "public/uploads"
 public_folder: "/my-portfolio/uploads"
 
@@ -10,18 +12,18 @@ collections:
   - name: "projects_collection"
     label: "Мои дизайны"
     files:
-      - name: "projects"
-        label: "Список проектов"
+      - name: "projects_data"
+        label: "Проекты портфолио"
         file: "src/data/projectsData.json"
         format: "json"
         fields:
           - name: "items"
-            label: "Проекты"
+            label: "Список проектов"
             widget: "list"
-            summary: "{{id}} — {{title}}"
+            summary: "{{fields.id}} — {{fields.title}}"
             collapsed: true
             fields:
-              - { label: "ID проекта (латиницей, уникальный)", name: "id", widget: "string" }
+              - { label: "ID проекта (латиницей)", name: "id", widget: "string" }
               - { label: "Главный заголовок", name: "title", widget: "string" }
               - { label: "Подзаголовок", name: "subtitle", widget: "string", required: false }
               - { label: "Описание проекта", name: "description", widget: "text", required: false }
@@ -31,15 +33,15 @@ collections:
                 widget: "list"
                 required: false
                 collapsed: true
-                field: { name: "result", widget: "string", label: "Текст результата" }
+                field: { label: "Текст результата", name: "result", widget: "string" }
               - name: "colors"
-                label: "Палитра цветов проекта"
+                label: "Палитра цветов"
                 widget: "list"
                 required: false
                 collapsed: true
-                field: { label: "Выбрать цвет", name: "colorCode", widget: "color" }
+                field: { label: "Цвет", name: "colorCode", widget: "color" }
               - { label: "Шрифты проекта", name: "fonts", widget: "string", required: false }
-              - { label: "Главное изображение проекта", name: "previewAsset", widget: "file", required: false }
+              - { label: "Главное превью", name: "previewAsset", widget: "image", required: false }
               - { label: "Цитата сверху", name: "topQuote", widget: "string", required: false }
               - { label: "Цитата слева внизу", name: "leftQuote", widget: "string", required: false }
               - { label: "Цитата справа внизу", name: "rightQuote", widget: "string", required: false }
@@ -48,25 +50,25 @@ collections:
                 widget: "list"
                 required: false
                 collapsed: true
-                field: { name: "tag", widget: "string", label: "Имя тега (например: UI/UX)" }
-              - { label: "Тип макета (для превью)", name: "deviceType", widget: "select", options: ["desktop", "mobile"], default: "desktop", required: true }
+                field: { label: "Тег", name: "tag", widget: "string" }
+              - { label: "Тип макета", name: "deviceType", widget: "select", options: ["desktop", "mobile"], default: "desktop", required: true }
               - name: "timelineSteps"
-                label: "Этапы прогресс-бара и изображения"
+                label: "Этапы таймлайна"
                 widget: "list"
                 required: false
                 collapsed: true
-                summary: "{{label}}"
+                summary: "{{fields.label}}"
                 fields:
-                  - { label: "ID этапа (латиницей)", name: "id", widget: "string" }
+                  - { label: "ID этапа", name: "id", widget: "string" }
                   - { label: "Название этапа", name: "label", widget: "string" }
-                  - { label: "Изображение этапа", name: "img", widget: "file", required: false }
+                  - { label: "Изображение этапа", name: "img", widget: "image", required: false }
                   - name: "subSteps"
-                    label: "Подэтапы (необязательно)"
+                    label: "Подэтапы"
                     widget: "list"
                     required: false
                     collapsed: true
-                    summary: "{{label}}"
+                    summary: "{{fields.label}}"
                     fields:
                       - { label: "ID подэтапа", name: "id", widget: "string" }
                       - { label: "Название подэтапа", name: "label", widget: "string" }
-                      - { label: "Изображение подэтапа", name: "img", widget: "file", required: false }
+                      - { label: "Изображение подэтапа", name: "img", widget: "image", required: false }
