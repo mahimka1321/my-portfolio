@@ -20,6 +20,7 @@ collections:
           - name: "items"
             label: "Список проектов"
             widget: "list"
+            allow_remove: false
             summary: "{{fields.id}} — {{fields.title}}"
             collapsed: true
             fields:
