@@ -1,47 +1,120 @@
 .preview-box {
   width: 100%;
   height: 100dvh;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   background-color: #f9fbdf;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  transition: max-width 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+  transition: max-width 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
-  // МОБИЛЬНЫЙ РЕЖИМ ПРОЕКТА (Или дефолтная карта):
-  &[data-device="mobile"], &.map-style {
-    max-width: 668px; 
+  &[data-device="mobile"],
+  &.map-style {
+    max-width: 668px;
     transition: none !important;
   }
 
-  // ДЕСКТОПНЫЙ РЕЖИМ ПРОЕКТА
   &[data-device="desktop"] {
     max-width: 668px;
 
-    // ПРИ НАВЕДЕНИИ КУРСОРA
     &:hover {
-      max-width: 50vw; 
+      max-width: 50vw;
     }
   }
 
   &::-webkit-scrollbar {
     width: 6px;
   }
+
   &::-webkit-scrollbar-thumb {
     background: #ffd200;
     border-radius: 3px;
   }
 
+  .media-layout-container {
+    width: 100%;
+  }
+
+  .preview-image-frame {
+    position: relative;
+    width: 100%;
+    min-height: 260px;
+    background: #f0f0d9;
+    overflow: hidden;
+
+    &.is-loaded {
+      min-height: 0;
+      background: transparent;
+    }
+
+    .preview-img-asset {
+      display: block;
+      height: auto;
+      transition: opacity 180ms ease;
+    }
+  }
+
+  .preview-image-loader {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    min-height: 260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 24px;
+    color: #575744;
+    background: linear-gradient(135deg, #f4f3df, #e9ead2, #f4f3df);
+    background-size: 200% 200%;
+    animation: preview-shimmer 1.5s ease-in-out infinite;
+    font-size: 13px;
+    letter-spacing: 0.03em;
+  }
+
+  .preview-spinner {
+    width: 28px;
+    height: 28px;
+    border: 3px solid rgba(87, 87, 68, 0.2);
+    border-top-color: #d7a900;
+    border-radius: 50%;
+    animation: preview-spin 0.75s linear infinite;
+  }
+
+  .preview-image-error {
+    position: relative;
+    animation: none;
+    background: #f0f0d9;
+    color: #7a554b;
+  }
+
   .svg-layout-container {
     width: 100%;
     height: auto;
-    
+
     svg {
       width: 100%;
       height: auto;
       display: block;
     }
+  }
+}
+
+@keyframes preview-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes preview-shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preview-box .preview-spinner,
+  .preview-box .preview-image-loader {
+    animation: none;
   }
 }

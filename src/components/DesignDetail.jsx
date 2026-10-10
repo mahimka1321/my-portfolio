@@ -93,14 +93,16 @@ function DesignDetail({ id, onBack }) {
       : "Montserrat";
 
   return (
+    <>
+            <button className="back-btn" onClick={onBack}>
+          ⟵ КО ВСЕМ ДИЗАЙНАМ
+        </button>
     <div
       className="design-detail-page"
       style={{ "--chosen-font": primaryFont }}
     >
       <section className="case-top-section">
-        <button className="back-btn" onClick={onBack}>
-          ⟵ КО ВСЕМ ДИЗАЙНАМ
-        </button>
+
 
         <div className="case-header-block">
           <span className="manifesto-tag">UI/UX ДИЗАЙН</span>
@@ -263,6 +265,7 @@ function DesignDetail({ id, onBack }) {
         </div>
       </section>
     </div>
+    </>
   );
 }
 

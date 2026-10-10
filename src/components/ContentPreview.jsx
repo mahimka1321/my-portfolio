@@ -1,58 +1,58 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import projectsData from "../data/projectsData.json";
-import { Svg } from "./ui/Svg/Svg";
+import { Svg, hasSvg } from "./ui/Svg/Svg";
+
 import "./ContentPreview.scss";
 
-// Keep compatibility with images that were already imported from src/assets.
-const legacyAssets = {};
+const rasterPreviews = {
 
-const normalizeId = (value) => String(value ?? "").trim().toLowerCase();
-
-const getProjectData = (item) => item?.fields || item || {};
+};
 
 const findProject = (id) => {
-  const items = Array.isArray(projectsData.items) ? projectsData.items : [];
-  return items.find((item) => normalizeId(getProjectData(item).id) === normalizeId(id));
+  return (projectsData.items || []).find((item) => {
+    const data = item.fields || item;
+    return (
+      String(data.id).trim().toLowerCase() === String(id).trim().toLowerCase()
+    );
+  });
 };
 
-/**
- * CMS uploads belong in public/uploads. Their paths are stored in JSON and
- * can be rendered directly, without adding a new JS import for each image.
- * Legacy src/assets images remain supported via the small map above.
- */
-const resolveImageSrc = (asset, { preferUploads = false } = {}) => {
-  if (!asset || typeof asset !== "string") return "";
-  const value = asset.trim();
-  if (!value) return "";
+function PreviewImage({ src, alt }) {
+  const [imageStatus, setImageStatus] = useState({ src: "", loaded: false, failed: false });
+  const loaded = imageStatus.src === src && imageStatus.loaded;
+  const failed = imageStatus.src === src && imageStatus.failed;
 
-  if (/^(https?:)?\/\//i.test(value) || value.startsWith("data:")) return value;
-
-  const cleanValue = value.split(/[?#]/)[0];
-  const fileName = cleanValue.split("/").pop();
-  const explicitlyUploads = /(^|\/)uploads\//i.test(cleanValue) || /\/uploads\//i.test(cleanValue);
-  // Timeline images entered through CMS must resolve to public/uploads, even if
-  // their filename happens to match an older src/assets image.
-  if (!preferUploads && !explicitlyUploads && !cleanValue.includes("/" ) && legacyAssets[fileName]) {
-    return legacyAssets[fileName];
-  }
-
-  const publicBase = process.env.PUBLIC_URL || "";
-  let path = value.replace(/^\.\//, "");
-  path = path.replace(/^public\//, "");
-  path = path.replace(/^\/?my-portfolio\//, "");
-  path = path.replace(/^\//, "");
-
-  // Old values such as "tour-box.webp" are treated as public/uploads files,
-  // while explicitly stored /assets/... paths keep their original location.
-  if (!path.startsWith("uploads/") && !path.startsWith("assets/")) {
-    path = `uploads/${path}`;
-  }
-
-  return `${publicBase}/${path}`.replace(/([^:]\/)\/+/, "$1");
-};
+  return (
+    <div
+    style={{ objectFit: "cover", width: "100%"}}
+     className={`preview-image-frame${loaded ? " is-loaded" : " is-loading"}`}>
+      {!loaded && !failed && (
+        <div className="preview-image-loader" role="status" aria-label="Загрузка изображения">
+          <span className="preview-spinner" />
+          <span>Загружаем макет…</span>
+        </div>
+      )}
+      {failed && (
+        <div className="preview-image-loader preview-image-error" role="status">
+          Не удалось загрузить изображение
+        </div>
+      )}
+      <img
+        key={src}
+        src={src}
+        alt={alt}
+        className="preview-img-asset"
+        onLoad={() => setImageStatus({ src, loaded: true, failed: false })}
+        onError={() => setImageStatus({ src, loaded: false, failed: true })}
+        style={{ objectFit: "cover", width: "100%", opacity: loaded ? 1 : 0 }}
+      />
+    </div>
+  );
+}
 
 function ContentPreview({ preview }) {
   const [timelinePreview, setTimelinePreview] = useState(null);
+  const previewRef = useRef(null);
 
   useEffect(() => {
     const handleTimelinePreview = (event) => setTimelinePreview(event.detail || null);
@@ -60,51 +60,81 @@ function ContentPreview({ preview }) {
     return () => window.removeEventListener("project-timeline-preview", handleTimelinePreview);
   }, []);
 
+  const projectId = preview ? preview.replace(/^preview-/, "").trim() : "";
+  const projectItem = projectId ? findProject(projectId) : null;
+  const project = projectItem ? projectItem.fields || projectItem : null;
+  const deviceType = project?.deviceType || "mobile";
+  const fileName = project?.previewAsset?.trim().split("/").pop();
+  const activeTimelineImage =
+  timelinePreview &&
+  project &&
+  String(timelinePreview.projectId) === String(project.id)
+    ? timelinePreview.image || ""
+    : "";
+
+  // Each newly selected project/branch starts at the top of its preview.
+  useEffect(() => {
+    if (previewRef.current) previewRef.current.scrollTop = 0;
+  }, [preview, activeTimelineImage, timelinePreview?.label]);
+
   if (preview === "map" || !preview) {
     return (
-      <div className="preview-box map-style" data-device="mobile">
+      <div ref={previewRef} className="preview-box map-style" data-device="mobile">
         <Svg id="main-architecture-map" />
       </div>
     );
   }
 
-  const projectId = preview.replace(/^preview-/, "").trim();
-  const projectItem = findProject(projectId);
-  const project = projectItem ? getProjectData(projectItem) : null;
-  const deviceType = project?.deviceType || "mobile";
-  const selectedTimelineImage =
-    timelinePreview && normalizeId(timelinePreview.projectId) === normalizeId(project?.id)
-      ? resolveImageSrc(timelinePreview.image, { preferUploads: true })
-      : "";
-  const projectPreviewImage = resolveImageSrc(project?.previewAsset);
-  const imageSrc = selectedTimelineImage || projectPreviewImage;
-
-  if (imageSrc) {
+  if (activeTimelineImage) {
     return (
-      <div className="preview-box dynamic" data-device={deviceType}>
-        <div className="media-layout-container" style={{ objectFit: "cover", width: "100%" }}>
-          <img
-            src={imageSrc}
-            alt={timelinePreview?.label || project?.title || "Превью проекта"}
-            className="preview-img-asset"
-            style={{ objectFit: "cover", width: "100%" }}
-            onError={(event) => {
-              // Keep the layout intact and expose a useful console error instead
-              // of silently hiding the image and breaking the preview styling.
-              console.error("Не удалось загрузить изображение превью:", imageSrc);
-              event.currentTarget.dataset.loadError = "true";
-            }}
+      <div ref={previewRef} className="preview-box dynamic" data-device={deviceType}>
+        <div className="media-layout-container">
+          <PreviewImage
+            src={activeTimelineImage}
+            alt={timelinePreview?.label || project?.title || "Превью этапа проекта"}
           />
         </div>
       </div>
     );
   }
 
+  if (project && fileName) {
+    const fileExtension = fileName.split(".").pop()?.toLowerCase();
+
+    if (["webp", "png", "jpg", "jpeg"].includes(fileExtension)) {
+      const imageSrc = rasterPreviews[fileName];
+
+      if (imageSrc) {
+        return (
+          <div ref={previewRef} className="preview-box dynamic" data-device={deviceType}>
+            <div className="media-layout-container">
+              <PreviewImage src={imageSrc} alt={project.title || "Design Preview"} />
+            </div>
+          </div>
+        );
+      }
+    }
+
+    if (fileExtension === "svg") {
+      const svgId = fileName.replace(/\.svg$/i, "");
+      const hasSvgPreview = hasSvg(svgId);
+
+      if (hasSvgPreview) {
+        return (
+          <div ref={previewRef} className="preview-box dynamic" data-device={deviceType}>
+            <div className="svg-layout-container">
+              <Svg id={svgId} />
+            </div>
+          </div>
+        );
+      }
+    }
+  }
+
   return (
-    <div className="preview-box map-style" data-device={deviceType}>
-      <div className="static-map-placeholder">
-        🪐 [МАКЕТ ВЕРСТКИ ГОТОВИТСЯ]
-        <p>Вы выбрали кейс «{project?.title || "Проект"}».</p>
+    <div ref={previewRef} className="preview-box map-style" data-device={deviceType}>
+      <div className="static-map-placeholder" style={{marginTop:'50px'}}>
+        <p>Вы выбрали кейс "{project?.title || "Проект"}".</p>
       </div>
     </div>
   );
