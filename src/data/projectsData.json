@@ -40,12 +40,12 @@
         {
           "id": "design",
           "label": "дизайн",
-          "img": "/my-portfolio/assets/tour-box.webp",
+          "img": "/my-portfolio/assets/tours-tour-box.webp",
           "subSteps": [
             {
               "id": "home",
               "label": "Home",
-              "img": "/my-portfolio/assets/tour-box.webp"
+              "img": "/my-portfolio/assets/tours-tour-box.webp"
             },
             {
               "id": "tour",
