@@ -82,7 +82,7 @@ function ContentPreview({ preview }) {
   if (imageSrc) {
     return (
       <div className="preview-box dynamic" data-device={deviceType}>
-        <div className="media-layout-container">
+        <div className="media-layout-container" style={{ objectFit: "cover", width: "100%" }}>
           <img
             src={imageSrc}
             alt={timelinePreview?.label || project?.title || "Превью проекта"}

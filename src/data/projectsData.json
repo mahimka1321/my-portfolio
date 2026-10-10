@@ -47,7 +47,8 @@
       "rightQuote": "круууто",
       "subtitle": "Онлайн гид по городу",
       "tags": [
-        "UI/UX"
+        "UI/UX",
+        "MOBILE"
       ],
       "task": "создать удобный интерфейс для пользователей, чтобы они могли легко находить информацию о достопримечательностях, ресторанах и других интересных местах.",
       "title": "Онлайн гид",
@@ -68,6 +69,7 @@
         {
           "id": "design",
           "label": "дизайн",
+<<<<<<< HEAD
           "img": "/assets/tour-box.webp",
           "subSteps": [
             {
@@ -79,13 +81,35 @@
               "id": "tour",
               "label": "tour",
               "img": "/assets/tea-layout.webp"
+=======
+          "img": "/my-portfolio/uploads/home-tour-box.png",
+          "subSteps": [
+            {
+              "id": "home",
+              "label": "Home",
+              "img": "/my-portfolio/uploads/home-tour-box.png"
+            },
+            {
+              "id": "tour",
+              "label": "Tour",
+              "img": "/my-portfolio/uploads/tours-tour-box.webp"
+            },
+            {
+              "id": "profil",
+              "label": "Profil",
+              "img": "/my-portfolio/uploads/ptofil-tour-box.png"
+>>>>>>> 4570e1d1a6ec8d0f107e3a89e2fc355c43e85fa3
             }
           ]
         },
         {
           "id": "adaptive",
           "label": "адаптив",
+<<<<<<< HEAD
           "img": "/assets/web-component.webp",
+=======
+          "img": "",
+>>>>>>> 4570e1d1a6ec8d0f107e3a89e2fc355c43e85fa3
           "subSteps": []
         }
       ]
