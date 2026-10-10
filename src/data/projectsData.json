@@ -85,7 +85,29 @@
       ],
       "task": "увеличить охват",
       "title": "Чайный магазин",
-      "topQuote": "ВОУ"
+      "topQuote": "ВОУ",
+      "timelineSteps": [
+        {
+          "id": "concept",
+          "label": "концепт",
+          "img": "/my-portfolio/assets/tea-layout.webp"
+        },
+        {
+          "id": "uikit",
+          "label": "ui кит",
+          "img": "/my-portfolio/assets/tea-layout.webp"
+        },
+        {
+          "id": "design",
+          "label": "дизайн",
+          "img": "/my-portfolio/assets/tea-layout.webp"
+        },
+        {
+          "id": "adaptive",
+          "label": "адаптив",
+          "img": "/my-portfolio/assets/tea-layout.webp"
+        }
+      ]
     },
     {
       "colors": [
@@ -110,7 +132,46 @@
       ],
       "task": "создать удобный интерфейс для пользователей, чтобы они могли легко находить информацию о достопримечательностях, ресторанах и других интересных местах.",
       "title": "Онлайн гид",
-      "topQuote": "вооооооой"
+      "topQuote": "вооооооой",
+      "timelineSteps": [
+        {
+          "id": "concept",
+          "label": "концепт",
+          "img": "/my-portfolio/assets/tour-box.webp"
+        },
+        {
+          "id": "uikit",
+          "label": "ui кит",
+          "img": "/my-portfolio/assets/image16.png"
+        },
+        {
+          "id": "design",
+          "label": "дизайн",
+          "img": "/my-portfolio/assets/tour-box.webp",
+          "subSteps": [
+            {
+              "id": "home",
+              "label": "Home",
+              "img": "/my-portfolio/assets/tour-box.webp"
+            },
+            {
+              "id": "tour",
+              "label": "Tour",
+              "img": "/my-portfolio/assets/image16.png"
+            },
+            {
+              "id": "profil",
+              "label": "Profil",
+              "img": "/my-portfolio/assets/web-component.webp"
+            }
+          ]
+        },
+        {
+          "id": "adaptive",
+          "label": "адаптив",
+          "img": "/my-portfolio/assets/web-component.webp"
+        }
+      ]
     },
     {
       "colors": [
@@ -136,7 +197,29 @@
       ],
       "task": "-",
       "title": "Web Component",
-      "topQuote": "2"
+      "topQuote": "2",
+      "timelineSteps": [
+        {
+          "id": "concept",
+          "label": "концепт",
+          "img": "/my-portfolio/assets/web-component.webp"
+        },
+        {
+          "id": "uikit",
+          "label": "ui кит",
+          "img": "/my-portfolio/assets/web-component.webp"
+        },
+        {
+          "id": "design",
+          "label": "дизайн",
+          "img": "/my-portfolio/assets/web-component.webp"
+        },
+        {
+          "id": "adaptive",
+          "label": "адаптив",
+          "img": "/my-portfolio/assets/web-component.webp"
+        }
+      ]
     }
   ]
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import projectsData from "../data/projectsData.json";
 import { Svg, hasSvg } from "./ui/Svg/Svg";
 import teaLayouttPreview from "../assets/tea-layout.png";
@@ -22,6 +22,14 @@ const findProject = (id) => {
 };
 
 function ContentPreview({ preview }) {
+  const [timelinePreview, setTimelinePreview] = useState(null);
+
+  useEffect(() => {
+    const handleTimelinePreview = (event) => setTimelinePreview(event.detail || null);
+    window.addEventListener("project-timeline-preview", handleTimelinePreview);
+    return () => window.removeEventListener("project-timeline-preview", handleTimelinePreview);
+  }, []);
+
   if (preview === "map" || !preview) {
     return (
       <div className="preview-box map-style" data-device="mobile">
@@ -35,6 +43,22 @@ function ContentPreview({ preview }) {
   const project = projectItem ? projectItem.fields || projectItem : null;
   const deviceType = project?.deviceType || "mobile";
   const fileName = project?.previewAsset?.trim().split("/").pop();
+  const activeTimelineImage = timelinePreview?.projectId === project?.id ? timelinePreview.image : "";
+
+  if (activeTimelineImage) {
+    return (
+      <div className="preview-box dynamic" data-device={deviceType}>
+        <div className="media-layout-container">
+          <img
+            src={activeTimelineImage}
+            alt={timelinePreview?.label || project?.title || "Превью этапа проекта"}
+            className="preview-img-asset"
+            style={{ objectFit: "cover", width: "100%" }}
+          />
+        </div>
+      </div>
+    );
+  }
 
   if (project && fileName) {
     const fileExtension = fileName.split(".").pop()?.toLowerCase();

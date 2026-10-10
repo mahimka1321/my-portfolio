@@ -1,48 +1,59 @@
-backend:
-  name: github
-  repo: mahimka1321/my-portfolio
-  branch: main
+    backend:
+      name: github
+      repo: mahimka1321/my-portfolio
+      branch: main
 
-media_folder: "public/assets"
-public_folder: "/assets"
+    media_folder: "src/assets"
+    public_folder: "/my-portfolio/assets"
 
-collections:
-  - name: "designs"
-    label: "Проекты веб-дизайна"
-    folder: "src/data"
-    extension: "json"
-    create: true
-    slug: "{{fields.id}}"
-    identifier_field: "id"
-    fields:
-      - { label: "Уникальный ID проекта", name: "id", widget: "string" }
-      - { label: "Название проекта", name: "title", widget: "string" }
-      - { label: "Подзаголовок", name: "subtitle", widget: "string" }
-      - { label: "Описание проекта", name: "description", widget: "text", required: false }
-      - { label: "Задача проекта", name: "task", widget: "text" }
-      - { label: "Результаты (каждый с новой строки)", name: "results", widget: "list" }
-      - { label: "Палитра цветов (HEX-коды)", name: "colors", widget: "list" }
-      - { label: "Основной шрифт", name: "fonts", widget: "string" }
-      - { label: "Главное превью (Обложка)", name: "previewAsset", widget: "image" }
-      - { label: "Теги", name: "tags", widget: "list" }
-      - { label: "Тип устройства", name: "deviceType", widget: "select", options: ["mobile", "desktop"] }
-      - { label: "Цвет кнопки (HEX)", name: "buttonColor", widget: "string", required: false }
-      
-      # ДИНАМИЧЕСКИЙ ТАЙМЛАЙН ДЛЯ НАСТРОЙКИ СЛАЙДОВ В АДМИНКЕ
-      - label: "Этапы прогресс-бара"
-        name: "timelineSteps"
-        widget: "list"
-        summary: "{{fields.label}}"
+    collections:
+      - name: "projects_collection"
+        label: "Мои Дизайны"
+        folder: "src/data"
+        file: "src/data/projectsData.json"
+        format: "json"
         fields:
-          - { label: "ID этапа (латиницей, например: concept, uikit, design, adaptive)", name: "id", widget: "string" }
-          - { label: "Название этапа (по-русски)", name: "label", widget: "string" }
-          - { label: "Картинка для этого этапа", name: "img", widget: "image", required: false }
-          - label: "Под-этапы (слайды для дизайна)"
-            name: "subSteps"
+          - name: "items"
+            label: "Список проектов"
             widget: "list"
-            required: false
-            summary: "{{fields.label}}"
+            # 🔥 МАГИЯ ТУТ: Сворачивает проекты в компактные аккордеоны с заголовком ID
+            summary: "{{id}} — {{title}}"
+            collapsed: true 
             fields:
-              - { label: "ID слайда (например: home, tour, profil)", name: "id", widget: "string" }
-              - { label: "Название слайда (английскими)", name: "label", widget: "string" }
-              - { label: "Картинка слайда", name: "img", widget: "image" }
+              - { label: 'ID проекта (латиницей)', name: 'id', widget: 'string' }
+              - { label: 'Главный Заголовок', name: 'title', widget: 'string' }
+              - { label: 'Подзаголовок', name: 'subtitle', widget: 'string' }
+              - { label: 'Описание проекта', name: 'description', widget: 'text' }
+              - { label: 'Задача бизнеса', name: 'task', widget: 'text' }
+              
+              # Компактный список результатов
+              - name: "results"
+                label: "Результаты"
+                widget: "list"
+                collapsed: true
+                summary: "{{result}}"
+                field: {name: 'result', widget: 'string', label: 'Текст результата'}
+              
+              # Компактный список цветов с пипеткой
+              - name: "colors"
+                label: "Палитра цветов проекта"
+                widget: "list"
+                collapsed: true
+                summary: "{{colorCode}}"
+                field: { label: 'Выбрать цвет', name: 'colorCode', widget: 'color' }
+
+              - { label: 'Шрифты проекта', name: 'fonts', widget: 'string' }
+              - { label: 'Загрузить SVG макет', name: 'previewAsset', widget: 'file' }
+              - { label: 'Цитата сверху', name: 'topQuote', widget: 'string' }
+              - { label: 'Цитата слева внизу', name: 'leftQuote', widget: 'string' }
+              - { label: 'Цитата справа внизу', name: 'rightQuote', widget: 'string' }
+              
+              # Компактный список тегов
+              - name: "tags"
+                label: "Теги проекта"
+                widget: "list"
+                collapsed: true
+                summary: "{{tag}}"
+                field: {name: 'tag', widget: 'string', label: 'Имя тега (например: UI/UX)'}
+                
+              - { label: 'Тип макета (для превью)', name: 'deviceType', widget: 'select', options: ['desktop', 'mobile'], default: 'desktop', required: true }
