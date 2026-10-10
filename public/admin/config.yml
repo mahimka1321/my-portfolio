@@ -3,7 +3,7 @@
       repo: mahimka1321/my-portfolio
       branch: main
 
-    media_folder: "src/assets"
+    media_folder: "public/assets"
     public_folder: "/my-portfolio/assets"
 
     collections:
@@ -57,3 +57,24 @@
                 field: {name: 'tag', widget: 'string', label: 'Имя тега (например: UI/UX)'}
                 
               - { label: 'Тип макета (для превью)', name: 'deviceType', widget: 'select', options: ['desktop', 'mobile'], default: 'desktop', required: true }
+              # Этапы прогресс-бара: у каждого этапа своё изображение и необязательные подэтапы
+              - name: "timelineSteps"
+                label: "Этапы прогресс-бара"
+                widget: "list"
+                required: false
+                collapsed: true
+                summary: "{{label}}"
+                fields:
+                  - { label: "ID этапа (латиницей)", name: "id", widget: "string" }
+                  - { label: "Название этапа", name: "label", widget: "string" }
+                  - { label: "Изображение этапа", name: "img", widget: "image", required: false }
+                  - name: "subSteps"
+                    label: "Подэтапы (необязательно)"
+                    widget: "list"
+                    required: false
+                    collapsed: true
+                    summary: "{{label}}"
+                    fields:
+                      - { label: "ID подэтапа", name: "id", widget: "string" }
+                      - { label: "Название подэтапа", name: "label", widget: "string" }
+                      - { label: "Изображение подэтапа", name: "img", widget: "image", required: false }
