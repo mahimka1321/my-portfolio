@@ -1,55 +1,142 @@
 {
-  "items": [
+  "id": "tour-boks",
+  "title": "TourBox",
+  "subtitle": "Онлайн гид в твоем кармане",
+  "description": "Это приложение онлайн туров, с ним твои путешествия будут легче и ты точно не чего не пропустишь.",
+  "task": "Привлечь больше туристов.",
+  "results": [
+    "Цель выполнена"
+  ],
+  "colors": [
+    "#2479DB",
+    "#C8DEF6",
+    "#FFFFFF",
+    "#FF5D5D"
+  ],
+  "fonts": "Akshar",
+  "previewAsset": "/assets/tour-box.webp",
+  "tags": [
+    "UI/UX",
+    "WEB",
+    "MOBILE"
+  ],
+  "deviceType": "mobile",
+  "buttonColor": "#2479DB",
+  "timelineSteps": [
     {
-      "id": "tea",
-      "title": "Чайный магазин",
-      "subtitle": "онлайн магазин по даставке чая",
-      "description": "отсутствует",
-      "task": "увеличить охват",
-      "results": ["1"],
-      "colors": ["#5d5950", "#dfd5c7", "#607647", "#6d8650", "#7f9960"],
-      "fonts": "Roboto",
-      "previewAsset": "tea-layout.png",
-      "topQuote": "ВОУ",
-      "leftQuote": "ДАДАДА",
-      "rightQuote": "КРУТО",
-      "tags": ["UI/UX"],
-      "deviceType": "mobile",
-      "buttonColor": "#eaaeae"
+      "id": "concept",
+      "label": "концепт",
+      "img": "/assets/tour-box.webp",
+      "subSteps": []
     },
     {
-      "id": "tourbox",
-      "title": "Онлайн гид",
-      "subtitle": "Онлайн гид по городу",
+      "id": "uikit",
+      "label": "киты",
+      "img": "/assets/image16.png",
+      "subSteps": []
+    },
+    {
+      "id": "design",
+      "label": "дизайн",
+      "img": "/assets/tour-box.webp",
+      "subSteps": [
+        {
+          "id": "home",
+          "label": "home",
+          "img": "/assets/tour-box.webp"
+        },
+        {
+          "id": "tour",
+          "label": "tour",
+          "img": "/assets/tea-layout.webp"
+        }
+      ]
+    },
+    {
+      "id": "adaptive",
+      "label": "адаптив",
+      "img": "/assets/web-component.webp",
+      "subSteps": []
+    }
+  ],
+  "items": [
+    {
+      "buttonColor": "#eaaeae",
+      "colors": [
+        "#5d5950",
+        "#dfd5c7",
+        "#607647",
+        "#6d8650",
+        "#7f9960"
+      ],
+      "description": "отсутствует",
+      "deviceType": "mobile",
+      "fonts": "Roboto",
+      "id": "tea",
+      "leftQuote": "ДАДАДА",
+      "previewAsset": "tea-layout.png",
+      "results": [
+        "1"
+      ],
+      "rightQuote": "КРУТО",
+      "subtitle": "онлайн магазин по даставке чая",
+      "tags": [
+        "UI/UX"
+      ],
+      "task": "увеличить охват",
+      "title": "Чайный магазин",
+      "topQuote": "ВОУ"
+    },
+    {
+      "colors": [
+        "#2479db",
+        "#c8def6",
+        "#ffffff",
+        "#ff5d5d"
+      ],
       "description": "это приложение для туристов, которое помогает им ориентироваться в городе и находить интересные места.",
-      "task": "создать удобный интерфейс для пользователей, чтобы они могли легко находить информацию о достопримечательностях, ресторанах и других интересных местах.",
+      "deviceType": "mobile",
+      "fonts": "Akshar",
+      "id": "tourbox",
+      "leftQuote": "оуууууу",
+      "previewAsset": "tour-box.webp",
       "results": [
         "за 2 месяца было разработано приложение, которое получило положительные отзывы от пользователей. Они отметили удобный интерфейс и полезность приложения для туристов."
       ],
-      "colors": ["#2479db", "#c8def6", "#ffffff", "#ff5d5d"],
-      "fonts": "Akshar",
-      "previewAsset": "tour-box.webp",
-      "topQuote": "вооооооой",
-      "leftQuote": "оуууууу",
       "rightQuote": "круууто",
-      "tags": ["UI/UX"],
-      "deviceType": "mobile"
+      "subtitle": "Онлайн гид по городу",
+      "tags": [
+        "UI/UX"
+      ],
+      "task": "создать удобный интерфейс для пользователей, чтобы они могли легко находить информацию о достопримечательностях, ресторанах и других интересных местах.",
+      "title": "Онлайн гид",
+      "topQuote": "вооооооой"
     },
     {
-      "id": "webComponent-01",
-      "title": "Web Component",
-      "subtitle": "Онлайн конструктор компонентов",
+      "colors": [
+        "#4aff93",
+        "#1a1a1a",
+        "#2b2b2b",
+        "#343434",
+        "#ffffff"
+      ],
       "description": "Лендинг Positivus справа встал хорошо, но так как левая панель сейчас слишком яркая (из-за обилия жёлтого цвета), фокус внимания размывается.",
-      "task": "-",
-      "results": ["2"],
-      "colors": ["#4aff93", "#1a1a1a", "#2b2b2b", "#343434", "#ffffff"],
+      "deviceType": "desktop",
       "fonts": "1",
-      "previewAsset": "web-component.webp",
-      "topQuote": "2",
+      "id": "webComponent-01",
       "leftQuote": "3",
+      "previewAsset": "web-component.webp",
+      "results": [
+        "2"
+      ],
       "rightQuote": "4",
-      "tags": ["UI/UX"],
-      "deviceType": "desktop"
+      "subtitle": "Онлайн конструктор компонентов",
+      "tags": [
+        "UI/UX"
+      ],
+      "task": "-",
+      "title": "Web Component",
+      "topQuote": "2"
     }
   ]
 }
