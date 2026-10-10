@@ -58,12 +58,6 @@
               "img": "/my-portfolio/assets/ptofil-tour-box.png"
             }
           ]
-        },
-        {
-          "id": "adaptive",
-          "label": "адаптив",
-          "img": "/my-portfolio/assets/web-component.webp",
-          "subSteps": []
         }
       ]
     }
