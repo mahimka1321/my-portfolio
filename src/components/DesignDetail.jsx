@@ -2,7 +2,28 @@ import React, { useState, useEffect } from 'react';
 import projectsData from '../data/projectsData.json';
 import './DesignDetail.scss';
 
+// Простая статическая структура, которая железно рендерится
+const TIMELINE_STEPS = [
+  { id: 'concept', label: 'концепт' },
+  { id: 'uikit', label: 'ui кит' },
+  { 
+    id: 'design', 
+    label: 'дизайн',
+    subSteps: [
+      { id: 'home', label: 'Home' },
+      { id: 'tour', label: 'Tour' },
+      { id: 'profil', label: 'Profil' }
+    ]
+  },
+  { id: 'adaptive', label: 'адаптив' }
+];
+
 function DesignDetail({ id, onBack }) {
+  // Железные дефолтные стейты без умных поисков по JSON
+  const [activeStep, setActiveStep] = useState('concept');
+  const [activeSubStep, setActiveSubStep] = useState('home');
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+
   const list = projectsData.items || [];
   
   const currentItem = list.find(item => {
@@ -10,19 +31,6 @@ function DesignDetail({ id, onBack }) {
     return data.id === id;
   });
 
-  const current = currentItem?.fields ? currentItem.fields : currentItem;
-
-  // Динамически получаем этапы прогресс-бара из админки
-  const stepsFromAdmin = current?.timelineSteps || [];
-
-  // ИСПРАВЛЕНО: Безопасный выбор дефолтных стейтов из массива шагов
-  const [activeStep, setActiveStep] = useState(stepsFromAdmin[0]?.id || 'concept');
-  const [activeSubStep, setActiveSubStep] = useState(
-    stepsFromAdmin.find(s => s.subSteps)?.subSteps[0]?.id || 'home'
-  );
-  const [isImageLoaded, setIsImageLoaded] = useState(false);
-
-  // Сбрасываем лоадер при каждом переключении
   useEffect(() => {
     setIsImageLoaded(false);
   }, [activeStep, activeSubStep, id]);
@@ -30,30 +38,32 @@ function DesignDetail({ id, onBack }) {
   if (!currentItem) {
     return (
       <div className="design-detail-page">
-        <h2>Проект не найден в базе данных админки</h2>
+        <h2>Проект не найден в базе данных</h2>
       </div>
     );
   }
   
+  const current = currentItem.fields ? currentItem.fields : currentItem;
   const primaryFont = current.fonts && current.fonts !== '-' ? current.fonts.trim() : 'Montserrat';
 
-  // Функция поиска имени файла картинки
+  // Простая и понятная функция выбора картинок на чистом if/else
   const getCurrentImage = () => {
-    const mainStep = stepsFromAdmin.find(s => s.id === activeStep);
-    if (!mainStep) return current.previewAsset;
-
-    if (activeStep === 'design' && mainStep.subSteps) {
-      const subStep = mainStep.subSteps.find(ss => ss.id === activeSubStep);
-      return subStep?.img || current.previewAsset;
+    if (activeStep === 'concept') return current.conceptImg || current.previewAsset;
+    if (activeStep === 'uikit') return current.uikitImg || current.previewAsset;
+    if (activeStep === 'adaptive') return current.adaptiveImg || current.previewAsset;
+    
+    if (activeStep === 'design') {
+      if (activeSubStep === 'home') return current.imgHome || current.previewAsset;
+      if (activeSubStep === 'tour') return current.imgTour || current.previewAsset;
+      if (activeSubStep === 'profil') return current.imgProfil || current.previewAsset;
     }
-
-    return mainStep.img || current.previewAsset;
+    return current.previewAsset;
   };
 
   return (
     <div className="design-detail-layout">
       
-      {/* ЛЕВАЯ ПАНЕЛЬ С КОНТЕНТОМ */}
+      {/* ЛЕВАЯ ПАНЕЛЬ */}
       <div className="design-detail-page" style={{ '--chosen-font': primaryFont }}>
         <section className="case-top-section">
           <button className="back-btn" onClick={onBack}>
@@ -76,7 +86,7 @@ function DesignDetail({ id, onBack }) {
           <div className="case-middle-block">
             <div className="desc-and-pills">
               <p className="case-description">
-                {current.description || 'Описание проекта отсутствует.'}
+                {current.description || 'Описание проекта.'}
               </p>
               <div className="pills-row">
                 {current.tags && Array.isArray(current.tags) ? (
@@ -93,52 +103,49 @@ function DesignDetail({ id, onBack }) {
                 <span>➔</span>
               </div>
 
-              {/* ТАЙМЛАЙН ПРОГРЕСС-БАРA */}
-              {stepsFromAdmin.length > 0 && (
-                <div className="timeline-progress">
-                  {stepsFromAdmin.map((step) => {
-                    const isStepActive = activeStep === step.id;
+              {/* ТАЙМЛАЙН */}
+              <div className="timeline-progress">
+                {TIMELINE_STEPS.map((step) => {
+                  const isStepActive = activeStep === step.id;
 
-                    return (
-                      <div key={step.id} className={`step ${isStepActive ? 'active' : ''}`}>
-                        <div className="step-main-click">
-                          <div 
-                            className={`dot ${isStepActive ? 'active' : ''}`}
-                            onClick={() => {
-                              setActiveStep(step.id);
-                              if (step.subSteps && step.subSteps.length > 0) {
-                                setActiveSubStep(step.subSteps[0].id);
-                              }
-                            }}
-                          ></div>
-                          <span>{step.label}</span>
-                        </div>
-
-                        {/* ВЫПАДАЮЩИЕ ПОД-ШАГИ */}
-                        {step.subSteps && isStepActive && (
-                          <div className="container-for-hidden-text">
-                            {step.subSteps.map((subStep) => {
-                              const isSubActive = activeSubStep === subStep.id;
-
-                              return (
-                                <div key={subStep.id} className="step sub-step-item">
-                                  <div 
-                                    className={`dot ${isSubActive ? 'active' : ''}`}
-                                    onClick={() => setActiveSubStep(subStep.id)}
-                                  ></div>
-                                  <span className={isSubActive ? 'text-active' : ''}>
-                                    {subStep.label}
-                                  </span>
-                                </div>
-                              );
-                            })}
-                          </div>
-                        )}
+                  return (
+                    <div key={step.id} className={`step ${isStepActive ? 'active' : ''}`}>
+                      <div className="step-main-click">
+                        {/* КЛИК СТРОГО НА КРУЖОК */}
+                        <div 
+                          className={`dot ${isStepActive ? 'active' : ''}`}
+                          onClick={() => {
+                            setActiveStep(step.id);
+                            if (step.subSteps) setActiveSubStep('home');
+                          }}
+                        ></div>
+                        <span>{step.label}</span>
                       </div>
-                    );
-                  })}
-                </div>
-              )}
+
+                      {step.subSteps && isStepActive && (
+                        <div className="container-for-hidden-text">
+                          {step.subSteps.map((subStep) => {
+                            const isSubActive = activeSubStep === subStep.id;
+
+                            return (
+                              <div key={subStep.id} className="step sub-step-item">
+                                {/* КЛИК СТРОГО НА КРУЖОК */}
+                                <div 
+                                  className={`dot ${isSubActive ? 'active' : ''}`}
+                                  onClick={() => setActiveSubStep(subStep.id)}
+                                ></div>
+                                <span className={isSubActive ? 'text-active' : ''}>
+                                  {subStep.label}
+                                </span>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </section>
@@ -151,17 +158,7 @@ function DesignDetail({ id, onBack }) {
 
           <div className="info-column">
             <h4>РЕЗУЛЬТАТ</h4>
-            <div className="results-list">
-              {current.results && Array.isArray(current.results) ? (
-                current.results.map((resObj, i) => (
-                  <div key={i} className="result-item">
-                    <span className="text">{resObj.result ? resObj.result : resObj}</span>
-                  </div>
-                ))
-              ) : (
-                <div className="result-item"><span className="text">Готово</span></div>
-              )}
-            </div>
+            <p>{current.task || 'Результат не описан.'}</p>
           </div>
 
           <div className="info-column">
@@ -173,13 +170,11 @@ function DesignDetail({ id, onBack }) {
                   return <div key={i} className="color-circle" style={{ backgroundColor: hex }} />;
                 })
               ) : (
-                <div className="color-circle" style={{ backgroundColor: '#222529' }} />
+                <div className="color-circle" style={{ backgroundColor: '#5D5950' }} />
               )}
             </div>
-
             <h4>ШРИФТЫ</h4>
             <h3 className="font-primary">{primaryFont}</h3>
-            <p className="font-secondary">{primaryFont} (Normal)</p>
           </div>
         </section>
       </div>
@@ -192,15 +187,13 @@ function DesignDetail({ id, onBack }) {
             <p>Загрузка макета...</p>
           </div>
         )}
-        
-        {/* ИСПРАВЛЕНО: путь изменен на относительный под сборщик билда. Добавлен onError */}
         <img
-          src={`./assets/${getCurrentImage()}`} 
+          src={`/assets/${getCurrentImage()}`} 
           alt="Интерфейс проекта"
           loading="lazy"
           onLoad={() => setIsImageLoaded(true)}
           onError={() => setIsImageLoaded(true)} 
-          style={{ opacity: isImageLoaded ? 1 : 0 }}
+          style={{ display: isImageLoaded ? 'block' : 'none' }}
           className="preview-mockup-img"
         />
       </div>
