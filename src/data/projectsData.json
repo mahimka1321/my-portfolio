@@ -90,7 +90,7 @@
         "DESKTOP",
         "MOBILE"
       ],
-      "deviceType": "desktop",
+      "deviceType": "mobile",
       "timelineSteps": [
         {
           "id": "dising",
