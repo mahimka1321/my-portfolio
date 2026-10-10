@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import projectsData from '../data/projectsData.json';
 import './DesignDetail.scss';
 
@@ -14,60 +14,61 @@ const DEFAULT_TIMELINE_STEPS = [
 ];
 
 const normalizeAssetPath = (asset) => {
-  if (!asset) return '';
-  const value = String(asset).trim();
-  if (/^(https?:)?\//i.test(value)) return value;
-  return `${process.env.PUBLIC_URL || ''}/${value.replace(/^\.\//, '').replace(/^\//, '')}`;
+  if (!asset || typeof asset !== 'string') return '';
+  const value = asset.trim();
+  if (!value) return '';
+  if (/^(https?:)?\/\//i.test(value) || /^(data:|blob:)/i.test(value)) return value;
+  const publicUrl = (process.env.PUBLIC_URL || '').replace(/\/$/, '');
+  if (publicUrl && (value === publicUrl || value.startsWith(`${publicUrl}/`))) return value;
+  if (value.startsWith('/')) return `${publicUrl}${value}`;
+  return `${publicUrl}/${value.replace(/^\.\//, '')}`;
 };
 
+const getStepImage = (step) => step?.img || step?.image || step?.imageUrl || '';
+
 const publishPreview = (projectId, step) => {
+  if (typeof window === 'undefined') return;
   window.dispatchEvent(new CustomEvent('project-timeline-preview', {
-    detail: { projectId, image: normalizeAssetPath(step?.img), label: step?.label || '' }
+    detail: {
+      projectId: String(projectId || ''),
+      image: normalizeAssetPath(getStepImage(step)),
+      label: step?.label || ''
+    }
   }));
 };
 
 function DesignDetail({ id, onBack }) {
-  // Хуки стейтов объявлены на самом верху компонента
   const [activeStep, setActiveStep] = useState('concept');
-  const [activeSubStep, setActiveSubStep] = useState('home');
+  const [activeSubStep, setActiveSubStep] = useState('');
 
-  const list = projectsData.items || [];
-  
-  const currentItem = list.find(item => {
-    const data = item.fields ? item.fields : item;
-    return data.id === id;
+  const list = Array.isArray(projectsData.items) ? projectsData.items : [];
+  const currentItem = list.find((item) => {
+    const data = item?.fields || item;
+    return String(data?.id || '').trim().toLowerCase() === String(id || '').trim().toLowerCase();
   });
+  const current = currentItem ? (currentItem.fields || currentItem) : null;
+  const timelineSteps = Array.isArray(current?.timelineSteps) && current.timelineSteps.length
+    ? current.timelineSteps
+    : DEFAULT_TIMELINE_STEPS;
+  const activeStepData = timelineSteps.find((step) => step.id === activeStep) || timelineSteps[0];
+  const activeSubStepData = activeStepData?.subSteps?.find((step) => step.id === activeSubStep);
+  const primaryFont = current?.fonts && current.fonts !== '-' ? String(current.fonts).trim() : 'Montserrat';
 
-  // Все хуки должны вызываться до любого условного возврата.
-  React.useEffect(() => {
-    if (!currentItem) return;
+  useEffect(() => {
+    if (!current) return;
+    const validStep = timelineSteps.find((step) => step.id === activeStep) || timelineSteps[0];
+    if (!validStep) return;
+    const validSubStep = validStep.subSteps?.find((step) => step.id === activeSubStep);
+    publishPreview(current.id, validSubStep || validStep);
+  }, [current, activeStep, activeSubStep, timelineSteps]);
 
-    const project = currentItem.fields ? currentItem.fields : currentItem;
-    const steps = Array.isArray(project.timelineSteps) && project.timelineSteps.length
-      ? project.timelineSteps
-      : DEFAULT_TIMELINE_STEPS;
-    const selectedStep = steps.find(step => step.id === activeStep) || steps[0];
-    const selectedSubStep = selectedStep?.subSteps?.find(step => step.id === activeSubStep);
-
-    publishPreview(project.id, selectedSubStep || selectedStep);
-  }, [currentItem, activeStep, activeSubStep]);
-
-  // Ранний возврат, если проект не найден — после вызова всех хуков.
-  if (!currentItem) {
+  if (!current) {
     return (
       <div className="design-detail-page">
-        <h2>Проект не найден в базе данных</h2>
+        <h2>Проект не найден в CMS. Проверь ID проекта и опубликованные данные.</h2>
       </div>
     );
   }
-  
-  const current = currentItem.fields ? currentItem.fields : currentItem;
-  const timelineSteps = Array.isArray(current.timelineSteps) && current.timelineSteps.length
-    ? current.timelineSteps
-    : DEFAULT_TIMELINE_STEPS;
-  const activeStepData = timelineSteps.find(step => step.id === activeStep) || timelineSteps[0];
-  const activeSubStepData = activeStepData?.subSteps?.find(step => step.id === activeSubStep);
-  const primaryFont = current.fonts && current.fonts !== '-' ? current.fonts.trim() : 'Montserrat';
 
   return (
     <div className="design-detail-page" style={{ '--chosen-font': primaryFont }}>
@@ -140,7 +141,6 @@ function DesignDetail({ id, onBack }) {
                         onClick={() => {
                           setActiveStep(step.id);
                           setActiveSubStep(step.subSteps?.[0]?.id || '');
-                          publishPreview(current.id, step);
                         }}
                       />
                       <span className={isStepActive ? 'text-active' : ''}>{step.label}</span>
@@ -164,7 +164,6 @@ function DesignDetail({ id, onBack }) {
                                 aria-pressed={isSubActive}
                                 onClick={() => {
                                   setActiveSubStep(subStep.id);
-                                  publishPreview(current.id, subStep);
                                 }}
                               />
                               <span className={isSubActive ? 'text-active' : ''}>
