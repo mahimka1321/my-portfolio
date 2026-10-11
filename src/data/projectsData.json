@@ -84,7 +84,7 @@
         "#424242"
       ],
       "fonts": "Nunito, M PLUS Rounded 1c",
-      "previewAsset": "",
+      "previewAsset": "/my-portfolio/uploads/dising-mahimka.png",
       "tags": [
         "UI/UX",
         "DESKTOP",
@@ -95,7 +95,7 @@
         {
           "id": "dising",
           "label": "Дизайн",
-          "img": "",
+          "img": "/my-portfolio/uploads/dising-mahimka.png",
           "subSteps": []
         }
       ]
